@@ -1,0 +1,34 @@
+# Examples
+
+This directory is reserved for community-contributed examples showing how the Design Source methodology has been applied to real projects.
+
+## How to Contribute an Example
+
+1. Create a Markdown file describing how you applied the methodology to your project
+2. Include:
+   - Project type and tech stack
+   - Which phases you used and how
+   - Which templates and prompts were most useful
+   - What worked well and what you'd do differently
+3. Submit a pull request
+
+## Example Format
+
+```markdown
+# Example: [Project Name]
+
+## Project Overview
+- **Type:** [library / web app / CLI / etc.]
+- **Stack:** [language + framework]
+- **Scope:** [what was built]
+
+## Methodology Application
+[How you used Design Source — which phases, templates, and prompts]
+
+## Key Takeaways
+[What worked, what didn't, lessons learned]
+```
+
+## Current Examples
+
+_No examples yet. Be the first to contribute!_

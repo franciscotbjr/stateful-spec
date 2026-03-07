@@ -1,76 +1,107 @@
 # Design Source
 
-A methodology guide for designing and implementing Rust libraries with AI assistance.
+A technology-agnostic methodology for building software with AI assistance.
 
-## Overview
+## What Is This?
 
-This project provides a structured approach to library development, derived from real-world experience building the [ollama-oxide](https://github.com/franciscotbjr/ollama-oxide) library. It serves as a blueprint for conducting iterative design and implementation cycles with an AI assistant.
+Design Source provides a structured, repeatable process for developing software with AI coding assistants. It includes:
 
-## Purpose
+- **A 5-phase methodology** — Analyze → Plan → Specify → Implement → Verify
+- **LLM-ready prompts** — Copy-paste Markdown prompts that work with any AI (Claude, GPT, Gemini, local models)
+- **Templates** — Fillable templates for project setup, technical specifications, and implementation planning
+- **Presets** — Pre-filled Project Profiles for common tech stacks (Rust, Node.js, Python, React, Go)
 
-- **Consistent Delivery**: Establish repeatable patterns for library design and implementation
-- **AI Collaboration**: Define clear protocols for working with AI assistants on complex projects
-- **Quality Assurance**: Ensure consistent code quality through defined conventions and testing practices
-- **Documentation First**: Prioritize specification and planning before implementation
+The methodology is **technology-agnostic** — it works for any language, framework, or project type.
+
+## Quick Start
+
+### 1. Set Up Your Project Profile
+
+Copy a preset from [`presets/`](presets/) or fill the template at [`templates/project/project-profile.md`](templates/project/project-profile.md). The Project Profile captures your tech stack, conventions, and quality gates — it's the single source of truth the AI references.
+
+### 2. Initialize AI Collaboration
+
+Use one of the initialization prompts from [`prompts/initialization/`](prompts/initialization/):
+
+| Prompt | When to Use |
+|--------|-------------|
+| [`new-project.md`](prompts/initialization/new-project.md) | Starting a brand-new project |
+| [`onboard-existing.md`](prompts/initialization/onboard-existing.md) | Bringing AI into an existing codebase |
+| [`resume-session.md`](prompts/initialization/resume-session.md) | Resuming work from a previous session |
+
+### 3. Follow the Methodology
+
+For each unit of work, follow the 5-phase cycle using the phase transition prompts in [`prompts/phase-transitions/`](prompts/phase-transitions/):
+
+```
+Analyze → Plan → Specify → Implement → Verify
+```
+
+### 4. Use Operation Prompts as Needed
+
+Common tasks have ready-made prompts in [`prompts/operations/`](prompts/operations/):
+
+| Prompt | Purpose |
+|--------|---------|
+| `write-commit-message.md` | Generate a structured commit message |
+| `update-documentation.md` | Update docs after a change |
+| `review-changes.md` | Self-review code before committing |
+| `create-technical-spec.md` | Write a spec for new work |
+| `write-tests.md` | Generate tests for existing code |
+| `refactor-code.md` | Safely restructure code |
+| `debug-issue.md` | Diagnose and fix a bug |
+| `save-session.md` | Generate a session summary for next time |
 
 ## Project Structure
 
 ```
 design-source/
-├── .claude/
-│   ├── skills/           # AI assistant skill definitions
-│   │   ├── architecture/    # Architectural patterns
-│   │   ├── conventions/     # Rust coding standards
-│   │   ├── implementation/  # Implementation workflows
-│   │   ├── testing/         # Testing strategies
-│   │   ├── api-design/      # API design principles
-│   │   └── documentation/   # Documentation standards
-│   └── scripts/          # Automation scripts
-├── phases/               # Implementation phase guides
-├── templates/            # Reusable templates
-└── examples/             # Reference implementations
+├── methodology/          # Core process documentation
+│   ├── overview.md       # Philosophy, principles, iteration cycle
+│   ├── phases/           # Detailed guide for each of the 5 phases
+│   ├── roles.md          # Human and AI responsibilities
+│   └── decision-framework.md  # How to make and record decisions
+├── prompts/              # LLM-ready prompts (copy-paste into any AI)
+│   ├── initialization/   # Start or resume projects
+│   ├── phase-transitions/# Move between methodology phases
+│   └── operations/       # Common development tasks
+├── templates/            # User-fillable templates
+│   ├── project/          # Project Profile, Architecture Decision Record
+│   ├── specification/    # Feature, endpoint, component, bugfix, refactor specs
+│   └── implementation/   # Implementation plan, test plan
+├── presets/              # Pre-filled Project Profiles for common stacks
+└── examples/             # Community-contributed applied examples
 ```
 
-## Methodology Phases
+## Key Concepts
 
-### Phase 1: Foundation
-- Project structure definition
-- Core abstractions design
-- Error handling strategy
-- Configuration patterns
+### The Project Profile
 
-### Phase 2: API Primitives
-- Type definitions (requests, responses)
-- Validation rules
-- Serialization patterns
-- Builder patterns
+A single document that captures everything technology-specific about your project (stack, conventions, quality gates). All prompts reference it, keeping the methodology itself agnostic.
 
-### Phase 3: Implementation
-- HTTP client integration
-- Async/sync variants
-- Streaming support
-- Retry mechanisms
+### The 5 Phases
 
-### Phase 4: Conveniences
-- High-level APIs
-- Common use-case helpers
-- Extension traits
-- Examples and documentation
+| Phase | Purpose |
+|-------|---------|
+| **Analyze** | Understand requirements, break down complexity, identify unknowns |
+| **Plan** | Define architecture, structure, milestones, and blockers |
+| **Specify** | Write technical specs for each unit of work |
+| **Implement** | Build, test, and integrate following the spec |
+| **Verify** | Run quality gates, update docs, prepare delivery |
 
-## Key Principles
+### Prompts as a Command Palette
 
-1. **Specification First**: Always write specs before code
-2. **Incremental Delivery**: Ship working code in small iterations
-3. **Type Safety**: Leverage Rust's type system for compile-time guarantees
-4. **Ergonomic APIs**: Design for the common case, allow escape hatches
-5. **Comprehensive Testing**: Unit, integration, and example-based tests
+Each prompt is a self-contained Markdown file. Copy the prompt section, paste your Project Profile and context, and send to any LLM. No vendor lock-in, no special tooling required.
 
-## Getting Started
+## Available Presets
 
-1. Read the [CLAUDE.md](CLAUDE.md) for AI assistant integration
-2. Review phases in [phases/](phases/) for implementation workflow
-3. Check [templates/](templates/) for reusable patterns
-4. See [examples/](examples/) for reference implementations
+| Preset | Stack |
+|--------|-------|
+| [`rust-library.md`](presets/rust-library.md) | Rust + Cargo + clippy/fmt |
+| [`node-express-api.md`](presets/node-express-api.md) | Node.js + Express + Jest + ESLint |
+| [`python-fastapi.md`](presets/python-fastapi.md) | Python + FastAPI + pytest + ruff |
+| [`react-webapp.md`](presets/react-webapp.md) | React + TypeScript + Vite + Vitest |
+| [`go-service.md`](presets/go-service.md) | Go + stdlib + go vet/test |
 
 ## License
 

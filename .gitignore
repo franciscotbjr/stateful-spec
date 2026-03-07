@@ -1,7 +1,3 @@
-# Build artifacts
-/target/
-**/*.rs.bk
-
 # IDE
 .idea/
 .vscode/
@@ -15,9 +11,6 @@ Thumbs.db
 # Cache and temp files
 *.log
 *.tmp
-
-# Local configuration (keep template)
-.claude/settings.local.json
 
 # Scratchpad files
 scratchpad/
