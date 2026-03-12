@@ -27,7 +27,7 @@ Use one of the initialization prompts from [`prompts/initialization/`](prompts/i
 |--------|-------------|
 | [`new-project.md`](prompts/initialization/new-project.md) | Starting a brand-new project |
 | [`onboard-existing.md`](prompts/initialization/onboard-existing.md) | Bringing AI into an existing codebase |
-| [`resume-session.md`](prompts/initialization/resume-session.md) | Resuming work from a previous session |
+| [`resume-session.md`](prompts/operations/resume-session.md) | Resuming work from a previous session |
 
 ### 3. Follow the Methodology
 

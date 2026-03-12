@@ -155,7 +155,16 @@ Create the memory structure at the project root:
 impl/
 ├── memory.md              # Initialize with project summary
 ├── project-definition.md  # Save the approved Project Definition here
-├── resume-session.md      # Copy of the resume-session prompt
+├── operations/            # Copy of prompts/operations/
+│   ├── resume-session.md
+│   ├── save-session.md
+│   ├── create-technical-spec.md
+│   ├── debug-issue.md
+│   ├── refactor-code.md
+│   ├── review-changes.md
+│   ├── update-documentation.md
+│   ├── write-commit-message.md
+│   └── write-tests.md
 ├── methodology/           # Copy of the Design Source methodology
 │   ├── overview.md
 │   ├── phases/
@@ -180,22 +189,22 @@ impl/
 
 2. **`impl/project-definition.md`** — Save the approved Project Definition
 
-3. **`impl/resume-session.md`** — Copy from `prompts/initialization/resume-session.md`
+3. **`impl/operations/`** — Copy the entire `prompts/operations/` folder from Design Source. This includes resume-session, save-session, and all other operation prompts.
 
-4. **`impl/methodology/`** — Copy the entire `methodology/` folder from Design Source, including all subfolders and files. This makes the project self-contained.
+4. **`impl/methodology/`** — Copy the entire `methodology/` folder from Design Source, including all subfolders and files.
 
 5. **`impl/history/`** — Create empty directory for iteration tracking
 
 Tell the developer:
 
-> "I've created the `impl/` folder with project memory and a copy of the Design Source methodology. This will be versioned with your code so any developer or AI assistant can pick up where you left off without needing access to the Design Source repository."
+> "I've created the `impl/` folder with project memory, operation prompts, and the Design Source methodology. This will be versioned with your code so any developer or AI assistant can pick up where you left off without needing access to the Design Source repository."
 
 **If `impl/` directory already exists:**
 
 Verify the structure is complete. If any of these are missing, create them:
 - `memory.md`
 - `project-definition.md`
-- `resume-session.md`
+- `operations/` folder
 - `methodology/` folder
 
 Update `memory.md` if the Project Definition was modified during validation.

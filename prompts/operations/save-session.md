@@ -87,7 +87,7 @@ After updating both files, tell the developer:
 > - `impl/history/[iteration-file].md` — [brief summary of changes]
 > - `impl/memory.md` — [brief summary of changes]
 >
-> "Next time, use `resume-session.md` or the copy in `impl/resume-session.md` to pick up where you left off."
+> "Next time, use `impl/operations/resume-session.md` to pick up where you left off."
 
 ### STEP 6 — Suggest Commit (Optional)
 
