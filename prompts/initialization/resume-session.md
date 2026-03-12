@@ -29,12 +29,13 @@ Read the following files from the project root:
 **Design Source files (required):**
 1. **`impl/memory.md`** — Current project state, active work, constraints, history index
 2. **`impl/project-definition.md`** — Technology stack, conventions, quality gates
-3. **`impl/history/`** — List files to find any in-progress iterations
+3. **`impl/methodology/`** — Design Source methodology guides (phases, roles, decision framework)
+4. **`impl/history/`** — List files to find any in-progress iterations
 
 **Project documentation (if they exist):**
-4. **`README.md`** — Project overview, purpose, usage instructions
-5. **`CHANGELOG.md`** — Recent changes and version history
-6. **`ARCHITECTURE.md`** — System design, component structure, key decisions
+5. **`README.md`** — Project overview, purpose, usage instructions
+6. **`CHANGELOG.md`** — Recent changes and version history
+7. **`ARCHITECTURE.md`** — System design, component structure, key decisions
 
 These documentation files provide important context about the project's purpose, recent changes, and technical design. Read them to understand the bigger picture before starting work.
 
