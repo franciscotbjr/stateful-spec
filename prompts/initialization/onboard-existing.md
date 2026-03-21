@@ -126,6 +126,92 @@ Specifically:
 **Then tells the developer:**
 > "Design Source is set up. The `impl/` folder contains your project memory, operation prompts, and methodology — all versioned with your code. Any AI assistant can now pick up where you left off."
 
+### STEP 4.5 — Detect Code Agent
+
+**AI does (silently, before asking the user):**
+
+1. **Self-identify:** Determine which Code Agent you are by introspecting your own identity and system context. Every AI coding agent knows who it is:
+   - If you are **Claude** running inside **Claude Code** → you are Claude Code
+   - If you are **Cascade** running inside **Windsurf** → you are Windsurf
+   - If you are running inside **Cursor** → you are Cursor
+   - If you are **Codex** (OpenAI) → you are Codex
+   - If you are **Gemini** running inside **Antigravity** → you are Antigravity
+   - If you are running inside **OpenCode** → you are OpenCode
+
+2. **Fallback — folder detection (only if self-identification is uncertain):**
+   Check the project root for agent configuration directories:
+   - `.claude/` → Claude Code
+   - `.windsurf/` → Windsurf
+   - `.cursor/` → Cursor
+   - `.codex/` → Codex
+   - `.antigravity/` → Antigravity
+   - `.opencode/` → OpenCode
+
+**Then always ask the developer to confirm:**
+
+> "I'm running as **[Agent Name]**. Would you like me to set up Design Source prompts as native [Agent] commands? This lets you invoke them directly (e.g., `/resume-session`) instead of referencing files manually."
+>
+> 1. **Yes, use [Agent Name]**
+> 2. **Use a different agent** — I'll show you the supported list
+> 3. **Skip** — only use `impl/operations/`
+
+**If the developer picks "Use a different agent"**, show:
+> - Claude Code
+> - Windsurf
+> - Cursor
+> - Codex
+> - Antigravity
+> - OpenCode
+
+**If the developer says yes (or picks an agent):**
+
+Create agent-native commands for each operation prompt in `impl/operations/`. Adapt the format to match the agent's conventions:
+
+**Claude Code** — For each prompt, create `.claude/skills/<name>/SKILL.md`:
+```yaml
+---
+name: <prompt-name>
+description: <one-line description from the prompt>
+---
+<prompt content>
+```
+
+**Windsurf** — For each prompt, create `.windsurf/workflows/<name>.md`:
+```yaml
+---
+description: <one-line description from the prompt>
+---
+<prompt content>
+```
+
+**Cursor** — Create `.cursor/rules/design-source.mdc` with:
+```yaml
+---
+description: "Design Source methodology — invoke with @design-source"
+alwaysApply: false
+---
+<reference to impl/methodology/ and impl/operations/>
+```
+Also create an `AGENTS.md` at project root referencing the Design Source methodology and operations.
+
+**Codex** — Create `AGENTS.md` at project root with Design Source methodology instructions. Codex discovers `AGENTS.md` files automatically from the project root down to the current directory. Optionally configure `.codex/config.toml` for model preferences.
+
+**Antigravity** — Create `.antigravity/rules.md` with Design Source conventions and methodology references. Create workflow files in `.antigravity/workflows/` for each operation prompt.
+
+**OpenCode** — For each prompt, create `.opencode/commands/<name>.md`:
+```yaml
+---
+description: <one-line description from the prompt>
+---
+<prompt content>
+```
+
+**Then tells the developer:**
+> "I've set up Design Source as native [Agent] commands. You can now use `/resume-session`, `/save-session`, and other prompts directly. The `impl/operations/` folder is kept as a portable backup."
+
+**If the developer says no or skips:**
+> "No problem. You can always reference prompts from `impl/operations/` directly."
+
 ### STEP 5 — What Do You Need?
 
 **AI asks:**
@@ -163,8 +249,9 @@ State the recommended phase and begin.
 1. **Codebase discovery summary** — stack, conventions, structure
 2. **Project Definition** (`impl/project-definition.md`) — generated and approved
 3. **Design Source structure** (`impl/`) — created or verified
-4. **Iteration file** (`impl/history/NNN-[name].md`) — with tasks and acceptance criteria
-5. **Task assessment** — recommended phase and initial analysis
+4. **Agent-native commands** (Step 4.5) — operation prompts adapted to the developer's Code Agent format (if accepted)
+5. **Iteration file** (`impl/history/NNN-[name].md`) — with tasks and acceptance criteria
+6. **Task assessment** — recommended phase and initial analysis
 
 ## Next Steps
 
