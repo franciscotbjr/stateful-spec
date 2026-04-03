@@ -21,6 +21,7 @@ _(none)_
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 001 | fix-cursor-init-prompts | chore | 2026-04-03 |
 
 ## Key Decisions
 
@@ -46,3 +47,4 @@ _(none)_
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
+| 001 | fix-cursor-init-prompts | chore | done | `history/001-fix-cursor-init-prompts.md` |
