@@ -8,6 +8,8 @@ This project uses the **Stateful Spec** methodology for AI-assisted development.
 2. **Read `.stateful-spec/project-definition.md`** — technology stack, conventions, quality gates
 3. **Read `methodology/`** — the full methodology (phases, roles, decision framework). This project IS the methodology source, so read from the root — not from `.stateful-spec/methodology/`.
 
+To **refresh** methodology, prompts, or agent rules from upstream in an already configured repo, use [`prompts/initialization/update-project.md`](prompts/initialization/update-project.md).
+
 ## Methodology
 
 Follow the 5-phase iteration cycle: **Analyze → Plan → Specify → Implement → Verify**
