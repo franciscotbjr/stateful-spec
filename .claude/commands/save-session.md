@@ -1,3 +1,7 @@
+---
+description: Save session progress by updating memory.md and iteration files
+---
+
 # Save Session
 
 > Use at the end of a work session to persist progress. The AI automatically updates `.stateful-spec/memory.md` and the active iteration file.

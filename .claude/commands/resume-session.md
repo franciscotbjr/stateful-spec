@@ -1,10 +1,14 @@
+---
+description: Resume work on a project using Stateful Spec methodology
+---
+
 # Resume Session
 
 > Use when returning to a project after a break. The AI automatically loads project context from `.stateful-spec/` and picks up where you left off.
 
 ## Methodology Source
 
-The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/design-source
+The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/stateful-spec
 
 ## Instructions
 

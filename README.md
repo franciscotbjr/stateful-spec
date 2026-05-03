@@ -13,6 +13,7 @@ Pick one file below and give it to your AI assistant. You can do this by:
 |---|---|
 | **Starting a new project** | [`prompts/initialization/new-project.md`](prompts/initialization/new-project.md) |
 | **Adding AI to an existing project** | [`prompts/initialization/onboard-existing.md`](prompts/initialization/onboard-existing.md) |
+| **Updating Stateful Spec in an existing project** | [`prompts/initialization/update-project.md`](prompts/initialization/update-project.md) |
 | **Resuming previous work** | [`prompts/operations/resume-session.md`](prompts/operations/resume-session.md) |
 
 **That's it.** The AI reads the instructions and walks you through everything else — project setup, conventions, and your first task.
