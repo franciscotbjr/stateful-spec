@@ -1,6 +1,22 @@
-# CLAUDE.md
+@AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Claude Code / OpenClaude
+
+Operation prompts are available as Claude Code commands. Invoke them with `/command-name`:
+
+| Command | Purpose |
+|---------|---------|
+| `/resume-session` | Resume work — loads project context and picks up where you left off |
+| `/save-session` | Save session progress — updates memory.md and iteration files |
+| `/create-technical-spec` | Write a technical specification for new work |
+| `/write-tests` | Generate tests for existing or new code |
+| `/debug-issue` | Diagnose and fix a bug with structured root cause analysis |
+| `/refactor-code` | Safely restructure code without changing behavior |
+| `/review-changes` | Self-review code changes before committing |
+| `/write-commit-message` | Generate a well-structured commit message |
+| `/update-documentation` | Update docs after implementing a change |
+
+These commands live in `.claude/commands/` and mirror the source prompts in `prompts/operations/`.
 
 ## What this repository is
 
@@ -21,7 +37,9 @@ Two layers coexist in this repo and must not be confused:
    - `prompts/` — three categories: `initialization/` (new-project, onboard-existing, update-project), `phase-transitions/` (one per phase), `operations/` (resume-session, save-session, write-commit-message, etc.)
    - `templates/` — `project/`, `specification/`, `implementation/`
    - `presets/` — pre-filled Project Definitions (rust-library, node-express-api, python-fastapi, react-webapp, go-service)
-   - `.cursor/rules/*.mdc` — Cursor-native versions of the operation prompts (see Sync rule below)
+   - `.cursor/rules/*.mdc` — Cursor-native versions of the operation prompts
+   - `.claude/commands/*.md` — Claude Code / OpenClaude command versions
+   - `.opencode/commands/*.md` — OpenCode command versions
 
 2. **Self-application** (this repo using its own methodology):
    - `.stateful-spec/memory.md` — current state, active work, history index. **AI's entry point.**
@@ -31,30 +49,17 @@ Two layers coexist in this repo and must not be confused:
 
 `AGENTS.md` at the root is the AI-agent entrypoint and should be read alongside this file.
 
-## Working in this repo
+## Sync rule: `prompts/operations/` ↔ tool-specific files
 
-### Iteration tracking is mandatory for non-trivial work
-
-Before substantive edits for any feature, bugfix, refactor, or methodology/documentation change:
-
-1. Find the next `NNN` from existing `.stateful-spec/history/*.md` files
-2. Create `.stateful-spec/history/NNN-[kebab-name].md` from `templates/implementation/iteration.md`
-3. Update **Active Work** and **History Index** in `.stateful-spec/memory.md`
-4. On completion, move it to **Recent Completions** and mark status `done`
-
-Trivial edits (typo, one-line obvious fix) may skip this. When in doubt, create the file. This applies even when the session starts with a direct task ("implement this") rather than a `@resume-session` dialog — see the **Direct-task entry** section in `prompts/operations/resume-session.md`.
-
-### Sync rule: `prompts/operations/` ↔ `.cursor/rules/`
-
-The files in `.cursor/rules/*.mdc` are Cursor-native ports of `prompts/operations/*.md`. **When you modify a source prompt in `prompts/operations/`, also update the matching `.cursor/rules/<name>.mdc`.** They drift quickly otherwise.
+The files in `.cursor/rules/*.mdc`, `.claude/commands/*.md`, and `.opencode/commands/*.md` are tool-native ports of `prompts/operations/*.md`. **When you modify a source prompt in `prompts/operations/`, also update each matching tool-specific file.** They drift quickly otherwise.
 
 Note: `.cursor/rules/*.mdc` files have YAML frontmatter (`description:`, `alwaysApply:`) that the source `.md` files do not. Preserve it when editing.
 
-### Methodology source location
+## Methodology source location
 
 Some prompts (notably `prompts/operations/resume-session.md`) instruct the AI to "read `methodology/`." In a downstream project that copied the methodology under `.stateful-spec/methodology/`, that copy is authoritative. **In this repo, read from `methodology/` at the root** — `.stateful-spec/methodology/` is intentionally a stub.
 
-### Conventions
+## Conventions
 
 - Files: `kebab-case.md`. Phase files: `NN-kebab-case.md`. Iteration files: `NNN-kebab-case.md`.
 - Templates use `[e.g., ...]` or `{{VARIABLE}}` placeholder syntax.
@@ -63,7 +68,7 @@ Some prompts (notably `prompts/operations/resume-session.md`) instruct the AI to
 - New presets must mirror the structure of `templates/project/project-definition.md`.
 - Branch strategy: `main` + feature branches via PRs. Don't push or open PRs without explicit instruction.
 
-### Constraints to honor
+## Constraints to honor
 
 - Do not introduce application code, build tooling, dependencies, or CI — this repo is documentation-only by design.
 - Do not duplicate methodology content into `.stateful-spec/methodology/`.

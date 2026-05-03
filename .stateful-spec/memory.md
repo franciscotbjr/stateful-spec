@@ -6,7 +6,7 @@
 
 - **Project:** Stateful Spec
 - **Description:** A specification-driven development methodology for AI-assisted software projects
-- **Last Updated:** 2026-04-04
+- **Last Updated:** 2026-04-25
 - **Current Status:** Active development
 
 ## Active Work
@@ -21,6 +21,7 @@ _(none)_
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 004 | add-claude-code-support | feature | 2026-04-25 |
 | 002 | require-iteration-tracking | chore | 2026-04-04 |
 | 003 | add-update-project-wizard | feature | 2026-04-03 |
 | 001 | fix-cursor-init-prompts | chore | 2026-04-03 |
@@ -50,6 +51,7 @@ _(none)_
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
+| 004 | add-claude-code-support | feature | done | `history/004-add-claude-code-support.md` |
 | 002 | require-iteration-tracking | chore | done | `history/002-require-iteration-tracking.md` |
 | 003 | add-update-project-wizard | feature | done | `history/003-add-update-project-wizard.md` |
 | 001 | fix-cursor-init-prompts | chore | done | `history/001-fix-cursor-init-prompts.md` |
