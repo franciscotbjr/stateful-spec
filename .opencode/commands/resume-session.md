@@ -8,7 +8,7 @@ description: Resume work on a project using Stateful Spec methodology
 
 ## Methodology Source
 
-The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/design-source
+The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/stateful-spec
 
 ## Instructions
 

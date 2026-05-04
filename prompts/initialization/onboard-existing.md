@@ -8,7 +8,7 @@ description: Onboard AI assistant to an existing codebase with guided discovery
 
 ## Methodology Source
 
-The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/design-source
+The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/stateful-spec
 
 Key resources:
 - `presets/` — Pre-filled Project Definitions for common stacks (use as base if stack matches)

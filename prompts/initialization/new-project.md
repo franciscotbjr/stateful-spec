@@ -8,7 +8,7 @@ description: Interactive wizard to set up a new project with AI assistance
 
 ## Methodology Source
 
-The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/design-source
+The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/stateful-spec
 
 Key resources in the repository:
 

@@ -8,7 +8,7 @@ description: Update Stateful Spec methodology and related files in an already co
 
 ## Methodology Source
 
-The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/design-source
+The Stateful Spec methodology is hosted at: https://github.com/franciscotbjr/stateful-spec
 
 You may also use a fork, a local clone path, or another URL if the developer provides one.
 
@@ -47,7 +47,7 @@ You are an AI assistant helping **update** Stateful Spec in a project that is al
 **AI does:**
 
 - Ask which **source** to use for the new Stateful Spec content, or propose defaults:
-  - Public repo URL (e.g. design-source / stateful-spec)
+  - Public repo URL (e.g. stateful-spec / stateful-spec)
   - A **local folder** path (clone on disk)
   - A **fork** URL
 
@@ -59,7 +59,7 @@ Try to read key paths from that source (`methodology/overview.md`, `CHANGELOG.md
 
 > "Which source should we treat as the **authoritative** Stateful Spec for this update?"
 >
-> 1. **Default upstream** — `https://github.com/franciscotbjr/design-source` (or the URL you have in context)
+> 1. **Default upstream** — `https://github.com/franciscotbjr/stateful-spec` (or the URL you have in context)
 > 2. **Local path** — I’ll use a folder you specify
 > 3. **Other URL** — fork or mirror
 
