@@ -58,6 +58,7 @@
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
+| 006 | universal-agents-md | fix | done | `history/006-universal-agents-md.md` |
 | 005 | new-session-management | feature | in-progress | `history/005-new-session-management.md` |
 | 004 | add-claude-code-support | feature | done | `history/004-add-claude-code-support.md` |
 | 002 | require-iteration-tracking | chore | done | `history/002-require-iteration-tracking.md` |
