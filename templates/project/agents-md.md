@@ -6,7 +6,7 @@ This project uses the **Stateful Spec** methodology for AI-assisted development.
 
 1. **Read `.stateful-spec/memory.md`** — your entry point for current project state
 2. **Read `.stateful-spec/project-definition.md`** — technology stack, conventions, quality gates
-3. **Read `.stateful-spec/methodology/`** — the full methodology (phases, roles, decision framework)
+3. Read the methodology digest below. For deeper reference see `.stateful-spec/methodology/`.
 
 To **refresh** methodology, prompts, or agent rules from upstream in an already configured repo, use [`prompts/initialization/update-project.md`](prompts/initialization/update-project.md).
 
@@ -14,9 +14,73 @@ To **refresh** methodology, prompts, or agent rules from upstream in an already 
 
 Follow the 5-phase iteration cycle: **Analyze → Plan → Specify → Implement → Verify**
 
-- Phase guides: `.stateful-spec/methodology/phases/`
-- Roles and boundaries: `.stateful-spec/methodology/roles.md`
-- Decision framework: `.stateful-spec/methodology/decision-framework.md`
+### Core Principles
+
+1. **Specification before implementation** — Write down what you're building before writing code
+2. **Incremental delivery** — Ship working software in small, verifiable iterations
+3. **Decisions are permanent artifacts** — Record architectural choices with rationale
+4. **The Project Definition is the source of truth** — All technology-specific details in one place
+5. **Quality gates are non-negotiable** — Every iteration passes the project's defined checks
+6. **AI is a collaborator, not an oracle** — Human owns decisions; AI accelerates execution
+
+### Phase Summary
+
+| Phase | Goal | Key Output | Skip When |
+|-------|------|------------|-----------|
+| 1. Analyze | Understand requirements, break down complexity, identify unknowns | Requirements summary, complexity breakdown, dependency list, open questions | — |
+| 2. Plan | Define architecture, milestones, identify blockers | Architecture sketch, milestone list, blocker list, ADRs if significant | Small bugfixes with obvious scope |
+| 3. Specify | Write detailed technical specs so implementation has no ambiguity | Filled specification documents with measurable acceptance criteria | Trivial changes (typos, config, dependency bumps) |
+| 4. Implement | Build, test, integrate following the specification and project conventions | Working code, tests, inline docs, clean incremental commits | — |
+| 5. Verify | Confirm quality standards, update docs, prepare for delivery | All quality gates passing, updated documentation, clean delivery artifact | — |
+
+**Implementation order:** Data/Types → Core Logic → Integration → Tests → Documentation
+
+### Phase Anti-Patterns
+
+| Phase | Avoid |
+|-------|-------|
+| 1. Analyze | Jumping to code before understanding; assuming requirements; analysis paralysis |
+| 2. Plan | Over-planning simple tasks; big-bang delivery; ignoring unresolved blockers |
+| 3. Specify | Writing spec after code; over-specifying trivial work; only specifying the happy path |
+| 4. Implement | Implementing without a spec; big-bang commits; tests as afterthought; gold plating |
+| 5. Verify | Skipping quality gates; forgetting documentation; scope creep during review |
+
+### Roles & Boundaries
+
+**Human developer** owns all decisions (architecture, scope, priorities). Reviews and approves AI output before committing. Fills the Project Definition, writes specs, drives the process.
+
+**AI assistant** follows the methodology, stays in the current phase, produces concrete artifacts. Follows the Project Definition's conventions. Asks when requirements are unclear. Identifies risks and edge cases.
+
+**AI must NOT:**
+- Make architectural decisions without human approval
+- Skip methodology phases
+- Introduce dependencies or patterns not in the Project Definition without discussion
+- Commit, deploy, or make irreversible changes without explicit instruction
+- Assume requirements — ask when unclear
+
+### Collaboration Model
+
+- **Start:** Use `start-session`. AI reads Project Definition + iteration context. Human states goal and phase.
+- **During:** Human provides direction. AI follows the phase, produces artifacts, human reviews.
+- **End:** Use `end-session`. AI summarizes, updates iteration file, moves work to Recent Completions.
+
+### Decision Framework
+
+For significant choices (architecture, patterns, tools):
+
+1. **Identify** — State what and why
+2. **List alternatives** — Pros/cons for each
+3. **Apply criteria** (priority order): consistency > simplicity > reversibility > convention > team familiarity
+4. **Decide and record** — Use the ADR template (`templates/project/architecture-decision.md`)
+5. **Communicate** — Reference ADR in PRs, update Project Definition if conventions change
+
+When in doubt: ask the human. When time-pressured: make the reversible choice and create a follow-up task. Revisit decisions when new information emerges — create a new ADR that supersedes the old one; never delete old ADRs.
+
+### Quality Gates
+
+All quality gates defined in the **Project Definition** must pass before work is considered complete. Typical gates: linter, formatter, type checker, tests, build. Never skip a gate or declare work done prematurely.
+
+> Full phase guides, detailed role descriptions, and extended examples are in `.stateful-spec/methodology/`.
 
 ## Operation Prompts
 
