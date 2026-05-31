@@ -17,7 +17,11 @@
 
 ### 1. Run Quality Gates
 
-Execute every quality gate defined in the Project Definition. Common examples:
+Execute every quality gate defined in the Project Definition. **What the gates are
+depends on the Project Type** — see the project's `project-definition.md` Quality
+Gates section and [`methodology/project-types.md`](../project-types.md).
+
+For `software`, the gates are commands that must pass. Common examples:
 
 | Gate | Example Commands | Purpose |
 |------|-----------------|---------|
@@ -26,6 +30,11 @@ Execute every quality gate defined in the Project Definition. Common examples:
 | Type checker | `tsc --noEmit`, `mypy .`, `cargo check` | Type safety |
 | Tests | `jest`, `cargo test`, `pytest` | Correctness |
 | Build | `npm run build`, `cargo build`, `go build ./...` | Compilation |
+
+For `skills` and `studies` there are no commands to run — the gates are a
+**checklist** recorded in the Project Definition (e.g. skills: structure + trigger +
+sober-prose + grounding; studies: citations resolve + claims sourced + no plagiarism
++ reproducible). Confirm each item explicitly.
 
 **All gates must pass.** If any gate fails, fix the issues before proceeding.
 
@@ -60,12 +69,19 @@ Use the `prompts/operations/update-documentation.md` prompt or manually update:
 
 ### 5. Prepare Delivery Artifact
 
-Depending on the project:
+What "deliver" means depends on the Project Type (see
+[`methodology/project-types.md`](../project-types.md)):
+
+- **software** — deploy / release / merge PR
+- **skills** — the skill is consumed directly from the repo; publish = merge to main via PR
+- **studies** — publish/submit the report or paper; share the dataset
+
+In every type:
 
 - **Write commit message** — Use `prompts/operations/write-commit-message.md`
 - **Create PR/MR** — With description referencing the spec
-- **Tag release** — If this completes a version milestone
-- **Deploy** — If the project has a deployment pipeline
+- **Tag release** — If this completes a version milestone (software)
+- **Deploy / publish / submit** — Per the Delivery / Distribution section of the Project Definition
 
 ## Outputs
 

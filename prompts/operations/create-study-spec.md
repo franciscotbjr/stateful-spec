@@ -1,0 +1,61 @@
+# Prompt: Create Study Specification
+
+> **Applies to:** studies. The studies analog of `create-technical-spec`. See [`methodology/project-types.md`](../../methodology/project-types.md).
+
+## Context
+
+Use this prompt to produce a specification for a research/study deliverable before producing it — a literature review, analysis, report, or paper. It combines analysis and specification using the `study-spec.md` template.
+
+## Prerequisites
+
+- AI has access to the **Project Definition** (Project Type: studies)
+- You can state the research question or goal
+- You have the `study-spec.md` template available
+
+## Input
+
+Paste the following alongside this prompt:
+
+1. Your **Project Definition** (if the AI doesn't already have it in context)
+2. A **description of the study** (research question, goal, deliverable type)
+3. The **`study-spec.md` template** (copy from `templates/specification/`)
+
+## Prompt
+
+<!-- Copy from here -->
+
+I need a specification for a research/study deliverable. Please analyze the request and produce a complete specification using the template provided.
+
+**Study description:**
+
+{{STUDY_DESCRIPTION}}
+
+**Specification template to follow:**
+
+{{PASTE_THE_TEMPLATE_HERE}}
+
+**Instructions:**
+
+**Before starting:** Check `.stateful-spec/memory.md` for an Open Session section. If found, you are working within an open implementation cycle — all contributions must be registered under that iteration.
+
+1. State the **research question** precisely
+2. Define **scope & boundaries** — what is covered and what is deliberately left out
+3. Identify the **sources/corpus** (papers, datasets, primary sources) and how they are accessed
+4. Describe the **method** in enough detail to be reproducible (search strategy, analysis pipeline, or argument structure)
+5. Name the **deliverable type** (review / analysis / report / paper)
+6. Write **acceptance criteria** that are independently verifiable (claims grounded, analysis reproducible, internally consistent)
+7. Flag anything uncertain as an open question rather than guessing
+
+**Session tracking:** If an Open Session was detected, append a timestamped entry to the **Session Log** in the referenced iteration file summarizing what this specification covers.
+
+<!-- To here -->
+
+## Expected Output
+
+A complete `study-spec.md` document, ready for review and execution.
+
+## Next Steps
+
+- Review the specification for scope and feasibility
+- Resolve open questions
+- Begin gathering sources and drafting; use `verify-sources` as claims accrue

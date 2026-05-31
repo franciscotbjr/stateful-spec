@@ -1,0 +1,62 @@
+# Prompt: Write Examples (Skill)
+
+> **Applies to:** skills. The skills analog of `write-tests` — it both implements and verifies the skill. See [`methodology/project-types.md`](../../methodology/project-types.md).
+
+## Context
+
+Use this prompt to author the before/after example pairs and the self-check checklist for a skill. In a skills project this is both the "implement" and the "verify" activity: the examples demonstrate the rule and validate that the trigger and instructions work.
+
+## Prerequisites
+
+- AI has access to the **Project Definition** (Project Type: skills)
+- A `skill-spec.md` exists (or the skill's intent is clearly described)
+- The skill's `SKILL.md` draft exists or is being written alongside
+
+## Input
+
+Paste the following alongside this prompt:
+
+1. Your **Project Definition** (if the AI doesn't already have it in context)
+2. The **skill spec** or skill draft (`SKILL.md`)
+3. Optionally: **existing skills** for pattern reference
+
+## Prompt
+
+<!-- Copy from here -->
+
+Please author before/after examples and a self-check checklist for the following skill. Follow the skills conventions from the Project Definition.
+
+**Skill (spec or SKILL.md draft):**
+
+{{SKILL_SPEC_OR_DRAFT}}
+
+**Existing skill examples for pattern reference (if available):**
+
+{{EXISTING_SKILLS_OR_NONE}}
+
+**Instructions:**
+
+**Before starting:** Check `.stateful-spec/memory.md` for an Open Session section. If found, you are working within an open implementation cycle — all contributions must be registered under that iteration.
+
+1. For **each anti-pattern** in the spec, write at least one before/after pair — the "before" exhibits the anti-pattern, the "after" shows the corrected form
+2. Make each pair demonstrate exactly **one** rule; keep examples realistic, not toy cases
+3. Add a **self-check checklist** the skill's consumer can run to confirm the rule was applied
+4. Validate the **trigger**: list cases the `description` should match and cases it should not, and confirm the draft covers them
+5. Confirm every normative claim is **grounded** in a source
+6. Keep prose sober — no rhetorical padding
+
+Place the examples in `SKILL.md` (and `README.md` where consumer-facing) per the two-file convention.
+
+**Session tracking:** If an Open Session was detected, append a timestamped entry to the **Session Log** in the referenced iteration file summarizing the examples and checks added.
+
+<!-- To here -->
+
+## Expected Output
+
+Before/after example pairs covering every anti-pattern, a self-check checklist, and a trigger-validation note.
+
+## Next Steps
+
+- Review the examples for clarity and grounding
+- Use `diagnose-skill` if the trigger over- or under-matches
+- Update the root README skill table

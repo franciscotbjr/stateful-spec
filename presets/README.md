@@ -1,6 +1,8 @@
 # Presets
 
-Pre-filled Project Definitions for common technology stacks. Copy a preset as your starting point instead of filling the Project Definition template from scratch.
+Pre-filled Project Definitions. Copy a preset as your starting point instead of filling the Project Definition template from scratch.
+
+Most presets are **software-stack** starting points. For non-software project types, use the matching type preset (`skills-repo.md`, `studies-project.md`) or the type's project-definition skeleton in [`methodology/project-types.md`](../methodology/project-types.md). `software` is the default Project Type.
 
 ## How to Use
 
@@ -11,13 +13,15 @@ Pre-filled Project Definitions for common technology stacks. Copy a preset as yo
 
 ## Available Presets
 
-| Preset | Stack | Best For |
-|--------|-------|----------|
-| [rust-library.md](rust-library.md) | Rust + Cargo + clippy/fmt | Rust libraries and crates |
-| [node-express-api.md](node-express-api.md) | Node.js + Express + Jest + ESLint | REST API backends |
-| [python-fastapi.md](python-fastapi.md) | Python + FastAPI + pytest + ruff | Python web APIs and services |
-| [react-webapp.md](react-webapp.md) | React + TypeScript + Vite + Vitest | Frontend web applications |
-| [go-service.md](go-service.md) | Go + standard library + go vet/test | Go backend services |
+| Preset | Type | Stack / Materials | Best For |
+|--------|------|-------------------|----------|
+| [rust-library.md](rust-library.md) | software | Rust + Cargo + clippy/fmt | Rust libraries and crates |
+| [node-express-api.md](node-express-api.md) | software | Node.js + Express + Jest + ESLint | REST API backends |
+| [python-fastapi.md](python-fastapi.md) | software | Python + FastAPI + pytest + ruff | Python web APIs and services |
+| [react-webapp.md](react-webapp.md) | software | React + TypeScript + Vite + Vitest | Frontend web applications |
+| [go-service.md](go-service.md) | software | Go + standard library + go vet/test | Go backend services |
+| [skills-repo.md](skills-repo.md) | skills | Markdown + YAML frontmatter; no build | Repositories of Agent Skills |
+| [studies-project.md](studies-project.md) | studies | LaTeX / Zotero / Python / R | Research projects (reviews, analyses, papers) |
 
 ## Contributing a Preset
 

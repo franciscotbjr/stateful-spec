@@ -1,0 +1,71 @@
+---
+description: "Safely revise a skill without changing its intent"
+alwaysApply: false
+---
+
+# Revise Skill
+
+> **Applies to:** skills. The skills analog of `refactor-code`. See [`methodology/project-types.md`](../../methodology/project-types.md).
+
+## Context
+
+Use this prompt to restructure or tighten a skill **without changing its intent** — clarify wording, remove padding, reorganize instructions, or strengthen grounding while keeping the same trigger behavior and rules.
+
+## Prerequisites
+
+- AI has access to the **Project Definition** (Project Type: skills)
+- You know what about the skill needs revision and why
+- The skill's current behavior is the baseline to preserve
+
+## Input
+
+Paste the following alongside this prompt:
+
+1. Your **Project Definition** (if the AI doesn't already have it in context)
+2. The **skill to revise** (`SKILL.md` + `README.md`)
+3. The **reason for revising** (what the current structure or wording causes)
+4. Optionally: the **desired outcome**
+
+## Prompt
+
+I need to revise the following skill. The revision must NOT change its intent — the same cases should trigger it and the same rules should apply.
+
+**Skill to revise:**
+
+{{SKILL_CONTENT_OR_REFERENCE}}
+
+**Why this needs revising:**
+
+{{REASON}}
+
+**Desired outcome (if known):**
+
+{{DESIRED_OUTCOME_OR_NONE}}
+
+**Instructions:**
+
+**Before starting:** Check `.stateful-spec/memory.md` for an Open Session section. If found, you are working within an open implementation cycle — all contributions must be registered under that iteration.
+
+1. Identify the specific problems with the current skill (padding, ambiguity, weak grounding, disorganized rules)
+2. Propose an ordered revision plan — each step independently reviewable
+3. For each step, explain what changes and why
+4. After each step, confirm that:
+   - The trigger behavior is unchanged (same cases match)
+   - The rules and "When NOT to apply" are preserved
+   - Prose follows sober-prose; claims stay grounded
+   - The two-file structure (SKILL.md + README.md) is intact
+5. If you find the trigger or a rule is actually wrong (a behavior change), flag it separately — do not mix it with structural revision
+
+**Session tracking:** If an Open Session was detected, append a timestamped entry to the **Session Log** in the referenced iteration file summarizing what was revised.
+
+## Expected Output
+
+1. Analysis of current problems
+2. Step-by-step revision plan
+3. Revised skill (incrementally)
+4. Confirmation that intent and trigger behavior are preserved at each step
+
+## Next Steps
+
+- Re-validate the trigger and before/after examples
+- Update the root README skill table if anything consumer-facing changed

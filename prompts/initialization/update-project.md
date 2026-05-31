@@ -106,6 +106,7 @@ Inspect and summarize:
 | Root docs | **`AGENTS.md`** present? Lists operations or methodology paths? If **missing**, flag it for creation during apply — this is always required regardless of scope. |
 | Vendored prompts | Any **`prompts/`** tree inside *this* project (full or partial copy from Stateful Spec) |
 | Git | Dirty working tree? Current branch? (recommend branch for update) |
+| Project Type | The `Project Type` in `.stateful-spec/project-definition.md` — software / skills / studies, or **absent** (legacy install → treated as software). See [`methodology/project-types.md`](../../methodology/project-types.md). |
 
 Present a short **summary table** to the developer.
 
@@ -134,8 +135,9 @@ Propose a scope based on inventory and typical needs; keep options clear.
 > 2. **Methodology + operation prompts** — methodology plus `prompts/operations/` (if vendored or copied) and **sync** native agent rules (e.g. `.cursor/rules/*.mdc` from source prompts) per Project Definition
 > 3. **Full refresh** — methodology + operations + note for **templates** (copy or diff `templates/` if the project vendors them)
 > 4. **Project Definition template only** — pull in changes from `templates/project/project-definition.md` into discussion; merge into **`.stateful-spec/project-definition.md`** only with explicit developer approval (does not auto-wipe custom sections)
+> 5. **Project Type migration** — set or confirm the `Project Type` and swap the variable sections + operation set to match (see STEP 6). Use this when the project predates multi-type support (no `Project Type` field) or is changing type. **Project memory and history are preserved.**
 
-Wait for the choice. If **4**, ask which sections they want to align and show a short diff plan before editing.
+Wait for the choice. If **4**, ask which sections they want to align and show a short diff plan before editing. If **5**, confirm the target Project Type before any edit.
 
 ---
 
@@ -199,6 +201,13 @@ Wait for the answer.
 
 3. **Templates** (if full refresh)
    - If the project vendors `templates/`, merge or copy from source; call out conflicts
+
+4. **Project Type migration** (if scope 5, or if `Project Type` is absent)
+   - Detect or ask the Project Type (software / skills / studies). If the field is absent, it defaults to **software** — confirm before changing anything.
+   - (a) **Set the field** in `.stateful-spec/project-definition.md` (Project Identity).
+   - (b) **Replace the variable sections** (Stack / Materials, Conventions, Verification, Quality Gates, Delivery / Distribution) with the active type's subsections from the template / registry. Preserve any project-specific values the developer wants to keep.
+   - (c) **Sync the operation set**: emit the active type's native commands (and remove ops that no longer apply only with explicit confirmation), and update the `AGENTS.md` operation table to match. See the per-type operation lists in [`methodology/project-types.md`](../../methodology/project-types.md).
+   - **Never** delete `.stateful-spec/memory.md` or `.stateful-spec/history/`. Act only on explicit confirmation.
 
 Show a **short summary of edits** (files touched) before saving.
 

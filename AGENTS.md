@@ -17,6 +17,7 @@ Follow the 5-phase iteration cycle: **Analyze → Plan → Specify → Implement
 - Phase guides: `methodology/phases/`
 - Roles and boundaries: `methodology/roles.md`
 - Decision framework: `methodology/decision-framework.md`
+- Project Types registry: [`methodology/project-types.md`](methodology/project-types.md) — this repo is `software` / documentation-only
 
 ## Operation Prompts
 
@@ -41,6 +42,8 @@ The following operations are available as native commands in supported tools:
 | `update-documentation` | Update docs after implementing a change |
 
 Source prompts live in `prompts/operations/`. The tool-specific files (`.cursor/rules/`, `.claude/commands/`, `.opencode/commands/`) mirror these sources.
+
+> This table is the **software** operation set (this repo's own Project Type). Other types have their own operations — skills and studies each get four type-specific ops in place of `create-technical-spec`/`write-tests`/`debug-issue`/`refactor-code`. See [`methodology/project-types.md`](methodology/project-types.md).
 
 ## Rules for All Work
 

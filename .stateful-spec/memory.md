@@ -6,21 +6,21 @@
 
 - **Project:** Stateful Spec
 - **Description:** A specification-driven development methodology for AI-assisted software projects
-- **Last Updated:** 2026-05-03
+- **Last Updated:** 2026-05-31
 - **Current Status:** Active development
 
 ## Active Work
 
 > What is currently in progress? Reference the iteration file.
 
-- [ ] New Session Management — `history/005-new-session-management.md`
+- [ ] Multi-Project-Type Support — `history/007-multi-project-type-support.md`
 
 ## Open Session
 
 > When a session is active, this section points to the current iteration file.
 > Managed by `start-session` and `end-session` — do not edit manually.
 
-- [005] New Session Management → `history/005-new-session-management.md`
+- [007] Multi-Project-Type Support → `history/007-multi-project-type-support.md`
 
 ## Recent Completions
 
@@ -28,10 +28,10 @@
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 005 | new-session-management | feature | 2026-05-03 |
 | 004 | add-claude-code-support | feature | 2026-04-25 |
 | 002 | require-iteration-tracking | chore | 2026-04-04 |
 | 003 | add-update-project-wizard | feature | 2026-04-03 |
-| 001 | fix-cursor-init-prompts | chore | 2026-04-03 |
 
 ## Key Decisions
 
@@ -58,8 +58,9 @@
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
+| 007 | multi-project-type-support | feature | review | `history/007-multi-project-type-support.md` |
 | 006 | universal-agents-md | fix | done | `history/006-universal-agents-md.md` |
-| 005 | new-session-management | feature | in-progress | `history/005-new-session-management.md` |
+| 005 | new-session-management | feature | done | `history/005-new-session-management.md` |
 | 004 | add-claude-code-support | feature | done | `history/004-add-claude-code-support.md` |
 | 002 | require-iteration-tracking | chore | done | `history/002-require-iteration-tracking.md` |
 | 003 | add-update-project-wizard | feature | done | `history/003-add-update-project-wizard.md` |

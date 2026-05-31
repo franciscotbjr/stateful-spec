@@ -1,5 +1,7 @@
 # Prompt: Refactor Code
 
+> **Applies to:** software. For skills, use `revise-skill`; for studies, use `restructure-argument`. See [`methodology/project-types.md`](../../methodology/project-types.md).
+
 ## Context
 
 Use this prompt when you need to restructure existing code without changing its external behavior. The AI will help plan and execute the refactoring safely.

@@ -57,42 +57,50 @@ Before starting, try to access the Stateful Spec repository (URL above or local 
 ### STEP 2 — Explore the Codebase
 
 **AI does:**
-- Read manifest files to detect language(s), framework(s), and dependencies
+- **Detect the Project Type** using the detection signals in [`methodology/project-types.md`](../../methodology/project-types.md):
+  - **software** — manifests (`package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`), `src/`, `tests/`, CI configs
+  - **skills** — directories containing `SKILL.md`, `opencode.json` with `skills.paths`, `description:` frontmatter
+  - **studies** — `.bib`/`.tex`, `references/`/`papers/`/`notes/`, analysis notebooks, `data/` + `figures/`
+- Read manifest files to detect language(s), framework(s), and dependencies (software)
 - Look for formatter/linter configs (`.prettierrc`, `rustfmt.toml`, `.eslintrc`, `ruff.toml`, etc.)
-- Look for test files to detect test framework and structure
+- Look for test files / verification material to detect framework and structure
 - Look for CI config (`.github/workflows/`, `.gitlab-ci.yml`, `Makefile`, etc.)
 - Map the directory structure
 
 **Then tells the developer:**
 > "Here's what I discovered:"
-> - **Stack:** [language, framework, key dependencies]
-> - **Conventions:** [formatter, linter, naming patterns]
-> - **Testing:** [framework, where tests live]
-> - **Quality gates:** [CI commands, scripts]
+> - **Project Type:** [software | skills | studies] — propose the detected type for confirmation; default to software if signals are ambiguous
+> - **Stack / Materials:** [language, framework, key dependencies — or skills format / studies sources]
+> - **Conventions:** [formatter, linter, naming patterns — or skills/studies conventions]
+> - **Verification:** [framework, where tests live — or skills/studies verification]
+> - **Quality gates:** [CI commands, scripts — or the type's checklist]
 > - **Structure:** [key directories and their purposes]
 >
-> "Does this look right? Anything to correct or add?"
+> "Does this look right — especially the Project Type? Anything to correct or add?"
 
-Wait for confirmation before proceeding.
+Wait for confirmation before proceeding. The confirmed Project Type drives the rest of
+the wizard.
 
 ### STEP 3 — Generate Project Definition
 
 **AI does:**
-- Check if the stack matches a known preset (Rust, Node+Express, Python+FastAPI, React, Go)
-- If match found, use the preset as a base merged with discovered conventions
+- **software:** Check if the stack matches a known preset (Rust, Node+Express, Python+FastAPI, React, Go); if so, use it as a base merged with discovered conventions
+- **skills / studies:** Use the type's preset (`presets/skills-repo.md` or `presets/studies-project.md`) or the type's skeleton in [`methodology/project-types.md`](../../methodology/project-types.md) as the base
 
 **Then asks** (only what wasn't detected):
-- Deployment target and CI/CD (if not found)
+- Delivery/distribution target (deployment & CI/CD for software; venue/format for studies; "consumed from repo" for skills)
 - Any constraints or rules the AI must always follow
 
 **AI does:**
-- Compile everything into a Project Definition document:
-  - Project Identity
-  - Technology Stack
+- Compile everything into a Project Definition document, **keeping only the active
+  Project Type's subsections** in the variable sections:
+  - Project Identity (including **Project Type**)
+  - Stack / Materials
   - Repository Structure
-  - Code Conventions
-  - Testing Strategy
+  - Conventions
+  - Verification
   - Quality Gates
+  - Delivery / Distribution
   - Constraints & Non-Negotiables
 
 **Then asks:**
@@ -156,6 +164,19 @@ Create the `.stateful-spec/` directory structure. The operation prompts placemen
 **If `.stateful-spec/` already exists** (partial setup): check for missing pieces (including `AGENTS.md`) and create only what's missing.
 
 **If the developer accepted native commands (STEP 4):**
+
+**Emit only the operations the active Project Type uses** (see the per-type operation
+lists in [`methodology/project-types.md`](../../methodology/project-types.md)). All
+types get the lifecycle ops (`start-session`, `end-session`, `resume-session`,
+`save-session`), `review-changes`, `update-documentation`, `write-commit-message`,
+plus:
+
+- **software:** `create-technical-spec`, `write-tests`, `debug-issue`, `refactor-code`
+- **skills:** `create-skill-spec`, `write-examples`, `diagnose-skill`, `revise-skill`
+- **studies:** `create-study-spec`, `verify-sources`, `resolve-inconsistency`, `restructure-argument`
+
+Emit only that set, and make the `AGENTS.md` operation table list exactly the emitted
+operations.
 
 Create agent-native commands for each operation prompt from the Stateful Spec `prompts/operations/` folder. Adapt the format to match the agent's conventions:
 
@@ -234,7 +255,7 @@ Create `.stateful-spec/operations/` — Copy the entire `prompts/operations/` fo
 **After the developer answers, AI does:**
 
 1. **Create iteration file:** Determine the next number from `.stateful-spec/history/`, then create `.stateful-spec/history/NNN-[task-name].md` with:
-   - Type: feature / bugfix / refactor / chore
+   - Type: use the Project Type's enum — software: feature/bugfix/refactor/chore; skills: new-skill/skill-revision/chore; studies: research/analysis/writing/revision/chore
    - Status: in-progress
    - Description from the developer
    - Acceptance criteria as checkboxes (ask the developer to confirm or add more)

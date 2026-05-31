@@ -15,6 +15,20 @@
 
 ## Activities
 
+> **"Implement" and "Tests" mean different things per Project Type** — see
+> [`methodology/project-types.md`](../project-types.md) (Terminology mapping). In
+> short:
+>
+> | Project Type | "Implement" means | "Tests" means |
+> |--------------|-------------------|---------------|
+> | software | write code (data → logic → integration) | unit/integration tests |
+> | skills | author the skill prose, before/after pairs, self-check checklist | trigger validation + self-check + before/after examples |
+> | studies | gather sources, run analysis, draft sections | source-checking, reproducibility, internal-consistency review |
+>
+> The activities below are written for `software`; read them through your type's
+> meaning. The principles (build inside-out, follow the Project Definition, verify
+> as you go, commit incrementally) apply to every type.
+
 ### 1. Implementation Order
 
 Follow this sequence for each unit of work:
@@ -38,15 +52,19 @@ Reference the Project Definition during implementation for:
 - **Patterns** — Error handling, logging, configuration
 - **File organization** — Where new files go, module structure
 
-### 3. Write Tests
+### 3. Write Tests (Verify the work)
 
 Testing strategy depends on the project (see Project Definition), but the methodology requires:
 
-- **At minimum:** Tests that verify the acceptance criteria from the spec
-- **Recommended:** Tests for edge cases and error scenarios listed in the spec
-- **If applicable:** Integration tests that verify the component works within the system
+- **At minimum:** Verification that the acceptance criteria from the spec are met
+- **Recommended:** Coverage of edge cases and error scenarios listed in the spec
+- **If applicable:** Integration-level checks that the artifact works within the system
 
-Use the `templates/implementation/test-plan.md` template for complex testing scenarios.
+For `software`, use `templates/implementation/test-plan.md`. For any type, use
+`templates/implementation/verification-plan.md`, which routes to the right kind of
+verification — code tests (software), before/after coverage + self-check (skills),
+or source/claim verification + reproducibility (studies). See
+[`methodology/project-types.md`](../project-types.md).
 
 ### 4. Commit Incrementally
 
@@ -75,8 +93,8 @@ If you discover something unexpected:
 ## Completion Criteria
 
 - [ ] All acceptance criteria from the spec are met
-- [ ] Tests pass (unit, integration, as applicable)
-- [ ] Code follows the Project Definition's conventions
+- [ ] Verification passes (see Project Type — tests, self-check, or source/reproducibility checks)
+- [ ] Work follows the Project Definition's conventions
 - [ ] No hardcoded values, secrets, or temporary hacks left in
 - [ ] Commits are clean and incremental
 
