@@ -1,6 +1,6 @@
 # Stateful Spec Methodology
 
-A structured, technology-agnostic framework for designing and building software with AI assistance.
+A structured, technology-agnostic framework for designing and building projects of any type (software, skills, studies, and more) with AI assistance.
 
 ## Philosophy
 
@@ -15,12 +15,22 @@ Software development with AI assistants works best when both human and AI operat
 
 ## Core Principles
 
-1. **Specification before implementation** — Write down what you're building before writing code
-2. **Incremental delivery** — Ship working software in small, verifiable iterations
+1. **Specification before implementation** — Write down what you're building before producing the artifact
+2. **Incremental delivery** — Deliver working increments in small, verifiable iterations
 3. **Decisions are permanent artifacts** — Record architectural choices with rationale
 4. **The Project Definition is the source of truth** — All technology-specific details live in one place
 5. **Quality gates are non-negotiable** — Every iteration passes the project's defined checks
 6. **AI is a collaborator, not an oracle** — The human owns decisions; the AI accelerates execution
+
+## Project Types
+
+Stateful Spec supports multiple **project types** — `software` (the default),
+`skills` (repositories of Agent Skills), and `studies` (research/study projects),
+with room for more. The Project Type is recorded in `project-definition.md` and
+determines which conventions, templates, and operations apply. The phase cycle below
+is the same for every type; only the meaning of words like "implement", "tests", and
+"deliver" changes. See [`project-types.md`](project-types.md) for the registry,
+detection signals, and the per-type terminology mapping.
 
 ## The Iteration Cycle
 

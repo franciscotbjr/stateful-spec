@@ -1,6 +1,6 @@
 # Stateful Spec
 
-A Specification Driven Development methodology for AI-assisted software projects.
+A Specification Driven Development methodology for AI-assisted projects of any type (software, skills, studies, and more).
 
 ## Get Started
 
@@ -62,6 +62,10 @@ This makes your project **self-contained** — any AI assistant can pick up wher
 
 **If you give an AI structured context and memory, it becomes a reliable collaborator instead of a stateless tool.**
 
+## Project Types
+
+Stateful Spec supports multiple **project types** — `software` (the default), `skills` (repositories of Agent Skills), and `studies` (research/study projects). The Project Type is recorded in your Project Definition and drives which conventions, templates, and operations apply. The 5-phase cycle is the same for every type; only what "implement", "tests", and "deliver" mean changes. See [`methodology/project-types.md`](methodology/project-types.md).
+
 ## Operation Prompts
 
 Once set up, these prompts are available in your project as native agent commands:
@@ -70,6 +74,12 @@ Once set up, these prompts are available in your project as native agent command
 - **Claude Code / OpenClaude:** `/resume-session`, `/save-session`, etc. (via `.claude/commands/`)
 - **OpenCode:** `/resume-session`, `/save-session`, etc. (via `.opencode/commands/`)
 - **Other tools:** point your AI at the source files in `prompts/operations/`
+
+> The table below is the **software** operation set. The set varies by Project Type:
+> `skills` projects get `create-skill-spec`, `write-examples`, `diagnose-skill`,
+> `revise-skill`; `studies` projects get `create-study-spec`, `verify-sources`,
+> `resolve-inconsistency`, `restructure-argument`. The lifecycle, review, docs, and
+> commit-message ops are shared by all types. See [`methodology/project-types.md`](methodology/project-types.md).
 
 | Prompt | Purpose |
 |--------|---------|
@@ -87,19 +97,22 @@ Once set up, these prompts are available in your project as native agent command
 
 ## Available Presets
 
-Pre-filled Project Definitions for common stacks — the AI will suggest one if it matches your tech:
+Pre-filled Project Definitions — the AI will suggest one if it matches your project:
 
-| Preset | Stack |
-|--------|-------|
-| [`rust-library.md`](presets/rust-library.md) | Rust + Cargo + clippy/fmt |
-| [`node-express-api.md`](presets/node-express-api.md) | Node.js + Express + Jest + ESLint |
-| [`python-fastapi.md`](presets/python-fastapi.md) | Python + FastAPI + pytest + ruff |
-| [`react-webapp.md`](presets/react-webapp.md) | React + TypeScript + Vite + Vitest |
-| [`go-service.md`](presets/go-service.md) | Go + stdlib + go vet/test |
+| Preset | Type | Stack / Materials |
+|--------|------|-------------------|
+| [`rust-library.md`](presets/rust-library.md) | software | Rust + Cargo + clippy/fmt |
+| [`node-express-api.md`](presets/node-express-api.md) | software | Node.js + Express + Jest + ESLint |
+| [`python-fastapi.md`](presets/python-fastapi.md) | software | Python + FastAPI + pytest + ruff |
+| [`react-webapp.md`](presets/react-webapp.md) | software | React + TypeScript + Vite + Vitest |
+| [`go-service.md`](presets/go-service.md) | software | Go + stdlib + go vet/test |
+| [`skills-repo.md`](presets/skills-repo.md) | skills | Markdown + YAML frontmatter; no build |
+| [`studies-project.md`](presets/studies-project.md) | studies | LaTeX / Zotero / Python / R |
 
 ## Learn More
 
 - [`methodology/overview.md`](methodology/overview.md) — Philosophy, principles, and the iteration cycle
+- [`methodology/project-types.md`](methodology/project-types.md) — Project Types registry (software, skills, studies)
 - [`methodology/phases/`](methodology/phases/) — Detailed guide for each of the 5 phases
 - [`methodology/roles.md`](methodology/roles.md) — Human and AI responsibilities
 - [`methodology/decision-framework.md`](methodology/decision-framework.md) — How to make and record technical decisions

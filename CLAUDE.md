@@ -18,7 +18,7 @@ Operation prompts are available as Claude Code commands. Invoke them with `/comm
 | `/write-commit-message` | Generate a well-structured commit message |
 | `/update-documentation` | Update docs after implementing a change |
 
-These commands live in `.claude/commands/` and mirror the source prompts in `prompts/operations/`.
+These commands live in `.claude/commands/` and mirror the source prompts in `prompts/operations/`. This table is the **software** operation set (this repo's own Project Type); skills and studies projects use their own type-specific operations — see [`methodology/project-types.md`](methodology/project-types.md).
 
 ## What this repository is
 
@@ -35,10 +35,10 @@ There are no build/lint/test commands. The only tooling is `git`. When the user 
 Two layers coexist in this repo and must not be confused:
 
 1. **Source artifacts** (the product this repo ships):
-   - `methodology/` — process docs: `overview.md`, `roles.md`, `decision-framework.md`, `phases/01-analyze.md` … `phases/05-verify.md`
+   - `methodology/` — process docs: `overview.md`, `project-types.md` (the Project Type registry), `roles.md`, `decision-framework.md`, `phases/01-analyze.md` … `phases/05-verify.md`
    - `prompts/` — three categories: `initialization/` (new-project, onboard-existing, update-project), `phase-transitions/` (one per phase), `operations/` (resume-session, save-session, write-commit-message, etc.)
    - `templates/` — `project/`, `specification/`, `implementation/`
-   - `presets/` — pre-filled Project Definitions (rust-library, node-express-api, python-fastapi, react-webapp, go-service)
+   - `presets/` — pre-filled Project Definitions (software: rust-library, node-express-api, python-fastapi, react-webapp, go-service; skills: skills-repo; studies: studies-project)
    - `.cursor/rules/*.mdc` — Cursor-native versions of the operation prompts
    - `.claude/commands/*.md` — Claude Code / OpenClaude command versions
    - `.opencode/commands/*.md` — OpenCode command versions

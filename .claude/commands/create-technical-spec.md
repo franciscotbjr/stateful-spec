@@ -1,5 +1,7 @@
 # Prompt: Create Technical Specification
 
+> **Applies to:** software. For skills, use `create-skill-spec`; for studies, use `create-study-spec`. See [`methodology/project-types.md`](../../methodology/project-types.md).
+
 ## Context
 
 Use this prompt when you need the AI to help you write a technical specification document for a new piece of work. This is a shortcut that combines analysis and specification into a single interaction.

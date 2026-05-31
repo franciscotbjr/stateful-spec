@@ -54,19 +54,32 @@ If the repository is not accessible, continue with the instructions embedded her
 Ask:
 - What is the project name?
 - What does it do? (one sentence)
-- What type of project is it? (library, web app, CLI, API service, mobile app, data pipeline, etc.)
 - What license? (propose MIT as default)
+
+### STEP 1.4 — Choose Project Type
+
+The **Project Type** drives the rest of the wizard — which sections the Project
+Definition gets, which spec templates and operations apply, and what detection runs
+next. Present the registry options (see [`methodology/project-types.md`](../../methodology/project-types.md)):
+
+> "What type of project is this?"
+> 1. **software** (default) — code projects: libraries, services, apps
+> 2. **skills** — a repository of Agent Skills (Markdown prompt extensions; zero-code)
+> 3. **studies** — a research/study project (reviews, analyses, reports, papers)
+
+Default to **software** if the developer is unsure. For **software**, also ask the
+category (library, web app, CLI, API service, mobile app, data pipeline). Record the
+choice — every step below is **type-aware**.
 
 ### STEP 1.5 — Detect Existing Structure & Project Location
 
-**First, scan the current folder** for existing project indicators:
-- `Cargo.toml` → Rust project
-- `package.json` → Node.js project
-- `pyproject.toml` or `setup.py` → Python project
-- `go.mod` → Go project
-- `.git/` → Git repository initialized
-- `src/`, `lib/`, `cmd/`, `internal/` → Source directories
-- `README.md`, `LICENSE` → Standard files
+**First, scan the current folder** for existing project indicators. Use the detection
+signals for the chosen Project Type (full table in [`methodology/project-types.md`](../../methodology/project-types.md)):
+
+- **software** — `Cargo.toml` → Rust; `package.json` → Node.js; `pyproject.toml`/`setup.py` → Python; `go.mod` → Go; `src/`, `lib/`, `cmd/`, `internal/` → source dirs
+- **skills** — directories containing `SKILL.md`; `opencode.json` with `skills.paths`; `description:` frontmatter
+- **studies** — `.bib`/`.tex`; `references/`, `papers/`, `notes/`; analysis notebooks; `data/` + `figures/`
+- **any** — `.git/` → Git initialized; `README.md`, `LICENSE` → standard files
 
 **If existing structure is found:**
 
@@ -89,9 +102,16 @@ Ask:
 
 **Remember what was detected** — you'll use this information in Step 8.75 to skip scaffolding steps that are already done.
 
-### STEP 2 — Tech Stack
+### STEP 2 — Tech Stack / Materials
 
-Ask:
+> **If Project Type is `skills` or `studies`, skip preset-by-stack.** There is no
+> language stack to match. Instead, seed the "Stack / Materials" section from the
+> type's skeleton in [`methodology/project-types.md`](../../methodology/project-types.md)
+> (skills: format + target agents + "no build"; studies: subject area + sources +
+> tooling) and the matching preset (`presets/skills-repo.md` or
+> `presets/studies-project.md`), then continue to STEP 3.
+
+For **software**, ask:
 - What programming language(s) and version(s)?
 - What framework(s), if any?
 - What are the key dependencies already known?
@@ -154,15 +174,21 @@ If the developer has nothing, that's fine — move on.
 ### STEP 8 — Generate Project Definition
 
 Compile all the answers into a complete Project Definition document following this structure:
-- Project Identity
-- Technology Stack (Language, Framework, Key Dependencies, Build System)
+- Project Identity (including the **Project Type** from STEP 1.4)
+- Stack / Materials
 - Repository Structure
-- Code Conventions (Naming, Code Style, Patterns)
-- Testing (Strategy, Test Naming Convention)
-- Quality Gates (bash commands)
-- Documentation (Required files, Documentation style)
-- Deployment (Target, CI/CD, Branch strategy)
+- Conventions
+- Verification
+- Quality Gates
+- Documentation
+- Delivery / Distribution
 - Constraints & Non-Negotiables
+
+The variable sections (Stack / Materials, Conventions, Verification, Quality Gates,
+Delivery / Distribution) are branched by Project Type in the template. **Keep only the
+active type's subsection** and delete the others, so the generated file is clean. The
+software subsection carries the current software content verbatim, so a software project
+is unchanged from before.
 
 Present the full document and ask: *"Here's your complete Project Definition. Review it and let me know if you want to change anything. Once you approve, I'll save this as our reference for the entire project."*
 
@@ -288,6 +314,19 @@ Create the `.stateful-spec/` directory structure at the project root. The operat
 
 **If the developer accepted native commands (STEP 8.5):**
 
+**Emit only the operations the active Project Type uses** (see the per-type operation
+lists in [`methodology/project-types.md`](../../methodology/project-types.md)). All
+types get the lifecycle ops (`start-session`, `end-session`, `resume-session`,
+`save-session`), `review-changes`, `update-documentation`, `write-commit-message`,
+plus:
+
+- **software:** `create-technical-spec`, `write-tests`, `debug-issue`, `refactor-code`
+- **skills:** `create-skill-spec`, `write-examples`, `diagnose-skill`, `revise-skill`
+- **studies:** `create-study-spec`, `verify-sources`, `resolve-inconsistency`, `restructure-argument`
+
+Do not emit a type's software-only ops for a skills/studies project (and vice versa).
+The `AGENTS.md` operation table must list exactly the emitted set.
+
 Create agent-native commands for each operation prompt from the Stateful Spec `prompts/operations/` folder. Adapt the format to match the agent's conventions:
 
 **Claude Code** — For each prompt, create `.claude/commands/<name>.md`:
@@ -368,7 +407,7 @@ Ask: *"What do you want to build first?"*
 Once the developer describes their first feature:
 
 1. **Create iteration file:** Create `.stateful-spec/history/001-[feature-name].md` using the iteration template with:
-   - Type: feature (or bugfix/refactor as appropriate)
+   - Type: use the Project Type's enum — software: feature/bugfix/refactor/chore; skills: new-skill/skill-revision/chore; studies: research/analysis/writing/revision/chore
    - Status: in-progress
    - Description from the developer
    - Acceptance criteria as checkboxes (ask the developer to confirm or add more)

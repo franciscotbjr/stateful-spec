@@ -2,6 +2,8 @@
 
 This project uses the **Stateful Spec** methodology for AI-assisted development.
 
+- **Project Type:** {{PROJECT_TYPE}} — determines which conventions, templates, and operations apply (`software` is the default). See [`.stateful-spec/methodology/project-types.md`](.stateful-spec/methodology/project-types.md).
+
 ## Getting Started
 
 1. **Read `.stateful-spec/memory.md`** — your entry point for current project state
@@ -26,19 +28,43 @@ The following operations are available as native commands in supported tools:
 - **Claude Code / OpenClaude:** invoke with `/name` (commands in `.claude/commands/`)
 - **OpenCode:** invoke with `/name` (commands in `.opencode/commands/`)
 
+> This table lists the operations for this project's Project Type ({{PROJECT_TYPE}}).
+> All types share the lifecycle, review, documentation, and commit-message ops; the
+> type-specific ops differ. The wizard fills `{{TYPE_SPECIFIC_OPERATIONS}}` below with
+> the active type's set. See [`.stateful-spec/methodology/project-types.md`](.stateful-spec/methodology/project-types.md).
+
 | Operation | Purpose |
 |-----------|---------|
 | `start-session` | Start a new session — creates iteration file and marks it as open |
 | `end-session` | End the current session — summarizes work and closes the iteration |
 | `resume-session` | Resume work — loads project context and picks up where you left off |
 | `save-session` | Save session progress — updates memory.md and iteration files |
+{{TYPE_SPECIFIC_OPERATIONS}}
+| `review-changes` | Self-review changes before committing |
+| `write-commit-message` | Generate a well-structured commit message |
+| `update-documentation` | Update docs after implementing a change |
+
+<!--
+{{TYPE_SPECIFIC_OPERATIONS}} is replaced with the active Project Type's rows:
+
+software:
 | `create-technical-spec` | Write a technical specification for new work |
 | `write-tests` | Generate tests for existing or new code |
 | `debug-issue` | Diagnose and fix a bug with structured root cause analysis |
 | `refactor-code` | Safely restructure code without changing behavior |
-| `review-changes` | Self-review code changes before committing |
-| `write-commit-message` | Generate a well-structured commit message |
-| `update-documentation` | Update docs after implementing a change |
+
+skills:
+| `create-skill-spec` | Write a specification for a new Agent Skill |
+| `write-examples` | Author before/after examples and a self-check for a skill |
+| `diagnose-skill` | Diagnose why a skill misfires and fix its trigger or grounding |
+| `revise-skill` | Safely revise a skill without changing its intent |
+
+studies:
+| `create-study-spec` | Write a specification for a research/study deliverable |
+| `verify-sources` | Verify citations resolve, support claims, and analysis reproduces |
+| `resolve-inconsistency` | Find and resolve internal contradictions in a study |
+| `restructure-argument` | Restructure a study's argument without changing conclusions |
+-->
 
 Source prompts live in `prompts/operations/`. The tool-specific files (`.cursor/rules/`, `.claude/commands/`, `.opencode/commands/`) mirror these sources.
 

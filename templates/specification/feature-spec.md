@@ -1,5 +1,7 @@
 # Feature Specification
 
+> **Applies to:** software. For other project types use `skill-spec.md` (skills) or `study-spec.md` (studies) — see [`methodology/project-types.md`](../../methodology/project-types.md).
+
 > Use this template for any new capability being added to the project.
 
 ---

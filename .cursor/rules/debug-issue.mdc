@@ -5,6 +5,8 @@ alwaysApply: false
 
 # Debug Issue
 
+> **Applies to:** software. For skills, use `diagnose-skill`; for studies, use `resolve-inconsistency`. See [`methodology/project-types.md`](../../methodology/project-types.md).
+
 ## Context
 
 Use this prompt when you encounter a bug or unexpected behavior and need AI assistance to diagnose and fix it.

@@ -1,0 +1,69 @@
+# Prompt: Restructure Argument
+
+> **Applies to:** studies. The studies analog of `refactor-code`. See [`methodology/project-types.md`](../../methodology/project-types.md).
+
+## Context
+
+Use this prompt to reorganize a study's structure — section order, flow of the argument, framing — **without changing its conclusions or evidence**. The claims and their grounding stay the same; only the presentation improves.
+
+## Prerequisites
+
+- AI has access to the **Project Definition** (Project Type: studies)
+- You know what about the current structure is weak and why
+- The current conclusions are the baseline to preserve
+
+## Input
+
+Paste the following alongside this prompt:
+
+1. Your **Project Definition** (if the AI doesn't already have it in context)
+2. The **material to restructure** (sections, outline, or full draft)
+3. The **reason** (what the current structure makes hard to follow)
+4. Optionally: the **desired structure**
+
+## Prompt
+
+<!-- Copy from here -->
+
+I need to restructure the following study material. The restructuring must NOT change its conclusions or the evidence behind them — only the organization and flow.
+
+**Material to restructure:**
+
+{{MATERIAL_OR_REFERENCE}}
+
+**Why this needs restructuring:**
+
+{{REASON}}
+
+**Desired structure (if known):**
+
+{{DESIRED_STRUCTURE_OR_NONE}}
+
+**Instructions:**
+
+**Before starting:** Check `.stateful-spec/memory.md` for an Open Session section. If found, you are working within an open implementation cycle — all contributions must be registered under that iteration.
+
+1. Analyze the current structure and identify what hurts readability or the logical flow
+2. Propose a new outline (section order and what each section argues)
+3. Present the change as ordered steps, each independently reviewable
+4. After each step, confirm that:
+   - No conclusion changed and no claim lost its supporting citation
+   - Figures/tables are still referenced and numbered correctly
+   - Terminology and notation remain consistent
+5. If, while restructuring, you find a claim that is actually unsupported or contradictory, flag it separately — do not silently change the substance
+
+**Session tracking:** If an Open Session was detected, append a timestamped entry to the **Session Log** in the referenced iteration file summarizing what was restructured.
+
+<!-- To here -->
+
+## Expected Output
+
+1. Analysis of the current structure's weaknesses
+2. Proposed outline
+3. Restructured material (incrementally)
+4. Confirmation that conclusions and grounding are preserved at each step
+
+## Next Steps
+
+- Re-read for flow end to end
+- Run `verify-sources` to confirm citations survived the move

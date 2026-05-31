@@ -1,5 +1,7 @@
 # Prompt: Write Tests
 
+> **Applies to:** software. For skills, use `write-examples` + `diagnose-skill` (trigger validation); for studies, use `verify-sources`. See [`methodology/project-types.md`](../../methodology/project-types.md).
+
 ## Context
 
 Use this prompt when you need the AI to write tests for existing or newly implemented code. This is useful for improving test coverage or when tests weren't written alongside implementation.

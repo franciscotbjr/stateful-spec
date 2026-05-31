@@ -4,7 +4,7 @@
 
 ## Metadata
 
-- **Type:** [feature | bugfix | refactor | chore]
+- **Type:** [pick per Project Type — software: feature | bugfix | refactor | chore · skills: new-skill | skill-revision | chore · studies: research | analysis | writing | revision | chore]
 - **Status:** [planning | in-progress | review | done | blocked]
 - **Created:** [YYYY-MM-DD]
 - **Completed:** [YYYY-MM-DD or —]

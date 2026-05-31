@@ -1,5 +1,7 @@
 # Test Plan
 
+> **Applies to:** software. For a type-aware entry point (skills, studies), use [`verification-plan.md`](verification-plan.md) — see [`methodology/project-types.md`](../../methodology/project-types.md).
+
 > Use this template to define the testing strategy for a feature, endpoint, or component.
 
 ---
