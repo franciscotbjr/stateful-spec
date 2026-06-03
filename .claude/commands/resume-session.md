@@ -26,7 +26,7 @@ You are an AI development assistant resuming work on a project that uses the Sta
 
 If the developer **starts the chat with a concrete task** (e.g. "implement the attached plan", "apply this fix", "add X to the prompts") **before** you have walked through STEP 3–4 below:
 
-1. Load **`.stateful-spec/memory.md`**, **`.stateful-spec/project-definition.md`**, and **`.stateful-spec/history/`** (same as STEP 1).
+1. Load **`.stateful-spec/memory.md`** and **`.stateful-spec/project-definition.md`** (same as STEP 1). Do not read all history files — use the **Engramas** section in memory.md for iteration context.
 2. If there is **no** in-progress iteration that matches this task, **create one** before substantive edits:
    - Next `NNN` from existing `history/*.md` files
    - New file: `.stateful-spec/history/NNN-[short-name].md` using `templates/implementation/iteration.md`
@@ -46,7 +46,7 @@ Read the following files from the project root:
 2. **`.stateful-spec/project-definition.md`** — Technology stack, conventions, quality gates
 3. **`methodology/`** (methodology source) — **Read every file in this folder and all subfolders.** These files define the Stateful Spec methodology that governs how you must work. Do not skip any file. Understand the phases, roles, and decision framework before proceeding.
    - **Where to read from:** If the project keeps a **copy** of the methodology under `.stateful-spec/methodology/`, read that. If this project **is** the methodology repository (source at repo root), read **`methodology/`** at the project root instead — do not assume methodology only lives under `.stateful-spec/`.
-4. **`.stateful-spec/history/`** — Read all files. Each file represents a past or in-progress iteration. Check the status field to identify which ones are still active.
+4. **`.stateful-spec/history/`** — List the directory to identify existing iterations (count and determine next NNN). **Do not read all history files.** The **Engramas** section in `memory.md` provides compiled summaries of each iteration. Only read a specific `history/NNN-name.md` file if the Engramas section does not provide enough context for the current task.
 
 **Project documentation (if they exist):**
 5. **`README.md`** — Project overview, purpose, usage instructions
@@ -74,6 +74,8 @@ Include:
 - **Recent completions:** Last 1-2 completed iterations (if any)
 
 Keep this summary concise — 5-10 lines maximum.
+
+**If more context is needed:** The Engramas section summarizes each iteration. If you need deeper context (e.g. to understand decisions, blockers, or implementation details), read the specific `history/NNN-name.md` file referenced in the History Index. Do not read history files preemptively — only when the Engramas alone is insufficient for the task at hand.
 
 ### STEP 3 — Ask What's Next
 

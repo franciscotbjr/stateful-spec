@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** review
+- **Status:** done
 - **Created:** 2026-05-31
-- **Completed:** —
+- **Completed:** 2026-06-02
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description

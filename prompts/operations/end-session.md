@@ -64,7 +64,14 @@ If the developer says **no**, stop here. The session remains open.
    - Mark **Status** as `done` (or `review` if not all criteria met)
    - Fill **Completed** date with today's date
 
-2. **Update `memory.md`:**
+2. **Finalize Engramas:**
+   - Run the Engramas map-reduce compaction on the iteration file:
+     - **Map:** Group Session Log entries in batches of 5, summarize each batch into 1-2 lines.
+     - **Reduce:** Combine Description + batch summaries + Decisions Made + Blockers & Notes into `Summary` (1-2 sentences), `Key Decisions` (up to 3 bullets, `—` if none), `Learnings` (up to 3 bullets, `—` if none).
+   - Update the corresponding row in the **Engramas** table in `memory.md`.
+   - **Two-tier compaction:** Check whether the active engram count (rows with a numeric `#`, excluding the Archive row) exceeds the tier threshold N (default 10, configured in the comment above the Engramas table). If it does, merge the oldest active row into the **Archive** row (numbered `0-archived`, the last row in the table): synthesize a 2-3 sentence summary covering all archived iterations for `Summary`, and fold relevant key decisions and learnings into `Key Decisions` and `Learnings`. This keeps the Engramas table bounded at N+1 rows regardless of project age.
+
+3. **Update `memory.md`:**
    - **Open Session** — Set back to `_(none)_`
    - **Active Work** — Move the completed item to **Recent Completions**
    - **History Index** — Update the iteration's status to `done`

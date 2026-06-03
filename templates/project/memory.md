@@ -54,6 +54,25 @@ _(none)_
 |---|------|------|--------|------|
 | [NNN] | [Name] | [feature/bugfix/refactor] | [done/in-progress/blocked] | `history/NNN-name.md` |
 
+## Engramas
+
+> Compiled memory from history. The agent reads this section for context without
+> loading all `history/` files. Each row links to the History Index via `#`.
+> If the engram is insufficient, the agent should consult the corresponding
+> history file.
+>
+> **Two-tier compaction:** The table holds at most `N` active rows (default 10)
+> plus one Archive row. N is the number after this comment. When the active row
+> count exceeds N, the oldest row merges into the Archive row at the bottom.
+> Adjust N to match your context budget — smaller N = less context, more loss.
+
+<!-- N = 10 -->
+
+| # | Summary | Key Decisions | Learnings |
+|---|---------|---------------|------------|
+| [NNN] | [1-2 sentences of what was done] | [— or relevant decisions, 1 line each] | [— or blockers/insights, 1 line each] |
+| 0-archived | [summary of older iterations] | [—] | [—] |
+
 ## How to Use This File
 
 1. **AI assistants:** Read this file first when joining the project. It provides context about what's happening and what to remember.

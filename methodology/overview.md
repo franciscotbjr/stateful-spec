@@ -124,13 +124,14 @@ your-project/
 - **Agent portability** — Works with any AI coding agent (Claude Code, Windsurf, Cursor, Codex, and others); switch agents without losing context
 - **Session persistence** — Work state survives across chat sessions without manual context restoration
 - **Iteration tracking** — Each feature, bugfix, or refactor has its own file with acceptance criteria and task checklists
+- **Context efficiency** — The Engramas section provides compiled iteration summaries so agents don't need to read every history file on session start
 - **Version controlled** — The entire `.stateful-spec/` directory is committed to the repository
 
 ### Key Files
 
 | File | Purpose |
 |------|---------|
-| `memory.md` | Current project state, active work, constraints, and history index. The AI's entry point. |
+| `memory.md` | Current project state, active work, constraints, history index, and compiled engrams (iteration summaries for context-efficient resumption). The AI's entry point. |
 | `project-definition.md` | Technology stack, conventions, quality gates. The source of truth for how to build. |
 | `history/NNN-name.md` | One file per iteration. Contains description, acceptance criteria, task checklist, decisions. |
 

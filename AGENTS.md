@@ -53,6 +53,7 @@ Source prompts live in `prompts/operations/`. The tool-specific files (`.cursor/
 4. When modifying existing content, minimize the diff — prefer targeted changes over rewrites
 5. Make small, logical commits that leave the repository in a working state
 6. Track iterations in `.stateful-spec/history/` and keep `.stateful-spec/memory.md` current
+7. **Engramas maintenance** — After any lifecycle operation that modifies a history file (`start-session`, `save-session`, `end-session`), update the **Engramas** section in `.stateful-spec/memory.md` using the map-reduce compaction algorithm: (a) group Session Log entries in batches of 5 and summarize each batch into 1-2 lines; (b) combine the Description, batch summaries, Decisions Made, and Blockers & Notes into three engram fields — `Summary` (1-2 sentences), `Key Decisions` (up to 3 bullets), `Learnings` (up to 3 bullets). **Two-tier compaction:** The Engramas table is bounded — recent N iterations (default 10) have individual rows; all older iterations are summarized in a single `0-archived` Archive row at the bottom. When an insert or update causes the active row count to exceed N, merge the oldest active row into the Archive row. Keep the Engramas table in sync with the History Index.
 
 ### Iteration tracking
 

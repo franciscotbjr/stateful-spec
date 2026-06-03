@@ -68,6 +68,13 @@ Open the active iteration file (when present) and update it:
 - If all acceptance criteria are met, change status to `done`
 - If blocked, change status to `blocked` and note why
 
+**Update Engramas:**
+- Run the Engramas map-reduce compaction on the current iteration file:
+  1. **Map:** Group Session Log entries in batches of 5. For each batch, synthesize a 1-2 line summary capturing the operations performed.
+  2. **Reduce:** Combine the **Description**, batch summaries, **Decisions Made**, and **Blockers & Notes** into three engram fields: `Summary` (1-2 sentences summarizing what was done and delivered), `Key Decisions` (up to 3 bullets, `—` if none), `Learnings` (up to 3 bullets from blockers, notes, or insights, `—` if none).
+  3. Update the corresponding row (`#` = iteration number) in the **Engramas** table in `memory.md`.
+- **Two-tier compaction:** When updating an engram row, check whether the active engram count (rows with a numeric `#`, excluding the Archive row) exceeds the tier threshold N (default 10, configured in the comment above the Engramas table). If it does, merge the oldest active row into the **Archive** row (numbered `0-archived`, the last row in the table): synthesize a 2-3 sentence summary covering all archived iterations for `Summary`, and fold relevant key decisions and learnings into `Key Decisions` and `Learnings`. This keeps the Engramas table bounded at N+1 rows regardless of project age.
+
 Show the developer the changes and ask:
 > "Here are the updates to the iteration file. Does this look correct?"
 

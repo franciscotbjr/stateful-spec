@@ -68,6 +68,10 @@ Update `.stateful-spec/memory.md`:
 
 3. **History Index** — Add a row for the new iteration with status `in-progress`.
 
+4. **Engramas section** — Insert a new row at the top of the Engramas table (newest-first). Set `Summary` to `_In progress_` and both `Key Decisions` and `Learnings` to `—`. The row must match the History Index `#` so both tables stay linked. The engram content will be finalized by `save-session` or `end-session` via map-reduce.
+
+   **Two-tier compaction:** If adding this row causes the active engram count to exceed the tier threshold N (default 10, configured in the comment above the Engramas table), merge the oldest active row into the **Archive** row (the last row in the table, numbered `0-archived`). Sum the merged iteration: update the Archive row's `Summary` to a 2-3 sentence synthesis covering all archived iterations, and fold relevant key decisions and learnings into `Key Decisions` and `Learnings`. This keeps the Engramas table bounded at N+1 rows regardless of project age.
+
 ### STEP 6 — Confirm
 
 Tell the developer:
