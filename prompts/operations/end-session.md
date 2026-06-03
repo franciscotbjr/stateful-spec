@@ -95,6 +95,15 @@ If there are uncommitted changes, ask:
 
 If yes, stage and commit.
 
+> **Multi-agent flow variant (milestone session).** When ending a session inside a
+> multi-agent flow (`start-multi-agent-flow` — software only), you are closing a **milestone
+> session** under an umbrella iteration, not the iteration itself. Log the milestone's close
+> in the umbrella iteration's Session Log and advance the flow per
+> `methodology/multi-agent-flow.md`. **Do not** clear the Open Session or move the umbrella
+> iteration to Recent Completions until the **final** milestone reaches `DONE` — only then
+> close the umbrella iteration, set its History Index status to `done`, and compile its
+> single Engrama row.
+
 ## Output
 
 After completing the end flow:

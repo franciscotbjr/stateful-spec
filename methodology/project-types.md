@@ -53,6 +53,8 @@ ships — and confirm with the developer.
 - **Operations:** lifecycle (`start-session`, `end-session`, `resume-session`,
   `save-session`) + `create-technical-spec`, `write-tests`, `debug-issue`,
   `refactor-code`, `review-changes`, `update-documentation`, `write-commit-message`.
+  Optional multi-agent mode: `start-multi-agent-flow` (two-agent milestone loop — see
+  [`multi-agent-flow.md`](multi-agent-flow.md)).
 - **Verification template:** `templates/implementation/test-plan.md` (via
   `verification-plan.md`).
 - **Iteration `Type` values:** feature | bugfix | refactor | chore.

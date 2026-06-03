@@ -17,6 +17,7 @@ Operation prompts are available as Claude Code commands. Invoke them with `/comm
 | `/review-changes` | Self-review code changes before committing |
 | `/write-commit-message` | Generate a well-structured commit message |
 | `/update-documentation` | Update docs after implementing a change |
+| `/start-multi-agent-flow` | Optional two-agent autonomous milestone loop (PM + Engineer) — see [`methodology/multi-agent-flow.md`](methodology/multi-agent-flow.md) |
 
 These commands live in `.claude/commands/` and mirror the source prompts in `prompts/operations/`. This table is the **software** operation set (this repo's own Project Type); skills and studies projects use their own type-specific operations — see [`methodology/project-types.md`](methodology/project-types.md).
 

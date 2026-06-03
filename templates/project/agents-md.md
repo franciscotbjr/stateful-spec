@@ -52,6 +52,7 @@ software:
 | `write-tests` | Generate tests for existing or new code |
 | `debug-issue` | Diagnose and fix a bug with structured root cause analysis |
 | `refactor-code` | Safely restructure code without changing behavior |
+| `start-multi-agent-flow` | Optional: two-agent autonomous milestone loop (PM + Engineer) — see `.stateful-spec/methodology/multi-agent-flow.md` |
 
 skills:
 | `create-skill-spec` | Write a specification for a new Agent Skill |
