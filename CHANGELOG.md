@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **Engramas (compiled memory)** — `memory.md` gains an `Engramas` section: compiled per-iteration summaries (`Summary` / `Key Decisions` / `Learnings`) so `resume-session` gets enough context without reading every `history/` file, with drill-down to the full iteration file only when needed.
+  - Map-reduce compaction over each iteration's Session Log; **two-tier compaction** (recent `N` active rows + a single `0-archived` Archive row) keeps the table bounded regardless of project age.
+  - `Engramas` section added to `templates/project/memory.md`; central maintenance rule added to `AGENTS.md`; `methodology/overview.md` documents it (Key Files + Why This Matters).
 - **Multi-project-type support** — `Project Type` is now a first-class, behavior-driving dimension. The methodology natively supports non-software projects.
   - `methodology/project-types.md` — central registry defining each type (detection signals, terminology mapping, applicable sections/templates/operations).
   - New project types: **skills** (repositories of Agent Skills; zero-code) and **studies** (research/study projects). `software` remains the default.
@@ -19,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Lifecycle operation prompts (`resume-session`, `start-session`, `save-session`, `end-session`) and their `.claude/`, `.cursor/`, `.opencode/` ports updated to read, initialize, and maintain the Engramas section (resume now uses Engramas instead of reading all `history/` files).
 - `templates/project/project-definition.md` — `Project Type` made load-bearing; variable sections (Stack/Materials, Conventions, Verification, Quality Gates, Delivery) branched per type via the conditional-section convention.
 - `methodology/overview.md`, `phases/04-implement.md`, `phases/05-verify.md` — generalized to be type-aware (terminology mapping, checklist-based gates for non-software types).
 - Initialization wizards (`new-project.md`, `onboard-existing.md`, `update-project.md`) — detect/select Project Type and drive type-aware generation and operation emission.

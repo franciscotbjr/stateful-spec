@@ -28,11 +28,11 @@ _(none)_
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 010 | reconcile-loose-ends | chore | 2026-06-03 |
 | 008 | engramas-compiled-memory | feature | 2026-06-03 |
 | 007 | multi-project-type-support | feature | 2026-06-02 |
 | 005 | new-session-management | feature | 2026-05-03 |
 | 004 | add-claude-code-support | feature | 2026-04-25 |
-| 002 | require-iteration-tracking | chore | 2026-04-04 |
 
 ## Key Decisions
 
@@ -59,6 +59,8 @@ _(none)_
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
+| 010 | reconcile-loose-ends | chore | done | `history/010-reconcile-loose-ends.md` |
+| 009 | review-handoff-engramas | review-handoff | done | `history/009-review-handoff-engramas.md` |
 | 008 | engramas-compiled-memory | feature | done | `history/008-engramas-compiled-memory.md` |
 | 007 | multi-project-type-support | feature | done | `history/007-multi-project-type-support.md` |
 | 006 | universal-agents-md | fix | done | `history/006-universal-agents-md.md` |
@@ -83,6 +85,7 @@ _(none)_
 
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|------------|
+| 010 | Reconciliação de pontas soltas pós-008: indexou o review-handoff 009 (commitado, PR #25) na History Index e registrou a feature Engramas no CHANGELOG `[Unreleased]`. | Indexar 009 como `review-handoff` (mantendo o arquivo) para preservar trilha de auditoria visível; 009 não recebe linha de Engramas por não ter Session Log próprio. | History Index e tabela Engramas divergem de propósito para artefatos não-feature — review-handoffs são indexados mas não compilados em engramas. |
 | 008 | Sistema de compactação de memória com seção Engramas, algoritmo map-reduce sobre Session Log, drill-down por engramas em vez de ler history/ inteiro, e two-tier compaction para prevenir crescimento ilimitado da tabela. | Two-tier compaction com Archive row mantém tabela em N+1 linhas; ports de operações sincronizados via regra de sync obrigatória; pesquisa de alternativas documentada (hierarchical, MemGPT/Letta, RAG, gist tokens, progressive disclosure). | A regra de sync do project-definition obriga portar mudanças para .cursor/.claude/.opencode; a two-tier compaction resolve o problema assintótico real que o modelo flat não resolvia. |
 | 007 | Suporte a múltiplos tipos de projeto (software, skills, studies) com registro central `project-types.md`. Criou templates, operações e presets específicos por tipo, além de detecção nos wizards de inicialização. | Project Type como campo load-bearing com seções condicionais; software mantido como default para backward compatibility | O repositório da metodologia permanece como software/documentation-only — não reclassificado |
 | 006 | Correção do AGENTS.md para ser universal (não apenas Cursor). Generalizou imports de CLAUDE.md para AGENTS.md e unificou as regras de agentes. | — | — |
