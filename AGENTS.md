@@ -40,6 +40,7 @@ The following operations are available as native commands in supported tools:
 | `review-changes` | Self-review code changes before committing |
 | `write-commit-message` | Generate a well-structured commit message |
 | `update-documentation` | Update docs after implementing a change |
+| `start-multi-agent-flow` | Optional two-agent autonomous milestone loop (PM + Engineer) — see [`methodology/multi-agent-flow.md`](methodology/multi-agent-flow.md) |
 
 Source prompts live in `prompts/operations/`. The tool-specific files (`.cursor/rules/`, `.claude/commands/`, `.opencode/commands/`) mirror these sources.
 

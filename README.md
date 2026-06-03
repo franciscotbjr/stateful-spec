@@ -94,6 +94,13 @@ Once set up, these prompts are available in your project as native agent command
 | `review-changes.md` | Self-review code before committing |
 | `write-commit-message.md` | Generate a structured commit message |
 | `update-documentation.md` | Update docs after a change |
+| `start-multi-agent-flow.md` | Optional: run a two-agent autonomous milestone loop (software) |
+
+> **Multi-agent flow (optional, software).** For a large task delivered in many milestones,
+> two agents can take turns through a shared state file — a PM/Architect that plans, specs,
+> and reviews, and a Senior Engineer that implements, fixes, and commits. Start it with
+> `start-multi-agent-flow pm` / `start-multi-agent-flow engineer`. See
+> [`methodology/multi-agent-flow.md`](methodology/multi-agent-flow.md).
 
 ## Available Presets
 

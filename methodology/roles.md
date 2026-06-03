@@ -74,6 +74,26 @@ The AI assistant should **NOT**:
 2. The AI analyzes the Session Log, updates the iteration file, and moves work to Recent Completions
 3. Human reviews and commits the updates
 
+## Multi-Agent Flow (optional mode)
+
+> **Applies to: software.** Additive — it does not change the single-agent model above.
+
+For a large task delivered in many milestones, two AI agents can take turns through a shared
+state file instead of the human relaying each step:
+
+- **Agent 1 — PM / Architect** (`pm`): breaks the task into milestones, writes one spec per
+  milestone, and code-reviews each delivery.
+- **Agent 2 — Senior Engineer** (`engineer`): implements each milestone (with the quality
+  gate), fixes review findings, and commits per approved milestone.
+- **Human:** gives the task, **approves the milestone plan once**, and authorizes
+  irreversible/outward-facing actions (push, PR, publish). Still owns all decisions; may
+  interrupt anytime.
+
+The full protocol (roles, state machine, signal file, termination) is in
+[`multi-agent-flow.md`](multi-agent-flow.md); start it with the `start-multi-agent-flow`
+operation. The boundaries above (no irreversible changes without instruction, no competing
+sessions) continue to apply to each agent.
+
 ## Communication Guidelines
 
 ### AI Should

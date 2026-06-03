@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **Multi-agent flow (optional, software)** — a two-agent autonomous milestone loop where a PM/Architect agent plans, specs, and reviews while a Senior Engineer agent implements, fixes, and commits, coordinating through a shared state file.
+  - `methodology/multi-agent-flow.md` — the canonical protocol (roles, state machine, signal file, milestone file layout, session-per-milestone, stall cap, branch/commit, completion). Marked "Applies to: software".
+  - New operation `start-multi-agent-flow` (arg `pm|engineer`) reusing the existing ops (`create-technical-spec`, `review-changes`, Phase 4, `write-commit-message`), with `.claude/`, `.cursor/`, `.opencode/` ports.
+  - New templates `templates/implementation/flow-state.md` (the `.stateful-spec/flow-state.md` signal scaffold) and `templates/implementation/review-handoff.md` (per-milestone code-review handoff).
+  - `methodology/roles.md` gains an optional-mode subsection; `start-session`/`end-session` (and ports) gain a milestone-session note; `project-types.md` (software), root `AGENTS.md`/`CLAUDE.md`, `README.md`, and `templates/project/agents-md.md` list the operation.
 - **Engramas (compiled memory)** — `memory.md` gains an `Engramas` section: compiled per-iteration summaries (`Summary` / `Key Decisions` / `Learnings`) so `resume-session` gets enough context without reading every `history/` file, with drill-down to the full iteration file only when needed.
   - Map-reduce compaction over each iteration's Session Log; **two-tier compaction** (recent `N` active rows + a single `0-archived` Archive row) keeps the table bounded regardless of project age.
   - `Engramas` section added to `templates/project/memory.md`; central maintenance rule added to `AGENTS.md`; `methodology/overview.md` documents it (Key Files + Why This Matters).

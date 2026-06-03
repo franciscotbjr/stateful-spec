@@ -1,0 +1,149 @@
+---
+description: Start or join a two-agent autonomous milestone flow in a given role (pm|engineer)
+---
+
+# Start Multi-Agent Flow
+
+> **Applies to: software.** Starts or joins the optional two-agent autonomous flow defined
+> in `methodology/multi-agent-flow.md`. Read that document first — it is the source of truth
+> for the roles, the state machine, and the signal file. This prompt is the executable entry
+> point; it **reuses** the existing operations rather than duplicating them.
+
+**Usage:** `start-multi-agent-flow pm` · `start-multi-agent-flow engineer`
+
+Two agents (possibly different tools) take turns through `.stateful-spec/flow-state.md`.
+Use this mode only for a large task delivered in many milestones; for small/medium work,
+use the ordinary single-agent cycle.
+
+## Instructions
+
+### STEP 0 — Resolve the role
+
+Read the argument: it must be `pm` (Agent 1 — PM/Architect) or `engineer` (Agent 2 — Senior
+Engineer). If it is missing or invalid, ask which role to assume and stop until answered.
+**You act only on turns that match your role.**
+
+### STEP 1 — Load context
+
+Read, in order:
+1. `.stateful-spec/memory.md` (current state, Open Session, Engramas)
+2. `.stateful-spec/project-definition.md` (conventions, **quality gates** — you will run them)
+3. `methodology/multi-agent-flow.md` (the protocol)
+4. `.stateful-spec/flow-state.md` if it exists (the current coordination state)
+
+### STEP 2 — Kickoff or attach
+
+**If role = `pm`:**
+
+- **No active flow** (`flow-state.md` absent, or `process_status: DONE`): **kick off.**
+  1. If the human did not state the task, ask for it.
+  2. Run **Analyze + Plan** (`methodology/phases/01-analyze.md`, `02-plan.md`). Produce the
+     **master plan**: a milestone breakdown M1…Mn. This is the umbrella iteration — create
+     `.stateful-spec/history/NNN-<name>.md` (next `NNN`) from
+     `templates/implementation/iteration.md`, with the milestone checklist as the **single
+     source of truth** (do not duplicate the list anywhere else). Mark it the **Open
+     Session** in `memory.md` and add it to Active Work + History Index + Engramas (per
+     `start-session`).
+  3. Create `.stateful-spec/flow-state.md` from `templates/implementation/flow-state.md`:
+     `process_status: PLANNING`, `iteration: NNN-<name>`, `turn: pm`. After the plan is
+     written, set `process_status: AWAITING_PLAN_APPROVAL`.
+  4. Present the milestone plan to the human for the **single approval gate**. On approval,
+     set `process_status: RUNNING`, `total_milestones: n`, `current_milestone: 1`,
+     `step: SPEC_PENDING`, `turn: pm`, and continue to STEP 3. (Do not proceed without it.)
+- **Active flow exists** (`RUNNING`/`BLOCKED`): resume as PM — go to STEP 3.
+
+**If role = `engineer`:**
+
+- Require an existing `flow-state.md`. If none exists, tell the human the PM must kick the
+  flow off first (`start-multi-agent-flow pm`) and stop.
+- Otherwise **attach** to the existing flow — do **not** create a new iteration or session
+  (honor the Open Session rule). Go to STEP 3.
+
+### STEP 3 — The poll loop
+
+Repeat:
+
+1. Read `.stateful-spec/flow-state.md`.
+2. If `process_status` is `DONE` or `BLOCKED` → report the state to the human and **exit**
+   (if `BLOCKED`, state the `blocked_reason`).
+3. If `turn` ≠ your role → **re-schedule a wake** and stop for now (in Claude Code, use the
+   `/loop` skill or a scheduled wake-up; other tools use their own loop/watch).
+4. If `turn` == your role → perform STEP 4 for the current `step`, then re-schedule a wake to
+   monitor for your next turn.
+
+> The protocol is identical whether the trigger is an autonomous loop or a human relaying
+> turns by invoking each agent in sequence.
+
+### STEP 4 — Act on your turn (by step)
+
+After acting, always: update `flow-state.md` frontmatter (`turn`, `step`, `review_round` if
+applicable, `updated_by`, `updated_at`), append a turn-log line (`timestamp · role · action ·
+file`), and append a Session Log entry to the umbrella iteration file.
+
+**PM (`pm`):**
+
+- **`SPEC_PENDING`** — Open the milestone session (Session Log marker; see the milestone-
+  session note in `start-session`). Write the milestone spec via `create-technical-spec` →
+  `history/NNN-<name>-m<k>-spec.md` (refine the master-plan item; never re-list milestones).
+  Set `step: SPEC_READY`, `turn: engineer`.
+- **`AWAITING_REVIEW`** — Review the Engineer's delivery via `review-changes`, writing a
+  handoff `history/handoff-NNN-<name>-m<k>-review.md` from
+  `templates/implementation/review-handoff.md`. **Verify the quality gate actually ran
+  green** (don't trust checkboxes).
+  - **Pass** (no blocking findings) → `step: APPROVED`, `turn: engineer`.
+  - **Fail** → `step: CHANGES_REQUESTED`, `turn: engineer`, `review_round += 1`. If
+    `review_round > max_review_rounds` → set `process_status: BLOCKED`,
+    `blocked_reason` (stall), and halt for the human (STEP 5).
+
+**Engineer (`engineer`):**
+
+- **`SPEC_READY`** — Implement milestone `k` per the spec (Phase 4 build order) and run the
+  **full quality gate** from the Project Definition. Only when green → `step: AWAITING_REVIEW`,
+  `turn: pm`. (If it cannot go green, set `BLOCKED` with the reason.)
+- **`CHANGES_REQUESTED`** — Read the handoff, fix every blocking finding, re-run the quality
+  gate → `step: AWAITING_REVIEW`, `turn: pm`.
+- **`APPROVED`** — On the **first** milestone, create the feature branch. Commit the
+  milestone with `write-commit-message` (one commit per approved milestone; repo stays
+  green). Close the milestone session (see `end-session` milestone variant). Then advance:
+  - More milestones remain → `current_milestone += 1`, `step: SPEC_PENDING`, `review_round: 0`,
+    `turn: pm`.
+  - Last milestone → STEP 6 (completion).
+
+### STEP 5 — Stall
+
+When `review_round` exceeds `max_review_rounds` (default 3), the PM sets `BLOCKED` with a
+`blocked_reason` describing the impasse and halts for the human rather than looping. Resume
+only after the human resolves it (e.g., narrows the milestone, answers a question, or lifts
+the block).
+
+### STEP 6 — Irreversible-action gate
+
+Never push, open a PR on a shared remote, publish, or release autonomously. When a step
+requires such an action, set `process_status: BLOCKED` with a `blocked_reason` and wait for
+explicit human authorization (per `methodology/roles.md`). Commits to the **local** feature
+branch are pre-authorized and do not gate.
+
+### STEP 7 — Completion
+
+When the last milestone reaches `COMMITTED`, the PM:
+1. Sets `process_status: DONE`, `done: true`; writes a final turn-log summary.
+2. Runs `end-session` for the final milestone, then closes the **umbrella iteration**: move
+   it to Recent Completions, set its History Index status to `done`, and compile its Engrama
+   (one row, from all milestone session logs).
+3. Leaves delivery (push/PR/publish) as a human gate.
+
+`DONE` is sticky — both agents see it on their next poll and exit. `flow-state.md` persists
+as the record until a new flow resets it.
+
+## Output
+
+1. **Kickoff (pm):** umbrella iteration + master plan created, Open Session marked,
+   `flow-state.md` initialized, plan approved by the human.
+2. **Running:** each turn advances exactly one step, with the spec/handoff artifact written,
+   `flow-state.md` and the Session Log updated, and the next wake scheduled.
+3. **Completion:** `process_status: DONE`, umbrella iteration closed, Engrama compiled.
+
+## Next Steps
+
+- The other role's agent picks up its turn automatically (or on the human's next invocation).
+- On `BLOCKED`, resolve the stated reason, clear the block, and the flow resumes.

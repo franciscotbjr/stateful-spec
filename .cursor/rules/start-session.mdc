@@ -80,6 +80,13 @@ Tell the developer:
 > "Session started: `history/NNN-name.md`"
 > "All operations you run in this session (spec writing, code review, documentation, etc.) will register their contributions under this iteration. Use `end-session` when the implementation cycle is complete."
 
+> **Multi-agent flow variant (milestone session).** When a multi-agent flow is active
+> (`start-multi-agent-flow` — software only), a session opens **per milestone** under an
+> existing **umbrella iteration**. In that case do **not** create a new `NNN` iteration file
+> or a competing History Index / Engramas row — instead, mark the milestone session open
+> under the umbrella iteration and log a Session Log entry there. See
+> `methodology/multi-agent-flow.md`.
+
 ## Output
 
 After completing the start flow:
