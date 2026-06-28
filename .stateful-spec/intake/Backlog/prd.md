@@ -1,10 +1,10 @@
 ---
 status: triaged
-title: new - 01 - publish flow-rs to cartes io
+title: new - 02 - publish flow-rs to npm
 origin: idea
-destination: O-002 — backlog.md (promoted → Iteration 015 publish-flow-rs-crates-io)
+destination: O-003 (backlog) — publish @stateful-spec/flow to npm
 ---
 
-# Atualizar o Cargo.toml
+# Aplicar
 
-D:\franciscotbjr\Documents\Explorações\Diário de Experiências com Agentes de IA\stateful-spec\fluxo\backlog\new - 01 - publish flow-rs to cartes io
+D:\franciscotbjr\Documents\Explorações\Diário de Experiências com Agentes de IA\stateful-spec\fluxo\backlog\new - 02 - publish flow-rs to npm
