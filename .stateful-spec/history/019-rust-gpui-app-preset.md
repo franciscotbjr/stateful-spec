@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** in-progress
+- **Status:** done
 - **Created:** 2026-06-28
-- **Completed:** —
+- **Completed:** 2026-06-28
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -54,10 +54,10 @@ This opportunity (**O-006**) was surfaced during iteration 018's stand-in analys
 
 > Standard checks from the Project Definition. Verify before marking done.
 
-- [ ] All quality gates pass (manual review — documentation-only, no build/lint/test)
-- [ ] Preset mirrors `templates/project/project-definition.md` structure
-- [ ] Documentation updated (presets index + CHANGELOG)
-- [ ] No debug code or TODOs left behind
+- [x] All quality gates pass (manual review — documentation-only, no build/lint/test)
+- [x] Preset mirrors `templates/project/project-definition.md` structure
+- [x] Documentation updated (presets index + CHANGELOG)
+- [x] No debug code or TODOs left behind
 
 ## Session Log
 
@@ -71,7 +71,8 @@ This opportunity (**O-006**) was surfaced during iteration 018's stand-in analys
 | 2026-06-28 19:30 | implement | Wrote `presets/rust-gpui-app.md` (~180 lines) directly to `presets/` (not the session-scoped scratchpad, per the 018 lesson): render-from-state architecture (engine ↔ UI via `UiCommand`/`EngineEvent`, pure `reduce()`), the async-off-the-UI-executor clippy `disallowed-methods` boundary (with `clippy.toml` example), 3-gate verification (technical/visual/functional) + headless engine/reducer/geometry/smoke tests, theming-via-design-system, serde-enum settings + mandatory-`Lang` i18n, `Arc<[T]>` snapshots + list virtualization, committed `Cargo.lock` + exact-`rev` git-dep pinning, release-tuned `[profile.release]`, per-OS human-gated binaries CI. Framework-neutral with marked **GPUI-only** callouts. Added the `presets/README.md` index row and a CHANGELOG `[Unreleased] › Added` entry. |
 | 2026-06-28 19:32 | review-changes | Self-review: leakage grep (`stand-in`/`MCP`/`explorer`/`studio`/…) clean — GPUI appears only in intentional callouts; preset mirrors the project-definition template and stays terse (sibling-comparable to `rust-library`); all 9 acceptance criteria met. Awaiting developer review before commit. |
 | 2026-06-28 19:35 | write-commit-message | Developer approved. Committed to new branch `feature/019-rust-gpui-app-preset` (commit `82283ce`, 6 files: preset + README index + CHANGELOG + iteration + memory bookkeeping) — single-line message ≤300 chars (298) per convention, Co-Authored-By trailer. Not pushed / no PR (awaiting explicit instruction). Note: `rtk` is not installed in this shell, fell back to plain `git`. |
-| 2026-06-28 19:40 | review-changes | Post-commit review of the branch diff surfaced two accuracy fixes (applied): (1) **egui is immediate-mode, not retained-mode** — reframed the preset + CHANGELOG from "retained-mode/GPU UI framework" to "GPU-accelerated, retained-mode (GPUI) / immediate-mode (egui)", noting render-from-state is the app's discipline layered on either mode; (2) resolved the apparent clippy contradiction — added that the **engine spawns via an explicit runtime `Handle`** (lint untouched) and only the **ambient free-function** `tokio::spawn` (the UI-thread mistake) is blocked. Rest of the diff verified: template parity, terseness, leakage-clean. |
+| 2026-06-28 19:40 | review-changes | Post-commit review of the branch diff surfaced two accuracy fixes (applied): (1) **egui is immediate-mode, not retained-mode** — reframed the preset + CHANGELOG from "retained-mode/GPU UI framework" to "GPU-accelerated, retained-mode (GPUI) / immediate-mode (egui)", noting render-from-state is the app's discipline layered on either mode; (2) resolved the apparent clippy contradiction — added that the **engine spawns via an explicit runtime `Handle`** (lint untouched) and only the **ambient free-function** `tokio::spawn` (the UI-thread mistake) is blocked. Rest of the diff verified: template parity, terseness, leakage-clean. Committed as `57c075e`. |
+| 2026-06-28 19:56 | end-session | Session closed. Delivered `presets/rust-gpui-app.md` (O-006) + `presets/README.md` index row + CHANGELOG `[Unreleased]` entry; all 9 acceptance criteria + 4 quality checks met → status `done`. Two commits on branch `feature/019-rust-gpui-app-preset` (`82283ce`, `57c075e`); **not pushed / no PR** (developer chose to close without publishing). Close triage: only intake item `prd.md` already `triaged` (→ O-005), no `ready` items. Failure sweep: no `[INCIDENT]` entries. Compiled the 019 Engrama; archived 016 central (RAW_HISTORY=3). O-007 (`rust-design-system`) remains `new` in the backlog. |
 
 > **Timestamp format:** `YYYY-MM-DD HH:MM` (local time). Example: `2026-05-03 14:30 | start-session | Session opened for feature work.`
 >
