@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** chore
-- **Status:** in-progress
+- **Status:** done
 - **Created:** 2026-06-28
-- **Completed:** —
+- **Completed:** 2026-06-28
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -63,6 +63,7 @@ Drives backlog opportunity **O-004** (intake `prd.md`, idea).
 |-----------|-----------|---------|
 | 2026-06-28 14:50 | start-session | Session opened for O-004 — validate published references (crates.io + npm). |
 | 2026-06-28 15:05 | implement | Validated both registries live: crates.io sparse index + API confirm `stateful-spec-flow@0.1.0` (yanked:false, MSRV 1.96, keywords/categories as published); npm confirms `@stateful-spec/flow@0.1.0` (dist-tag latest, MIT, repo→packages/flow-ts). Audited all in-repo refs (manifests, README, packages/README, AGENTS, project-definition, multi-agent-flow, 4 start-multi-agent-flow ports) against published truth — name/version/desc/repo all match, **no drift**. Promoted O-004 → iteration 017 in backlog.md. |
+| 2026-06-28 15:30 | end-session | Session closed. All acceptance criteria met: both packages confirmed live and resolvable, every in-repo reference audited against published truth (zero drift, zero corrective edits), O-004 routed to iteration 017. No `[INCIDENT]` entries. |
 
 > **Timestamp format:** `YYYY-MM-DD HH:MM` (local time). Example: `2026-05-03 14:30 | start-session | Session opened for feature work.`
 >
