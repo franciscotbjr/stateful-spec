@@ -1,6 +1,6 @@
-# Project Definition — Rust Desktop/UI Application (GPUI / retained-mode)
+# Project Definition — Rust GPU UI Application (GPUI / egui)
 
-> Pre-filled preset for a Rust desktop/UI **application** built on a retained-mode/GPU UI framework (GPUI, or egui/eframe). Distinct from `rust-library` (a published crate): this is a shipped **binary** with a render-from-state architecture. Customize for your project; delete optional blocks that do not apply. **GPUI-only** callouts mark mechanics specific to GPUI — adapt or drop them for another framework. For the underlying crate-authoring conventions (modules, errors, secrets, identity), the `rust-library` preset still applies.
+> Pre-filled preset for a Rust desktop/UI **application** built on a GPU-accelerated native UI framework — retained-mode (e.g. GPUI) or immediate-mode (e.g. egui/eframe). Distinct from `rust-library` (a published crate): this is a shipped **binary** with a render-from-state architecture (the app's own discipline, layered on either UI mode). Customize for your project; delete optional blocks that do not apply. **GPUI-only** callouts mark mechanics specific to GPUI — adapt or drop them for another framework. For the underlying crate-authoring conventions (modules, errors, secrets, identity), the `rust-library` preset still applies.
 
 ---
 
@@ -33,7 +33,7 @@
 
 | Framework | Version | Purpose |
 |-----------|---------|---------|
-| [e.g., GPUI \| egui/eframe] | [git rev / e.g., 0.29] | Retained-mode/GPU UI toolkit |
+| [e.g., GPUI \| egui/eframe] | [git rev / e.g., 0.29] | GPU-accelerated UI toolkit (retained- or immediate-mode) |
 
 > **GPUI-only:** GPUI has no crates.io release — it is a **git dependency** pinned by exact `rev`/`tag`. With `egui/eframe` it is a normal versioned crate.
 
@@ -116,7 +116,9 @@ Standard Rust naming (same as the `rust-library` preset): `snake_case` files/fun
   ]
   ```
 
-  > **GPUI-only:** GPUI's foreground executor is **not** tokio. Calling `tokio::spawn` from a view silently runs on the wrong runtime; route the intent to the engine instead. The lint above makes the mistake a build failure.
+  The engine still spawns freely — through an explicit runtime `Handle` (`handle.spawn(…)`), which the lint does **not** touch. Only the **ambient free-function** forms (`tokio::spawn` and friends) are blocked, and those are exactly what careless UI code reaches for.
+
+  > **GPUI-only:** GPUI's foreground executor is **not** tokio, and a view has no ambient tokio runtime. Calling `tokio::spawn` from a view runs on the wrong runtime (or panics); route the intent to the engine instead. The lint above makes the mistake a build failure.
 
 ### Patterns & Conventions
 
