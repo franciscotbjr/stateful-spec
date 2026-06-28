@@ -34,3 +34,9 @@
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|-----------|
 | 005 | Sistema de session lifecycle com start-session e end-session. Iteration tracking com Session Log para registrar contribuições de diferentes operações sob a mesma iteração. | Sessões explícitas com Open Session flag em memory.md; operações registram timestamp + operação + sumário no Session Log | Closed stale session de iteração já mergeada via PR |
+
+## 006 — folded 2026-06-28
+
+| # | Summary | Key Decisions | Learnings |
+|---|---------|---------------|-----------|
+| 006 | Correção do AGENTS.md para ser universal (não apenas Cursor). Generalizou imports de CLAUDE.md para AGENTS.md e unificou as regras de agentes. | — | — |
