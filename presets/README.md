@@ -16,6 +16,7 @@ Most presets are **software-stack** starting points. For non-software project ty
 | Preset | Type | Stack / Materials | Best For |
 |--------|------|-------------------|----------|
 | [rust-library.md](rust-library.md) | software | Rust + Cargo + clippy/fmt | Rust libraries and crates |
+| [rust-gpui-app.md](rust-gpui-app.md) | software | Rust + GPUI/egui + cargo | Rust desktop/UI apps (render-from-state) |
 | [node-express-api.md](node-express-api.md) | software | Node.js + Express + Jest + ESLint | REST API backends |
 | [python-fastapi.md](python-fastapi.md) | software | Python + FastAPI + pytest + ruff | Python web APIs and services |
 | [react-webapp.md](react-webapp.md) | software | React + TypeScript + Vite + Vitest | Frontend web applications |
