@@ -136,7 +136,7 @@ Not applicable — documentation-only project.
 
 ## Constraints & Non-Negotiables
 
-- All content must be Markdown — no application code in the repository
+- The methodology content is Markdown — no application code in the repository **except** the optional `packages/` reference implementations of the multi-agent flow tool (separately published to crates.io / npm; not required to use the methodology)
 - File naming must follow existing kebab-case convention
 - CHANGELOG entries must follow Keep a Changelog format
 - New presets must match the structure of `templates/project/project-definition.md`

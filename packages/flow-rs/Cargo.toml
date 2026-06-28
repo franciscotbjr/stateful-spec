@@ -1,0 +1,22 @@
+[package]
+name = "stateful-spec-flow"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.74.0"
+description = "Validated state-transition CLI for the Stateful Spec multi-agent flow (flow-state.md). Cross-platform, zero-dependency."
+license = "MIT"
+repository = "https://github.com/franciscotbjr/stateful-spec"
+readme = "README.md"
+keywords = ["stateful-spec", "workflow", "state-machine", "cli"]
+categories = ["command-line-utilities", "development-tools"]
+
+# Standalone tool — its own one-crate workspace, not a member of any parent.
+[workspace]
+
+[[bin]]
+name = "flow"
+path = "src/main.rs"
+
+[dependencies]
+# Intentionally zero external dependencies (pure std): builds offline and fast,
+# and keeps the tooling self-contained.

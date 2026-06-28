@@ -1,0 +1,54 @@
+# Three-agent flow: design gate (submit-spec / request-spec-changes / approve-spec)
+# then delivery, then advance on the last milestone -> DONE.
+[initial]
+process_status = RUNNING
+iteration = 013-conf
+total_milestones = 1
+current_milestone = 1
+turn = pm
+step = SPEC_PENDING
+review_round = 0
+max_review_rounds = 3
+spec_review_round = 0
+max_spec_review_rounds = 3
+seq = 0
+
+[step]
+run = submit-spec
+exit = 0
+expect = step=ARCH_REVIEW turn=architect updated_by=pm seq=1
+
+[step]
+run = request-spec-changes needs-edge-cases
+exit = 0
+expect = step=SPEC_CHANGES_REQUESTED turn=pm spec_review_round=1 seq=2
+
+[step]
+run = submit-spec
+exit = 0
+expect = step=ARCH_REVIEW turn=architect seq=3
+
+[step]
+run = approve-spec
+exit = 0
+expect = step=SPEC_APPROVED turn=pm updated_by=architect seq=4
+
+[step]
+run = spec-ready
+exit = 0
+expect = step=SPEC_READY turn=engineer seq=5
+
+[step]
+run = submit
+exit = 0
+expect = step=AWAITING_REVIEW turn=pm seq=6
+
+[step]
+run = approve
+exit = 0
+expect = step=APPROVED turn=engineer seq=7
+
+[step]
+run = advance --allow-dirty
+exit = 0
+expect = process_status=DONE done=true step=COMMITTED turn=pm seq=8

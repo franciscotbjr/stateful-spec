@@ -102,6 +102,19 @@ The methodology adapts to work of any size:
 | **Large** (new module, major refactor) | All 5 phases, multiple iterations with sub-tasks |
 | **Project bootstrap** | Use the `new-project` initialization prompt, then iterate |
 
+## Supporting Structures
+
+The 5-phase cycle is the core, but three lightweight structures wrap around it. **They are not new
+phases** — the cycle stays Analyze → Plan → Specify → Implement → Verify — they are supporting
+disciplines that keep a project's context, opportunities, and post-delivery feedback under control
+as it ages. All three apply to **every** Project Type.
+
+| Structure | What it does | When | Doc |
+|-----------|--------------|------|-----|
+| **Intake & Backlog** | A pre-phase funnel: raw notes (`intake/`) pass a READY gate, get triaged into a durable `O-NNN` backlog, and are promoted to the roadmap — so ideas never leak half-formed into planning. | Triaged at session kickoff and close | [`backlog.md`](backlog.md) |
+| **History Archiving** | A two-tier context budget: compiled Engramas plus a bounded raw `history/`, with older iterations moved to an indexed `history/.archived/` that is never bulk-read. | At iteration start / end | [`history-archiving.md`](history-archiving.md) |
+| **Post-Delivery QA** | A loop entered *after* Verify, when a delivered artifact meets real-world testing: register → route → categorize (E/P/H) → root-cause → fix → lesson back to a skill. | After delivery | [`qa-phase.md`](qa-phase.md) |
+
 ## Project Memory Structure
 
 Projects using Stateful Spec maintain a `.stateful-spec/` directory at the project root for tracking state across sessions and developers:
@@ -111,10 +124,13 @@ your-project/
 └── .stateful-spec/
     ├── memory.md              # Current context — AI reads this first
     ├── project-definition.md  # Technology stack, conventions, quality gates
+    ├── backlog.md             # Triaged opportunities (O-NNN)
+    ├── intake/                # Raw inbox: Backlog/, Discovery/, QA/
     ├── operations/            # Operation prompts (only if native agent commands aren't used)
     └── history/
         ├── 001-feature-x.md
         ├── 002-bugfix-y.md
+        ├── .archived/         # Older iterations — indexed, never bulk-read
         └── ...
 ```
 
@@ -124,7 +140,7 @@ your-project/
 - **Agent portability** — Works with any AI coding agent (Claude Code, Windsurf, Cursor, Codex, and others); switch agents without losing context
 - **Session persistence** — Work state survives across chat sessions without manual context restoration
 - **Iteration tracking** — Each feature, bugfix, or refactor has its own file with acceptance criteria and task checklists
-- **Context efficiency** — The Engramas section provides compiled iteration summaries so agents don't need to read every history file on session start
+- **Context efficiency** — The Engramas section provides compiled iteration summaries, and history archiving keeps the raw `history/` bounded (older iterations move to an indexed `history/.archived/`), so agents don't need to read every history file on session start
 - **Version controlled** — The entire `.stateful-spec/` directory is committed to the repository
 
 ### Key Files
@@ -157,7 +173,10 @@ The initialization prompts (`new-project.md`, `onboard-existing.md`) automatical
 │   ├── overview.md       # This file
 │   ├── phases/           # Detailed guide for each phase
 │   ├── roles.md          # AI assistant role and expectations
-│   └── decision-framework.md
+│   ├── decision-framework.md
+│   ├── backlog.md        # Intake + backlog pipeline (opportunities)
+│   ├── history-archiving.md  # Context budget (history/.archived/)
+│   └── qa-phase.md       # Post-delivery QA loop
 ├── prompts/              # LLM-ready prompts (copy-paste into any AI)
 │   ├── initialization/   # Start/resume projects
 │   ├── phase-transitions/# Move between phases

@@ -1,0 +1,28 @@
+# Two-agent delivery cycle: submit -> approve -> advance to the next milestone.
+[initial]
+process_status = RUNNING
+iteration = 013-conf
+total_milestones = 2
+current_milestone = 1
+turn = engineer
+step = SPEC_READY
+review_round = 0
+max_review_rounds = 3
+spec_review_round = 0
+max_spec_review_rounds = 3
+seq = 0
+
+[step]
+run = submit
+exit = 0
+expect = step=AWAITING_REVIEW turn=pm updated_by=engineer seq=1
+
+[step]
+run = approve
+exit = 0
+expect = step=APPROVED turn=engineer updated_by=pm seq=2
+
+[step]
+run = advance --allow-dirty
+exit = 0
+expect = current_milestone=2 step=SPEC_PENDING turn=pm review_round=0 seq=3

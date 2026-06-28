@@ -13,6 +13,7 @@ You are helping the developer start a new work session. Your job is to create th
 
 **Your role:**
 - Check for any existing open session
+- Triage the intake inbox (kickoff triage)
 - Ask the developer what they're working on
 - Create an iteration file and mark the session as open in `memory.md`
 
@@ -29,6 +30,35 @@ If the file has an **Open Session** section that references an active iteration 
 - If the developer says **close it**, switch to the `end-session.md` workflow first, then return to this step.
 - If the developer says **cancel**, stop here.
 
+### STEP 1.5 — Triage the Intake Inbox (kickoff triage)
+
+Run the kickoff triage before STEP 2. (The close-side triage runs in `end-session`.)
+
+> Two "backlog" paths: `.stateful-spec/intake/Backlog/` is the raw inbox (input);
+> `.stateful-spec/backlog.md` is the triaged artifact (output). Scan the former; write the latter.
+
+1. **Scan the raw inbox.** List `.stateful-spec/intake/{Backlog,Discovery,QA}/` for item files
+   (ignore each folder's `README.md`).
+
+2. **Apply the READY gate.** Read each item's frontmatter. Triage only `status: ready` items; list
+   `draft` and `triaged` items as not eligible. An item with a missing or unrecognized `status` is
+   treated as `draft` (not triaged) — warn so it gets a valid `status`. (READY convention:
+   `methodology/backlog.md`.)
+
+3. **Present the candidates.** Show the `ready` items before asking what to work on (STEP 2); a
+   triaged opportunity may become this session's work. If none, say so and continue.
+
+4. **Route each candidate**, per `methodology/backlog.md`:
+   - **Promote** → add a row to `.stateful-spec/backlog.md` with the next `O-NNN` (sequential, never
+     reused), status `new`, Origin, Description. Numbering belongs to `backlog.md`.
+   - **Discard** → record the reason. A resolved `Discovery/` note may instead feed a decision in the
+     relevant iteration / ADR.
+   - **Mark the item triaged.** Set the intake item's `status: triaged` and add a `destination:` line
+     (the `O-NNN` + slot, or the discard reason). The file stays; it is not re-triaged.
+
+5. **No scope-creep.** A promoted `O-NNN` is born `new`; it does not change the work being started
+   unless the developer picks it in STEP 2.
+
 ### STEP 2 — Ask What's Being Worked On
 
 Ask:
@@ -39,9 +69,9 @@ The description should be concise — one or two sentences. Examples: "Add user 
 
 ### STEP 3 — Determine Iteration Number
 
-Look at `.stateful-spec/history/` to find the highest existing number (`NNN`). The new iteration will be `NNN + 1`.
+Scan **both** `.stateful-spec/history/` and `.stateful-spec/history/.archived/` to find the highest existing number (`NNN`) — older iterations are archived, and an archived number must never be reused. The new iteration will be `NNN + 1`.
 
-If no iteration files exist, start from `001`.
+If no iteration files exist, start from `001`. See `methodology/history-archiving.md`.
 
 ### STEP 4 — Create Iteration File
 
@@ -71,7 +101,15 @@ Update `.stateful-spec/memory.md`:
 
 4. **Engramas section** — Insert a new row at the top of the Engramas table (newest-first). Set `Summary` to `_In progress_` and both `Key Decisions` and `Learnings` to `—`. The row must match the History Index `#` so both tables stay linked. The engram content will be finalized by `save-session` or `end-session` via map-reduce.
 
-   **Two-tier compaction:** If adding this row causes the active engram count to exceed the tier threshold N (default 10, configured in the comment above the Engramas table), merge the oldest active row into the **Archive** row (the last row in the table, numbered `0-archived`). Sum the merged iteration: update the Archive row's `Summary` to a 2-3 sentence synthesis covering all archived iterations, and fold relevant key decisions and learnings into `Key Decisions` and `Learnings`. This keeps the Engramas table bounded at N+1 rows regardless of project age.
+   **Two-tier compaction:** If adding this row causes the active engram count to exceed the tier threshold N (default 10, configured in the comment above the Engramas table), merge the oldest active row into the **Archive** row (the last row in the table, numbered `0-archived`). **Before collapsing it, append that row's full content verbatim to `history/.archived/memory.md`** so the fold loses no detail (see `methodology/history-archiving.md`). Sum the merged iteration: update the Archive row's `Summary` to a 2-3 sentence synthesis covering all archived iterations, and fold relevant key decisions and learnings into `Key Decisions` and `Learnings`. This keeps the Engramas table bounded at N+1 rows regardless of project age.
+
+### STEP 5.5 — Archive Old History
+
+Run the idempotent archive operation in `methodology/history-archiving.md`: now that the new
+iteration is created and indexed, ensure `history/` keeps only the central files of the last
+`RAW_HISTORY` (=3) closed iterations plus this newly-opened iteration; `git mv` everything else
+(old centrals + all auxiliaries) into `history/.archived/`, repointing each moved iteration's
+`File` cell in the History Index. Running it when nothing needs moving is a no-op.
 
 ### STEP 6 — Confirm
 

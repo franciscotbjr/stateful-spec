@@ -1,0 +1,29 @@
+{
+  "name": "@stateful-spec/flow",
+  "version": "0.1.0",
+  "description": "Validated state-transition CLI for the Stateful Spec multi-agent flow (flow-state.md). Cross-platform, zero runtime dependencies.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/franciscotbjr/stateful-spec.git",
+    "directory": "packages/flow-ts"
+  },
+  "type": "module",
+  "bin": {
+    "flow": "dist/src/cli.js"
+  },
+  "files": [
+    "dist/src"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node --test dist/test/cli.test.js dist/test/conformance.test.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0"
+  }
+}

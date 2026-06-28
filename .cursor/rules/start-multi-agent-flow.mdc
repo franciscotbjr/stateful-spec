@@ -1,16 +1,16 @@
 ---
-description: "Start or join a two-agent autonomous milestone flow in a given role (pm|engineer)"
+description: "Start or join an autonomous multi-agent milestone flow in a given role (pm|engineer|architect)"
 alwaysApply: false
 ---
 
 # Start Multi-Agent Flow
 
-> **Applies to: software.** Starts or joins the optional two-agent autonomous flow defined
+> **Applies to: software.** Starts or joins the optional autonomous multi-agent flow (two-agent or three-agent) defined
 > in `methodology/multi-agent-flow.md`. Read that document first — it is the source of truth
 > for the roles, the state machine, and the signal file. This prompt is the executable entry
 > point; it **reuses** the existing operations rather than duplicating them.
 
-**Usage:** `start-multi-agent-flow pm` · `start-multi-agent-flow engineer`
+**Usage:** `start-multi-agent-flow pm` · `start-multi-agent-flow engineer` · `start-multi-agent-flow architect` *(three-agent flow)*
 
 Two agents (possibly different tools) take turns through `.stateful-spec/flow-state.md`.
 Use this mode only for a large task delivered in many milestones; for small/medium work,
@@ -20,8 +20,9 @@ use the ordinary single-agent cycle.
 
 ### STEP 0 — Resolve the role
 
-Read the argument: it must be `pm` (Agent 1 — PM/Architect) or `engineer` (Agent 2 — Senior
-Engineer). If it is missing or invalid, ask which role to assume and stop until answered.
+Read the argument: it must be `pm` (Agent 1 — PM/Architect-planner), `engineer` (Agent 2 — Senior
+Engineer), or `architect` (Agent 3 — read-only spec reviewer; **three-agent flow only**). If it is
+missing or invalid, ask which role to assume and stop until answered.
 **You act only on turns that match your role.**
 
 ### STEP 1 — Load context
@@ -31,6 +32,12 @@ Read, in order:
 2. `.stateful-spec/project-definition.md` (conventions, **quality gates** — you will run them)
 3. `methodology/multi-agent-flow.md` (the protocol)
 4. `.stateful-spec/flow-state.md` if it exists (the current coordination state)
+
+> **Optional flow tool — ask permission first.** Published reference implementations of the
+> coordination verbs exist (`stateful-spec-flow` / `@stateful-spec/flow`; source in the methodology
+> repository's `packages/`). They are **not required** — you may relay turns by hand or use a
+> scheduler/loop. If you want to use one, **tell the user it is available and ask permission before
+> using it** (per `methodology/roles.md`); otherwise proceed without it.
 
 ### STEP 2 — Kickoff or attach
 
@@ -45,8 +52,11 @@ Read, in order:
      source of truth** (do not duplicate the list anywhere else). Mark it the **Open
      Session** in `memory.md` and add it to Active Work + History Index + Engramas (per
      `start-session`).
-  3. Create `.stateful-spec/flow-state.md` from `templates/implementation/flow-state.md`:
-     `process_status: PLANNING`, `iteration: NNN-<name>`, `turn: pm`. After the plan is
+  3. **Choose the flow mode** — **two-agent** (PM + Engineer; default) or **three-agent** (adds a
+     read-only Architect spec reviewer — a design gate before each implementation; use it for
+     design-sensitive work). Create `.stateful-spec/flow-state.md` from
+     `templates/implementation/flow-state.md`: `process_status: PLANNING`, `iteration: NNN-<name>`,
+     `turn: pm` (three-agent flow: also record each milestone's `profile`). After the plan is
      written, set `process_status: AWAITING_PLAN_APPROVAL`.
   4. Present the milestone plan to the human for the **single approval gate**. On approval,
      set `process_status: RUNNING`, `total_milestones: n`, `current_milestone: 1`,
@@ -60,6 +70,14 @@ Read, in order:
 - Otherwise **attach** to the existing flow — do **not** create a new iteration or session
   (honor the Open Session rule). Go to STEP 3.
 
+**If role = `architect` (three-agent flow):**
+
+- Require an existing `flow-state.md`. If none exists, tell the human the PM must kick off first
+  (`start-multi-agent-flow pm`) and stop.
+- Otherwise **attach** as the **read-only** reviewer — do **not** create a new iteration or session,
+  and **never edit code or run the build**. You act only on `turn: architect` / `step: ARCH_REVIEW`.
+  Go to STEP 3.
+
 ### STEP 3 — The poll loop
 
 Repeat:
@@ -67,9 +85,10 @@ Repeat:
 1. Read `.stateful-spec/flow-state.md`.
 2. If `process_status` is `DONE` or `BLOCKED` → report the state to the human and **exit**
    (if `BLOCKED`, state the `blocked_reason`).
-3. If `turn` ≠ your role → **re-schedule a wake** and stop for now (in Claude Code, use the
-   `/loop` skill or a scheduled wake-up; other tools use their own loop/watch).
-4. If `turn` == your role → perform STEP 4 for the current `step`, then re-schedule a wake to
+3. If `turn` ≠ your role → **stand by on a blocking poll** that returns the instant the turn flips
+   (the primary standby); a fixed-interval wake (a scheduler, the `/loop` skill) is a fallback only.
+   On a poll timeout, run the liveness / spawn-death watchdog and re-poll.
+4. If `turn` == your role → perform STEP 4 for the current `step`, then re-enter the blocking poll to
    monitor for your next turn.
 
 > The protocol is identical whether the trigger is an autonomous loop or a human relaying
@@ -77,9 +96,10 @@ Repeat:
 
 ### STEP 4 — Act on your turn (by step)
 
-After acting, always: update `flow-state.md` frontmatter (`turn`, `step`, `review_round` if
-applicable, `updated_by`, `updated_at`), append a turn-log line (`timestamp · role · action ·
-file`), and append a Session Log entry to the umbrella iteration file.
+After acting, always: update `flow-state.md` frontmatter (`turn`, `step`, the round counter
+(`review_round` / `spec_review_round`) and `profile` if applicable, `updated_by`, `updated_at`, and
+`seq`), append a turn-log line (`timestamp · role · action · file`), and append a Session Log entry
+to the umbrella iteration file.
 
 **PM (`pm`):**
 
@@ -109,6 +129,25 @@ file`), and append a Session Log entry to the umbrella iteration file.
   - More milestones remain → `current_milestone += 1`, `step: SPEC_PENDING`, `review_round: 0`,
     `turn: pm`.
   - Last milestone → STEP 6 (completion).
+
+**Three-agent flow — design gate (additions).** In the three-agent flow the PM does **not** hand
+straight to the engineer at `SPEC_PENDING`; the spec passes the architect first:
+
+- **PM `SPEC_PENDING` / `SPEC_CHANGES_REQUESTED`** — After writing (or revising) the milestone spec,
+  **submit it to the reviewer**: `step: ARCH_REVIEW`, `turn: architect`, and **spawn the architect**
+  (born reading the draft spec). Then blocking-poll.
+- **Architect `ARCH_REVIEW`** — Review the spec **read-only** against the known failure classes
+  (never build, never edit). End your final message with a parseable verdict block (scaffold
+  `templates/implementation/arch-verdict.md`). The PM recovers the verdict and runs the matching
+  transition (the verbs are turn-gated, not identity-gated):
+  - approve → `step: SPEC_APPROVED`, `turn: pm`.
+  - request changes → `step: SPEC_CHANGES_REQUESTED`, `turn: pm`, `spec_review_round += 1`. If
+    `spec_review_round > max_spec_review_rounds` → `BLOCKED` (design-gate stall).
+- **PM `SPEC_APPROVED`** — Hand off to the engineer: `step: SPEC_READY`, `turn: engineer`, and spawn
+  the engineer for the milestone's `profile`.
+- **Engineer hand-back** — If the milestone is mis-scoped for its profile, return it:
+  `step: SPEC_PENDING`, `turn: pm` (un-counted); the PM re-scopes / re-profiles and the architect
+  re-reviews.
 
 ### STEP 5 — Stall
 

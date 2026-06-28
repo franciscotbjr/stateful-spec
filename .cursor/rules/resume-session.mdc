@@ -17,6 +17,7 @@ You are an AI development assistant resuming work on a project that uses the Sta
 
 **Your role:**
 - Load project context from the `.stateful-spec/` directory
+- Triage the intake inbox at the kickoff moment
 - Summarize the current state for the developer
 - Ask what they want to work on
 - Continue following the Stateful Spec methodology: Analyze → Plan → Specify → Implement → Verify
@@ -28,11 +29,13 @@ You are an AI development assistant resuming work on a project that uses the Sta
 If the developer **starts the chat with a concrete task** (e.g. "implement the attached plan", "apply this fix", "add X to the prompts") **before** you have walked through STEP 3–4 below:
 
 1. Load **`.stateful-spec/memory.md`** and **`.stateful-spec/project-definition.md`** (same as STEP 1). Do not read all history files — use the **Engramas** section in memory.md for iteration context.
-2. If there is **no** in-progress iteration that matches this task, **create one** before substantive edits:
-   - Next `NNN` from existing `history/*.md` files
+2. **Triage the intake inbox** (kickoff triage) — same as `start-session` STEP 1.5: scan `.stateful-spec/intake/{Backlog,Discovery,QA}/` for `ready` items, route promote→`O-NNN`/discard per `methodology/backlog.md`, mark each routed item `triaged`.
+3. If there is **no** in-progress iteration that matches this task, **create one** before substantive edits:
+   - Next `NNN` = max over **both** `history/*.md` and `history/.archived/*.md` (never reuse an archived number; see `methodology/history-archiving.md`)
    - New file: `.stateful-spec/history/NNN-[short-name].md` using `templates/implementation/iteration.md`
    - Update **Active Work** and **History Index** in `.stateful-spec/memory.md`
-3. Then proceed with the methodology phase appropriate to the task (often Phase 1 Analyze or Phase 4 Implement for small changes).
+   - Run the idempotent archive operation (`methodology/history-archiving.md`), same as `start-session` STEP 5.5
+4. Then proceed with the methodology phase appropriate to the task (often Phase 1 Analyze or Phase 4 Implement for small changes).
 
 This path exists because many sessions skip the "What would you like to work on?" step — iteration tracking must still apply.
 
@@ -47,7 +50,7 @@ Read the following files from the project root:
 2. **`.stateful-spec/project-definition.md`** — Technology stack, conventions, quality gates
 3. **`methodology/`** (methodology source) — **Read every file in this folder and all subfolders.** These files define the Stateful Spec methodology that governs how you must work. Do not skip any file. Understand the phases, roles, and decision framework before proceeding.
    - **Where to read from:** If the project keeps a **copy** of the methodology under `.stateful-spec/methodology/`, read that. If this project **is** the methodology repository (source at repo root), read **`methodology/`** at the project root instead — do not assume methodology only lives under `.stateful-spec/`.
-4. **`.stateful-spec/history/`** — List the directory to identify existing iterations (count and determine next NNN). **Do not read all history files.** The **Engramas** section in `memory.md` provides compiled summaries of each iteration. Only read a specific `history/NNN-name.md` file if the Engramas section does not provide enough context for the current task.
+4. **`.stateful-spec/history/`** — List the directory to identify existing iterations. **Do not read all history files**, and **do not list or bulk-read `history/.archived/`** (the cold store). The **Engramas** section in `memory.md` provides compiled summaries of each iteration. Only read a specific iteration file if the Engramas section is insufficient — open it by the exact path in the History Index `File` column (which may point into `history/.archived/`). When determining the next `NNN`, scan **both** `history/` and `history/.archived/` so an archived number is never reused. See `methodology/history-archiving.md`.
 
 **Project documentation (if they exist):**
 5. **`README.md`** — Project overview, purpose, usage instructions
@@ -77,6 +80,13 @@ Include:
 Keep this summary concise — 5-10 lines maximum.
 
 **If more context is needed:** The Engramas section summarizes each iteration. If you need deeper context (e.g. to understand decisions, blockers, or implementation details), read the specific `history/NNN-name.md` file referenced in the History Index. Do not read history files preemptively — only when the Engramas alone is insufficient for the task at hand.
+
+### STEP 2.5 — Triage the Intake Inbox (kickoff triage)
+
+Run the kickoff triage before asking what's next, same as `start-session` STEP 1.5: scan
+`.stateful-spec/intake/{Backlog,Discovery,QA}/`, route `ready` items promote→`O-NNN`/discard per
+`methodology/backlog.md`, mark each routed item `triaged`. Surface the `ready` items in STEP 3 as
+candidate work. If none, continue.
 
 ### STEP 3 — Ask What's Next
 

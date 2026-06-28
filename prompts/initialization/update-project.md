@@ -194,6 +194,7 @@ Wait for the answer.
 1. **Methodology**
    - If the project keeps a **copy** under `.stateful-spec/methodology/`: replace or merge files from source `methodology/` (preserve any local `README` that explains reference-only layout if still used)
    - If the project **only references** root `methodology/`: update files under **`methodology/`** at project root from source (this applies when the app repo *is* or *contains* the methodology source)
+   - **New supporting structures:** a methodology refresh brings `backlog.md`, `history-archiving.md`, and `qa-phase.md`. If the project lacks the project-side scaffolding they assume, offer to create `.stateful-spec/intake/` (from `templates/intake/`) and an empty `.stateful-spec/backlog.md` (from `templates/backlog.md`). `history/.archived/` is created lazily by the archive operation. Never populate them with data — scaffold only.
 
 2. **Operation prompts**
    - If **`prompts/operations/`** exists in the project: sync from source `prompts/operations/`

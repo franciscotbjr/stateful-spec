@@ -17,3 +17,11 @@ scratchpad/
 impl.md
 plan.md
 prompt.md
+.venv
+
+# packages
+packages/flow-rs/target
+packages/flow-rs/Cargo.lock
+packages/flow-ts/dist
+packages/flow-ts/node_modules
+packages/flow-ts/package-lock.json

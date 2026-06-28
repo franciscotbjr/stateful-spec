@@ -18,6 +18,7 @@ Follow the 5-phase iteration cycle: **Analyze → Plan → Specify → Implement
 - Roles and boundaries: `methodology/roles.md`
 - Decision framework: `methodology/decision-framework.md`
 - Project Types registry: [`methodology/project-types.md`](methodology/project-types.md) — this repo is `software` / documentation-only
+- Optional flow tooling: [`packages/`](packages/) holds separately-published reference implementations (`stateful-spec-flow` / `@stateful-spec/flow`) of the multi-agent flow contract — **not required**; an agent must ask the user's permission before using one (see [`methodology/roles.md`](methodology/roles.md))
 
 ## Operation Prompts
 
