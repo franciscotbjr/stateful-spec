@@ -13,6 +13,7 @@
 | ID | Description | Origin | Status | Destination |
 |------|-------------|--------|--------|-------------|
 | O-001 | The repo is the Stateful Spec methodology source yet had not adopted the structures it ships — its own `intake/` inbox + `backlog.md`, documented `RAW_HISTORY`, and an up-to-date `project-definition.md` structure. Make the repo practice its own methodology. | iteration 012/013 review (self-adoption audit) | promoted | Iteration 014 — self-adoption |
+| O-002 | Publish the reference crate `stateful-spec-flow` (`packages/flow-rs/`) to crates.io: update `Cargo.toml` with the metadata required for publishing (description, license, repository, keywords, categories, etc.) and prepare the release. | intake/Backlog/prd.md (idea) | promoted | Iteration 015 — publish-flow-rs-crates-io |
 
 <!--
 States:

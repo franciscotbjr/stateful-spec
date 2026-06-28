@@ -65,4 +65,4 @@ cargo build
 cargo test
 ```
 
-Zero external dependencies (pure `std`); MSRV 1.74. MIT licensed.
+Zero external dependencies (pure `std`); MSRV 1.96. MIT licensed.
