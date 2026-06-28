@@ -13,14 +13,14 @@
 
 > What is currently in progress? Reference the iteration file.
 
-- [ ] Apply preset rust (O-005) → `history/018-apply-preset-rust.md`
+- _(none)_ — last cycle (018) closed 2026-06-28. Backlog has `new` opportunities **O-006** (`rust-gpui-app`) and **O-007** (`rust-design-system`) ready to pick up.
 
 ## Open Session
 
 > When a session is active, this section points to the current iteration file.
 > Managed by `start-session` and `end-session` — do not edit manually.
 
-- Currently open: 018 Apply preset rust (O-005) → `history/018-apply-preset-rust.md`
+- _(none)_
 
 ## Recent Completions
 
@@ -28,11 +28,11 @@
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 018 | apply-preset-rust | feature | 2026-06-28 |
 | 017 | validate-published-references | chore | 2026-06-28 |
 | 016 | publish-flow-ts-npm | chore | 2026-06-28 |
 | 015 | publish-flow-rs-crates-io | chore | 2026-06-28 |
 | 014 | self-adoption | chore | 2026-06-28 |
-| 013 | flow-packages | feature | 2026-06-28 |
 
 ## Key Decisions
 
@@ -64,10 +64,10 @@
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
-| 018 | apply-preset-rust | feature | in-progress | `history/018-apply-preset-rust.md` |
+| 018 | apply-preset-rust | feature | done | `history/018-apply-preset-rust.md` |
 | 017 | validate-published-references | chore | done | `history/017-validate-published-references.md` |
 | 016 | publish-flow-ts-npm | chore | done | `history/016-publish-flow-ts-npm.md` |
-| 015 | publish-flow-rs-crates-io | chore | done | `history/015-publish-flow-rs-crates-io.md` |
+| 015 | publish-flow-rs-crates-io | chore | done | `history/.archived/015-publish-flow-rs-crates-io.md` |
 | 014 | self-adoption | chore | done | `history/.archived/014-self-adoption.md` |
 | 013 | flow-packages | feature | done | `history/.archived/013-flow-packages.md` |
 | 012 | reverse-update-from-stand-in | feature | done | `history/.archived/012-reverse-update-from-stand-in.md` |
@@ -98,7 +98,7 @@
 
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|------------|
-| 018 | _In progress_ | — | — |
+| 018 | Aplicou O-005 revisando o preset `presets/rust-library.md` com os aprendizados destilados do projeto real `stand-in` (workflow multi-agente: 338 learnings → síntese → verificação adversarial): MSRV + `rust-toolchain.toml`, bloco de workspace + layout proc-macro, subseção de lints, patterns expandidos (mod-facade, prelude-como-API, `#[non_exhaustive]`, `tracing` sem subscriber, serde, segredos), feature flags, convenção `assert_send_sync`, e Publishing/CI dividido — mantendo o preset terso. Atualizou os valores de exemplo p/ o Rust atual (edição 2024, rust-version 1.96) e as versões correntes do crates.io (tokio 1.52.3 / serde 1.0.228 / serde_json 1.0.150 / thiserror 2.0.18 / tracing 0.1.44 / async-trait 0.1.89 / reqwest 0.13.4), +entrada no CHANGELOG. Entregue em `main` via **PR #34** (`dc38287`) e fechada. | Revisar o preset `rust-library` existente, não criar novo; a metade "propor outros presets" do PRD vira backlog (O-006 `rust-gpui-app`, O-007 `rust-design-system`), não construída em 018. · Aparar a síntese conforme o verificador adversarial antes de propor (remover 3 vazamentos residuais stand-in/MCP; preset genérico e terso). · Versões nos exemplos são placeholders ilustrativos do Rust atual, não pins (incl. re-adição do `reqwest` a pedido). | O scratchpad é session-scoped — o draft pendente sobreviveu só na pasta da sessão anterior e foi recuperado por caminho explícito no resume; não deixar artefato pendente só no scratchpad. · Extração multi-agente + verificação adversarial revela bloat e vazamentos da fonte que a síntese direta não pega. · Versões de exemplo num preset são um snapshot datado (consultadas no crates.io), mantidas como `[e.g., …]`. |
 | 017 | Validou as duas implementações de referência **opcionais** publicadas nas iterações 015–016 (O-004): confirmou `stateful-spec-flow` v0.1.0 vivo e resolvível no crates.io e `@stateful-spec/flow` v0.1.0 vivo no npm, e auditou toda referência in-repo (manifests, READMEs, AGENTS, project-definition, multi-agent-flow, 4 ports de start-multi-agent-flow) contra a verdade publicada — **zero drift, zero edição corretiva**. | Tratar O-004 como **chore** (validação), não feature — nenhum comportamento novo é adicionado, só confirmação de artefatos publicados e reconciliação de referências. | crates.io rejeita requests sem `User-Agent` (política de data-access) — usar o índice esparso `index.crates.io/st/at/stateful-spec-flow` ou enviar UA; API de leitura do npm é `registry.npmjs.org/@stateful-spec%2Fflow`; a metadata publicada bate exatamente com os `Cargo.toml`/`package.json` commitados (incl. MSRV 1.96 e node `>=24`), confirmando consistência total sem correção. |
 | 016 | Publicou no npm a implementação de referência **opcional** `@stateful-spec/flow` (`packages/flow-ts/`) v0.1.0 — contraparte Node/TS da publicação 015 no crates.io, dirigida por um PRD externo promovido como O-003: bump das devDeps (typescript 6.0.3, @types/node 26.0.1) e do engine (node `>=24`), `"types": ["node"]` exigido pelo TS 6.0, 16 testes + dry-run limpos, então publish público. | Interpretar "flow-rs to npm" como **flow-ts → npm** (flow-rs já foi p/ crates.io na 015; npm é o registro do gêmeo Node/TS); seguir as versões vinculantes do PRD verbatim (ts 6.0.3 / @types/node 26.0.1 / node `>=24`); publicar com `--access public` via **automation token** por env (bypass de 2FA), nunca commitado. | TS 6.0 mudou o default de `types` — não auto-inclui mais `@types/*`, então pacotes Node precisam declarar `"types": ["node"]` ou os imports `node:*` quebram; publicar pacote escopado exige a **org/escopo existir antes** (404 "Scope not found") e token que faça **bypass de 2FA** (token "Publish" comum cai em 403); debugar auth colando tokens vivos no chat vaza segredos — usar um único automation token em env e rotacionar (o PRD guardava o token em plaintext). |
 | 015 | Publicou no crates.io a implementação de referência **opcional** `stateful-spec-flow` (`packages/flow-rs/`) v0.1.0, dirigida por um PRD externo promovido da intake como O-002: bump do `Cargo.toml` para edition 2024 / MSRV 1.96, refino de `keywords`/`categories` para descoberta, 62 testes + dry-run limpos, então publish. | Seguir as propriedades vinculantes do PRD verbatim (edition 2024, MSRV 1.96) em vez dos 2021/1.74 anteriores; refinar keywords p/ termos de maior tráfego (cli/state-machine/workflow/agents) mantendo a keyword de marca e os dois slugs de categoria válidos; commitar o prep num branch e publicar de uma árvore limpa (sem `--allow-dirty`), token só via env. | Publish no crates.io é permanente (yank ≠ delete) — gatear atrás de confirmação explícita; segredo em PRD de intake (token em plaintext) é risco real — usar via env, nunca commitar, e sinalizar rotação; o bump p/ edition 2024 neste crate zero-dep foi no-op de código (cargo check/test limpos). |
