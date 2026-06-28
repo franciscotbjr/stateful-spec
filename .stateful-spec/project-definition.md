@@ -40,20 +40,39 @@ None — no runtime or build-time dependencies.
 stateful-spec/
 ├── methodology/            # Core process documentation
 │   ├── overview.md         # Philosophy, principles, iteration cycle
-│   ├── roles.md            # Human vs AI responsibilities
+│   ├── project-types.md    # Project Type registry (software/skills/studies)
+│   ├── roles.md            # Human vs AI responsibilities (+ multi-agent flow)
 │   ├── decision-framework.md
+│   ├── backlog.md          # Intake + backlog (O-NNN) pipeline
+│   ├── history-archiving.md # Context budget: history/.archived/ + RAW_HISTORY
+│   ├── qa-phase.md         # Post-delivery QA loop (E/P/H)
+│   ├── multi-agent-flow.md # Optional two/three-agent milestone flow (software)
 │   └── phases/             # 5 phase guides (01-analyze through 05-verify)
 ├── prompts/                # LLM-ready prompts
-│   ├── initialization/     # new-project, onboard-existing
+│   ├── initialization/     # new-project, onboard-existing, update-project
 │   ├── phase-transitions/  # start-analysis through start-verification
-│   └── operations/         # 9 operational prompts
+│   └── operations/         # operation prompts (lifecycle + per-type + multi-agent flow)
 ├── templates/              # Fill-in templates
-│   ├── project/            # project-definition, memory, architecture-decision
-│   ├── specification/      # feature, endpoint, component, bugfix, refactor
-│   └── implementation/     # implementation-plan, test-plan, iteration
-├── presets/                # Pre-filled project definitions (Rust, Node, Python, React, Go)
+│   ├── project/            # project-definition, memory, architecture-decision, agents-md
+│   ├── specification/      # feature, endpoint, component, bugfix, refactor, skill, study
+│   ├── implementation/     # implementation-plan, test-plan, iteration, verification-plan,
+│   │                       #   flow-state, review-handoff, arch-verdict
+│   ├── intake/             # Backlog/Discovery/QA intake scaffold (+ READMEs)
+│   ├── backlog.md          # O-NNN backlog template
+│   ├── intake-item.md      # Single intake-item template
+│   └── qa-log.md           # Post-delivery QA log template
+├── presets/                # Pre-filled project definitions (software/skills/studies)
+├── packages/               # Optional reference implementations of the flow tooling contract
+│   ├── flow-rs/            #   stateful-spec-flow (Rust → crates.io, zero-dep)
+│   ├── flow-ts/            #   @stateful-spec/flow (Node/TS → npm, zero runtime deps)
+│   └── conformance/        #   shared fixtures (Rust ≡ TS parity)
 ├── examples/               # Community examples (placeholder)
 ├── .stateful-spec/         # Project memory instance (this project's own Stateful Spec)
+│   ├── memory.md           #   state, Engramas, History Index
+│   ├── project-definition.md
+│   ├── backlog.md          #   triaged opportunities (O-NNN)
+│   ├── intake/             #   raw inbox: Backlog/, Discovery/, QA/
+│   └── history/            #   one file per iteration (+ .archived/ cold store)
 ├── .cursor/rules/          # Cursor-native operation prompts
 ├── .claude/commands/       # Claude Code / OpenClaude operation commands
 ├── .opencode/commands/     # OpenCode operation commands
@@ -70,10 +89,11 @@ stateful-spec/
 |-----------|---------|
 | `methodology/` | Core process documentation — the source of truth for the methodology |
 | `prompts/` | Ready-to-use prompts organized by category (initialization, phase-transitions, operations) |
-| `templates/` | Fill-in templates for project setup, specifications, and implementation plans |
-| `presets/` | Pre-filled Project Definitions for common technology stacks |
+| `templates/` | Fill-in templates for project setup, specs, implementation, and intake/backlog/QA |
+| `presets/` | Pre-filled Project Definitions (software, skills, studies) |
+| `packages/` | Optional, separately-published reference implementations of the multi-agent flow tooling contract (`stateful-spec-flow` / `@stateful-spec/flow`) — **not required** to use the methodology |
 | `examples/` | Placeholder for community-contributed applied examples |
-| `.stateful-spec/` | This project's own memory, project definition, and iteration history |
+| `.stateful-spec/` | This project's own memory, project definition, backlog, intake inbox, and iteration history |
 
 ## Code Conventions
 

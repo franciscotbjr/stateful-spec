@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** review
+- **Status:** done
 - **Created:** 2026-06-26
-- **Completed:** — (implementation complete; awaiting developer review)
+- **Completed:** 2026-06-28
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -73,6 +73,7 @@ Plan: `sprightly-painting-babbage.md`.
 | 2026-06-26 | final-review | Both suites green together — Rust: 54 unit + 7 cli + 1 conformance (5 shared cases); Node: 16 (4 unit + 7 cli + 5 conformance). Holistic e2e: packages implement exactly the 012 `flow-state.md` schema + 13-verb contract; methodology fully usable WITHOUT the packages (contract suffices); an agent must ask permission to use one; documentation-only amendment coherent. Build artifacts (target/node_modules/dist) are `.gitignore`d. Status → review; **NOT committed**. Final Engrama compaction deferred to the true `end-session` close after developer review. |
 | 2026-06-28 | review-changes | Independent developer-requested review (via resume-session). **Re-ran the gates from a clean slate**: `cargo test` → 54 unit + 7 integration + 1 conformance (0 failed); `npm ci && npm test` → 16 (4 unit + 7 CLI + 5 conformance, 0 failed); zero-dep confirmed; Rust≡TS parity genuine (both suites load the same 5 `conformance/cases/*.txt`). Leakage CLEAN (spawn config-driven; no bundles/fmt-gate); documentation-only carve-out consistent across CLAUDE/AGENTS/project-definition/README/agents-md; ask-permission wired in all 8 locations w/ 4-way parity. No rework — stays parked, uncommitted. Removed unrelated stray root `package.json`/`package-lock.json` (`headroom-ai`). |
 | 2026-06-28 | write-commit-message | Generated the combined single-line commit message (279 chars, ASCII pt-BR per repo convention) for the whole 012+013 uncommitted delivery (the two iterations are intermingled across shared files — `start-multi-agent-flow` ports, CHANGELOG, README — so a clean split is impractical): `feat: back-port agnostico das evolucoes de metodologia do stand-in (012) + implementacao de referencia opcional do fluxo em packages/ (013) - novos docs history-archiving, backlog/intake e qa-phase; fluxo multi-agente em 2 modos + contrato de tooling; crate Rust + pacote Node/TS`. **Not committed** — message provided for the developer; both iterations stay parked. |
+| 2026-06-28 | end-session | Session closed; **Open Session cleared**. Status → **done**, Completed 2026-06-28. Full close with 012: Engramas for both compiled into `memory.md` (001+002 folded to `0-archived`, preserved to `history/.archived/memory.md`); history-archiving migration 001–010 → `history/.archived/` executed (RAW_HISTORY=3 keeps 011/012/013); Recent Completions + History Index updated. Already committed as `b4bdd10`; this close is a follow-up commit. No `[INCIDENT]` entries to sweep. |
 
 ## Decisions Made
 
