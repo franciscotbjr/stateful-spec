@@ -36,7 +36,7 @@ the developer 2026-06-28).
 
 - [x] External PRD read and its requirements shaped into concrete revisions to `presets/rust-library.md`
 - [x] Learnings extracted from the `stand-in` project (codebase + memory/history + Rust skills) and mapped to the preset
-- [ ] `presets/rust-library.md` revised with the applicable learnings (mirrors `templates/project/project-definition.md`) — drafted in `scratchpad/rust-library-final.md`, **pending developer review before apply**
+- [x] `presets/rust-library.md` revised with the applicable learnings (mirrors `templates/project/project-definition.md`) — applied 2026-06-28 after developer review of the draft
 - [x] Other rust presets (app/ui, design-system) proposed in writing and filed as new `O-NNN` backlog opportunities (O-006 `rust-gpui-app`, O-007 `rust-design-system`)
 
 ## Implementation Tasks
@@ -47,18 +47,18 @@ the developer 2026-06-28).
 - [x] Read and analyze the external PRD; resolve the design decision tree (document alternatives)
 - [x] Analyze the `stand-in` project: crates/codebase, memory & history docs, Rust-specific `.claude/skills`
 - [x] Extract candidate learnings; map each onto the current `presets/rust-library.md` (what changes, what stays)
-- [ ] Apply the revisions to `presets/rust-library.md` (mirror `templates/project/project-definition.md` structure) — **pending developer review** of `scratchpad/rust-library-final.md`
+- [x] Apply the revisions to `presets/rust-library.md` (mirror `templates/project/project-definition.md` structure) — applied 2026-06-28 after developer review
 - [x] Draft the proposal for additional rust presets (app/ui, design-system); file each as a new `O-NNN` in `backlog.md` (O-006, O-007)
-- [ ] Documentation / CHANGELOG update if applicable — with the apply step
+- [x] Documentation / CHANGELOG update if applicable — CHANGELOG `[Unreleased] › Changed` entry added
 
 ## Quality Checks
 
 > Standard checks from the Project Definition. Verify before marking done.
 
-- [ ] All quality gates pass (manual review — methodology core is documentation-only)
-- [ ] New/changed preset mirrors the structure of `templates/project/project-definition.md`
-- [ ] Documentation updated (if applicable)
-- [ ] No debug code or TODOs left behind
+- [x] All quality gates pass (manual review — methodology core is documentation-only)
+- [x] New/changed preset mirrors the structure of `templates/project/project-definition.md`
+- [x] Documentation updated (if applicable) — CHANGELOG `[Unreleased]` entry
+- [x] No debug code or TODOs left behind
 
 ## Session Log
 
@@ -74,6 +74,10 @@ the developer 2026-06-28).
 | 2026-06-28 16:05 | analyze | Access granted; surveyed `stand-in`: 11-crate Cargo workspace (MCP lib `stand-in`/`-macros`, client SDK `stand-in-client`/`-macros`, GPUI app `stand-in-mcp-explorer` + spike, egui app `stand-in-mcp-studio`, DS crate `stand-in-mcp-studio-ds` + prototype, `stand-in-reference`, `sync-crates`), 22 `.claude/skills` (rust-pro, gpui-*, design-system/frontend/ux, mcp), and a deep `.stateful-spec/` history (iters 035-038 + archived). Launched multi-agent extraction workflow (9 readers → 3 syntheses → adversarial verify). |
 | 2026-06-28 16:25 | analyze | Workflow done (15 agents, ~1.4M tok): **338 learnings** (175 rust-library / 116 app-ui / 95 design-system). rust-library synthesis = 12 changes; adversarial verify: 0 drop / 4 keep / 8 revise, flagging bloat + 3 residual stand-in leaks. Produced a tightened final preset applying every verifier trim (dropped binary-only `[profile.release]`, demoted RPC two-error-plane note, dropped sibling-binary test recipe, genericized `exclude=`, deduped `env!`, trimmed multi-workspace asides + Constraints dup) → `scratchpad/rust-library-final.md`. Both new-preset proposals verified as well-justified (no `rust-library` duplication). |
 | 2026-06-28 16:30 | plan | Developer decisions: (1) will **read the tightened preset first** before I apply it to `presets/rust-library.md` — apply pending review; (2) app preset slug = **`rust-gpui-app`** (framework-specific, over the neutral alternatives); (3) **file both** new presets — added **O-006** (`rust-gpui-app`) and **O-007** (`rust-design-system`) to `backlog.md`, status `new`, with verifier-refined descriptions. |
+| 2026-06-28 16:45 | resume-session | Reloaded project context; kickoff intake triage = no-op (only intake item `prd.md` already `triaged` → O-005). Recovered the pending draft (`rust-library-final.md`) from the prior session's scratchpad; presented it to the developer for review. |
+| 2026-06-28 16:50 | implement | Developer approved the draft as-is. Applied the tightened revision to `presets/rust-library.md` (158 → 243 lines: MSRV/toolchain pinning, Cargo-workspace + proc-macro layouts, Lints subsection, expanded patterns, Feature Flags, `assert_send_sync` convention, split Publishing/CI-CD). Added a CHANGELOG `[Unreleased] › Changed` entry; README preset row unchanged (still accurate). All four acceptance criteria now met. |
+| 2026-06-28 16:55 | implement | Per developer: set the preset's example values to current Rust — edition example `2024`, MSRV `[e.g., 1.96]`, `rust-toolchain.toml` channel `[e.g., 1.96.0]` (kept as `[e.g., …]` placeholders, not hard-coded requirements). |
+| 2026-06-28 17:00 | implement | Per developer: looked up latest stable crate versions on crates.io and refreshed the dependency examples — tokio 1.52.3, serde 1.0.228, serde_json 1.0.150, thiserror 2.0.18, tracing 0.1.44, async-trait 0.1.89, reqwest 0.13.4. Re-added the `reqwest` row (HTTP client, if needed) the developer named, which the tightening pass had dropped. |
 
 > **Timestamp format:** `YYYY-MM-DD HH:MM` (local time). Example: `2026-05-03 14:30 | start-session | Session opened for feature work.`
 >
