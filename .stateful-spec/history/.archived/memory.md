@@ -16,3 +16,9 @@
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|-----------|
 | 002 | Iteration tracking obrigatório para todo trabalho não-trivial. Arquivos `history/NNN-name.md` com template padronizado de iteration. | Iteration file como artefato permanente de tracking; memory.md atualizado ao iniciar/completar trabalho | — |
+
+## 003 — folded 2026-06-28
+
+| # | Summary | Key Decisions | Learnings |
+|---|---------|---------------|-----------|
+| 003 | Wizard `update-project.md` para atualizar a metodologia em projetos já configurados. Permite refresh de prompts, regras e templates a partir do upstream. | — | — |
