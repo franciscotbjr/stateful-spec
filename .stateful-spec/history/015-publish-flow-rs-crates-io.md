@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** chore
-- **Status:** in-progress
+- **Status:** done
 - **Created:** 2026-06-28
-- **Completed:** —
+- **Completed:** 2026-06-28
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -22,11 +22,11 @@ Promoted from the intake inbox (`intake/Backlog/prd.md`, origin: idea) as opport
 
 > Checkboxes for what "done" means. These come from the PRD (external intake source).
 
-- [ ] `packages/flow-rs/Cargo.toml`: `edition = "2024"` and `rust-version = "1.96"` (per PRD properties)
-- [ ] `keywords` / `categories` researched and chosen for best crates.io discoverability
-- [ ] All tests pass (`cargo test`)
-- [ ] `cargo publish --dry-run` succeeds
-- [ ] Crate published to crates.io
+- [x] `packages/flow-rs/Cargo.toml`: `edition = "2024"` and `rust-version = "1.96"` (per PRD properties)
+- [x] `keywords` / `categories` researched and chosen for best crates.io discoverability
+- [x] All tests pass (`cargo test`) — 54 unit + 7 CLI + 1 conformance = 62
+- [x] `cargo publish --dry-run` succeeds
+- [x] Crate published to crates.io — v0.1.0 live at https://crates.io/crates/stateful-spec-flow
 
 ## PRD Properties (binding)
 
@@ -40,20 +40,20 @@ Promoted from the intake inbox (`intake/Backlog/prd.md`, origin: idea) as opport
 
 > Breakdown of work, in PRD order. Check off as you go.
 
-- [ ] Update `Cargo.toml`: bump `edition` → `2024`, `rust-version` → `1.96`
-- [ ] Research & set best `keywords` / `categories` for discoverability
-- [ ] Run all tests (`cargo test`)
-- [ ] Run `cargo publish --dry-run`
-- [ ] Publish (`cargo publish`) — confirm with developer first (irreversible)
+- [x] Update `Cargo.toml`: bump `edition` → `2024`, `rust-version` → `1.96`
+- [x] Research & set best `keywords` / `categories` for discoverability
+- [x] Run all tests (`cargo test`)
+- [x] Run `cargo publish --dry-run`
+- [x] Publish (`cargo publish`) — confirmed by developer; v0.1.0 live
 
 ## Quality Checks
 
 > Standard checks from the Project Definition. Verify before marking done.
 
-- [ ] `cargo test` passes in `packages/flow-rs/`
-- [ ] `cargo publish --dry-run` clean
-- [ ] Documentation updated (if applicable)
-- [ ] No debug code or TODOs left behind
+- [x] `cargo test` passes in `packages/flow-rs/` (62 tests)
+- [x] `cargo publish --dry-run` clean
+- [x] Documentation updated (README MSRV synced to 1.96)
+- [x] No debug code or TODOs left behind
 
 ## Session Log
 
@@ -63,6 +63,9 @@ Promoted from the intake inbox (`intake/Backlog/prd.md`, origin: idea) as opport
 | Timestamp | Operation | Summary |
 |-----------|-----------|---------|
 | 2026-06-28 | start-session | Session opened. Triaged intake `prd.md` → promoted as O-002; iteration 015 created for publishing `flow-rs` to crates.io. |
+| 2026-06-28 | implement | Applied PRD properties to `Cargo.toml` (edition 2024, MSRV 1.96), refined keywords/categories, synced README MSRV. `cargo check` + `cargo test` (62) green; `cargo publish --dry-run` clean. Committed on branch `chore/publish-flow-rs-crates-io`. |
+| 2026-06-28 | implement | Published `stateful-spec-flow v0.1.0` to crates.io (token via env, not stored). Live at https://crates.io/crates/stateful-spec-flow. |
+| 2026-06-28 | end-session | Session closed. Followed PRD properties (edition 2024, MSRV 1.96) and task order: updated Cargo.toml, refined keywords/categories, 62 tests green, dry-run clean, published v0.1.0. All criteria met. Flagged token rotation (PRD stored token in plaintext). |
 
 > **Timestamp format:** `YYYY-MM-DD HH:MM` (local time). Example: `2026-05-03 14:30 | start-session | Session opened for feature work.`
 >
@@ -80,11 +83,14 @@ Promoted from the intake inbox (`intake/Backlog/prd.md`, origin: idea) as opport
 
 > Anything that blocked progress or is worth remembering.
 
-- Publishing to crates.io requires a registry token and is an irreversible/outward-facing action — confirm with the developer before the actual `cargo publish`.
+- Publishing to crates.io requires a registry token and is an irreversible/outward-facing action — confirm with the developer before the actual `cargo publish`. (Confirmed; published v0.1.0.)
+- **Security:** the PRD (`…/product requirements document.md`) stored the crates.io API token in plaintext frontmatter, and it was passed on the command line. Recommend revoking it at https://crates.io/settings/tokens and removing it from the PRD. The token was never written into this repo, git, or any committed file.
+- Crate versions on crates.io are permanent — v0.1.0 can be yanked but never deleted or re-uploaded; future changes require a version bump.
 
 ## References
 
-- **Specification:** —
-- **PR/MR:** —
-- **Commits:** —
+- **Specification:** intake/Backlog/prd.md (external PRD)
+- **PR/MR:** branch `chore/publish-flow-rs-crates-io`
+- **Commits:** `a6a957c` (prep) + end-session close commit
 - **Related Issues:** Backlog O-002; intake/Backlog/prd.md
+- **Published:** https://crates.io/crates/stateful-spec-flow (v0.1.0)
