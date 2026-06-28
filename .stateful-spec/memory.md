@@ -13,16 +13,14 @@
 
 > What is currently in progress? Reference the iteration file.
 
-- [ ] O-006 — add `presets/rust-gpui-app.md` (Rust retained-mode/GPU desktop app preset) → `history/019-rust-gpui-app-preset.md`
-
-> O-007 (`rust-design-system`) remains `new` in the backlog for a later session.
+- _(none)_ — iteration 019 (O-006 `rust-gpui-app`) closed 2026-06-28; committed on branch `feature/019-rust-gpui-app-preset` (`82283ce`, `57c075e`), **not yet pushed / no PR**. Backlog: **O-007** (`rust-design-system`) remains `new`.
 
 ## Open Session
 
 > When a session is active, this section points to the current iteration file.
 > Managed by `start-session` and `end-session` — do not edit manually.
 
-- Currently open: 019 — add `presets/rust-gpui-app.md` (O-006) → `history/019-rust-gpui-app-preset.md`
+- _(none)_
 
 ## Recent Completions
 
@@ -30,11 +28,11 @@
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 019 | rust-gpui-app-preset | feature | 2026-06-28 |
 | 018 | apply-preset-rust | feature | 2026-06-28 |
 | 017 | validate-published-references | chore | 2026-06-28 |
 | 016 | publish-flow-ts-npm | chore | 2026-06-28 |
 | 015 | publish-flow-rs-crates-io | chore | 2026-06-28 |
-| 014 | self-adoption | chore | 2026-06-28 |
 
 ## Key Decisions
 
@@ -66,10 +64,10 @@
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
-| 019 | rust-gpui-app-preset | feature | in-progress | `history/019-rust-gpui-app-preset.md` |
+| 019 | rust-gpui-app-preset | feature | done | `history/019-rust-gpui-app-preset.md` |
 | 018 | apply-preset-rust | feature | done | `history/018-apply-preset-rust.md` |
 | 017 | validate-published-references | chore | done | `history/017-validate-published-references.md` |
-| 016 | publish-flow-ts-npm | chore | done | `history/016-publish-flow-ts-npm.md` |
+| 016 | publish-flow-ts-npm | chore | done | `history/.archived/016-publish-flow-ts-npm.md` |
 | 015 | publish-flow-rs-crates-io | chore | done | `history/.archived/015-publish-flow-rs-crates-io.md` |
 | 014 | self-adoption | chore | done | `history/.archived/014-self-adoption.md` |
 | 013 | flow-packages | feature | done | `history/.archived/013-flow-packages.md` |
@@ -101,7 +99,7 @@
 
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|------------|
-| 019 | _In progress_ | — | — |
+| 019 | Adicionou `presets/rust-gpui-app.md` (O-006) — Project Definition terso para um app Rust desktop/UI sobre framework de UI acelerada por GPU (GPUI retained-mode ou egui/eframe immediate-mode), distinto de `rust-library`: arquitetura **render-from-state** (engine async GUI-agnóstico + canais `UiCommand`/`EngineEvent` + reducer puro headless-testável), fronteira async-fora-do-executor-UI via clippy `disallowed-methods`, verificação em **3 gates** (técnico/visual/funcional) com testes headless de reducer/geometria + smoke, theming-via-design-system, settings serde-enum + i18n `Lang` obrigatório, snapshots `Arc<[T]>` + virtualização de listas, `Cargo.lock` commitado com git-deps pré-1.0 pinadas por `rev`, `[profile.release]` afinado e CI de binários por-OS human-gated. Genérico com callouts **GPUI-only**; +linha no índice de presets +CHANGELOG. Entregue em 2 commits no branch `feature/019-rust-gpui-app-preset` (`82283ce`, `57c075e`), **não publicado/sem PR**. | Autorar a partir do spec O-006 (síntese já verificada adversarialmente na 018) + paridade com `rust-library`, sem re-rodar a análise multi-agente do `stand-in` — evita custo (~1.4M tok) e o risco de reintroduzir vazamentos já removidos na 018. · Manter o preset framework-neutral com a mecânica específica isolada em callouts **GPUI-only**, reduzir o `--capture` a um único constraint ("fixtures gated, never ship mocks"), e escrever direto em `presets/` (não no scratchpad session-scoped, lição da 018). · Pegar O-006 (`rust-gpui-app`) nesta sessão e deixar O-007 (`rust-design-system`) `new` no backlog — um preset por sessão. | `egui`/`eframe` é **immediate-mode**, não retained — o atalho "retained-mode/GPU" do O-006 classificava errado; o correto é "UI acelerada por GPU" com render-from-state como disciplina do app sobre qualquer modo de UI. · Um clippy `disallowed-methods` global sobre `tokio::spawn` não contradiz "async roda na engine": a engine spawna via `Handle::spawn` explícito (não afetado pela lint), e a lint pega só a forma livre/ambiente — exatamente o erro de spawnar da thread de UI. · `rtk` não está no PATH do tool Bash deste ambiente — fallback p/ `git` puro (a instrução RTK é passthrough, logo sem efeito colateral). |
 | 018 | Aplicou O-005 revisando o preset `presets/rust-library.md` com os aprendizados destilados do projeto real `stand-in` (workflow multi-agente: 338 learnings → síntese → verificação adversarial): MSRV + `rust-toolchain.toml`, bloco de workspace + layout proc-macro, subseção de lints, patterns expandidos (mod-facade, prelude-como-API, `#[non_exhaustive]`, `tracing` sem subscriber, serde, segredos), feature flags, convenção `assert_send_sync`, e Publishing/CI dividido — mantendo o preset terso. Atualizou os valores de exemplo p/ o Rust atual (edição 2024, rust-version 1.96) e as versões correntes do crates.io (tokio 1.52.3 / serde 1.0.228 / serde_json 1.0.150 / thiserror 2.0.18 / tracing 0.1.44 / async-trait 0.1.89 / reqwest 0.13.4), +entrada no CHANGELOG. Entregue em `main` via **PR #34** (`dc38287`) e fechada. | Revisar o preset `rust-library` existente, não criar novo; a metade "propor outros presets" do PRD vira backlog (O-006 `rust-gpui-app`, O-007 `rust-design-system`), não construída em 018. · Aparar a síntese conforme o verificador adversarial antes de propor (remover 3 vazamentos residuais stand-in/MCP; preset genérico e terso). · Versões nos exemplos são placeholders ilustrativos do Rust atual, não pins (incl. re-adição do `reqwest` a pedido). | O scratchpad é session-scoped — o draft pendente sobreviveu só na pasta da sessão anterior e foi recuperado por caminho explícito no resume; não deixar artefato pendente só no scratchpad. · Extração multi-agente + verificação adversarial revela bloat e vazamentos da fonte que a síntese direta não pega. · Versões de exemplo num preset são um snapshot datado (consultadas no crates.io), mantidas como `[e.g., …]`. |
 | 017 | Validou as duas implementações de referência **opcionais** publicadas nas iterações 015–016 (O-004): confirmou `stateful-spec-flow` v0.1.0 vivo e resolvível no crates.io e `@stateful-spec/flow` v0.1.0 vivo no npm, e auditou toda referência in-repo (manifests, READMEs, AGENTS, project-definition, multi-agent-flow, 4 ports de start-multi-agent-flow) contra a verdade publicada — **zero drift, zero edição corretiva**. | Tratar O-004 como **chore** (validação), não feature — nenhum comportamento novo é adicionado, só confirmação de artefatos publicados e reconciliação de referências. | crates.io rejeita requests sem `User-Agent` (política de data-access) — usar o índice esparso `index.crates.io/st/at/stateful-spec-flow` ou enviar UA; API de leitura do npm é `registry.npmjs.org/@stateful-spec%2Fflow`; a metadata publicada bate exatamente com os `Cargo.toml`/`package.json` commitados (incl. MSRV 1.96 e node `>=24`), confirmando consistência total sem correção. |
 | 016 | Publicou no npm a implementação de referência **opcional** `@stateful-spec/flow` (`packages/flow-ts/`) v0.1.0 — contraparte Node/TS da publicação 015 no crates.io, dirigida por um PRD externo promovido como O-003: bump das devDeps (typescript 6.0.3, @types/node 26.0.1) e do engine (node `>=24`), `"types": ["node"]` exigido pelo TS 6.0, 16 testes + dry-run limpos, então publish público. | Interpretar "flow-rs to npm" como **flow-ts → npm** (flow-rs já foi p/ crates.io na 015; npm é o registro do gêmeo Node/TS); seguir as versões vinculantes do PRD verbatim (ts 6.0.3 / @types/node 26.0.1 / node `>=24`); publicar com `--access public` via **automation token** por env (bypass de 2FA), nunca commitado. | TS 6.0 mudou o default de `types` — não auto-inclui mais `@types/*`, então pacotes Node precisam declarar `"types": ["node"]` ou os imports `node:*` quebram; publicar pacote escopado exige a **org/escopo existir antes** (404 "Scope not found") e token que faça **bypass de 2FA** (token "Publish" comum cai em 403); debugar auth colando tokens vivos no chat vaza segredos — usar um único automation token em env e rotacionar (o PRD guardava o token em plaintext). |
