@@ -40,3 +40,9 @@
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|-----------|
 | 006 | Correção do AGENTS.md para ser universal (não apenas Cursor). Generalizou imports de CLAUDE.md para AGENTS.md e unificou as regras de agentes. | — | — |
+
+## 007 — folded 2026-06-28
+
+| # | Summary | Key Decisions | Learnings |
+|---|---------|---------------|-----------|
+| 007 | Suporte a múltiplos tipos de projeto (software, skills, studies) com registro central `project-types.md`. Criou templates, operações e presets específicos por tipo, além de detecção nos wizards de inicialização. | Project Type como campo load-bearing com seções condicionais; software mantido como default para backward compatibility | O repositório da metodologia permanece como software/documentation-only — não reclassificado |

@@ -13,14 +13,14 @@
 
 > What is currently in progress? Reference the iteration file.
 
-- [ ] Validate published references (crates.io + npm) → `history/017-validate-published-references.md`
+- [ ] Apply preset rust (O-005) → `history/018-apply-preset-rust.md`
 
 ## Open Session
 
 > When a session is active, this section points to the current iteration file.
 > Managed by `start-session` and `end-session` — do not edit manually.
 
-- Currently open: 017 Validate published references → `history/017-validate-published-references.md`
+- Currently open: 018 Apply preset rust (O-005) → `history/018-apply-preset-rust.md`
 
 ## Recent Completions
 
@@ -28,11 +28,11 @@
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 017 | validate-published-references | chore | 2026-06-28 |
 | 016 | publish-flow-ts-npm | chore | 2026-06-28 |
 | 015 | publish-flow-rs-crates-io | chore | 2026-06-28 |
 | 014 | self-adoption | chore | 2026-06-28 |
 | 013 | flow-packages | feature | 2026-06-28 |
-| 012 | reverse-update-from-stand-in | feature | 2026-06-28 |
 
 ## Key Decisions
 
@@ -64,10 +64,11 @@
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
-| 017 | validate-published-references | chore | in-progress | `history/017-validate-published-references.md` |
+| 018 | apply-preset-rust | feature | in-progress | `history/018-apply-preset-rust.md` |
+| 017 | validate-published-references | chore | done | `history/017-validate-published-references.md` |
 | 016 | publish-flow-ts-npm | chore | done | `history/016-publish-flow-ts-npm.md` |
 | 015 | publish-flow-rs-crates-io | chore | done | `history/015-publish-flow-rs-crates-io.md` |
-| 014 | self-adoption | chore | done | `history/014-self-adoption.md` |
+| 014 | self-adoption | chore | done | `history/.archived/014-self-adoption.md` |
 | 013 | flow-packages | feature | done | `history/.archived/013-flow-packages.md` |
 | 012 | reverse-update-from-stand-in | feature | done | `history/.archived/012-reverse-update-from-stand-in.md` |
 | 011 | multi-agent-flow | feature | done | `history/.archived/011-multi-agent-flow.md` |
@@ -97,7 +98,8 @@
 
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|------------|
-| 017 | _In progress_ | — | — |
+| 018 | _In progress_ | — | — |
+| 017 | Validou as duas implementações de referência **opcionais** publicadas nas iterações 015–016 (O-004): confirmou `stateful-spec-flow` v0.1.0 vivo e resolvível no crates.io e `@stateful-spec/flow` v0.1.0 vivo no npm, e auditou toda referência in-repo (manifests, READMEs, AGENTS, project-definition, multi-agent-flow, 4 ports de start-multi-agent-flow) contra a verdade publicada — **zero drift, zero edição corretiva**. | Tratar O-004 como **chore** (validação), não feature — nenhum comportamento novo é adicionado, só confirmação de artefatos publicados e reconciliação de referências. | crates.io rejeita requests sem `User-Agent` (política de data-access) — usar o índice esparso `index.crates.io/st/at/stateful-spec-flow` ou enviar UA; API de leitura do npm é `registry.npmjs.org/@stateful-spec%2Fflow`; a metadata publicada bate exatamente com os `Cargo.toml`/`package.json` commitados (incl. MSRV 1.96 e node `>=24`), confirmando consistência total sem correção. |
 | 016 | Publicou no npm a implementação de referência **opcional** `@stateful-spec/flow` (`packages/flow-ts/`) v0.1.0 — contraparte Node/TS da publicação 015 no crates.io, dirigida por um PRD externo promovido como O-003: bump das devDeps (typescript 6.0.3, @types/node 26.0.1) e do engine (node `>=24`), `"types": ["node"]` exigido pelo TS 6.0, 16 testes + dry-run limpos, então publish público. | Interpretar "flow-rs to npm" como **flow-ts → npm** (flow-rs já foi p/ crates.io na 015; npm é o registro do gêmeo Node/TS); seguir as versões vinculantes do PRD verbatim (ts 6.0.3 / @types/node 26.0.1 / node `>=24`); publicar com `--access public` via **automation token** por env (bypass de 2FA), nunca commitado. | TS 6.0 mudou o default de `types` — não auto-inclui mais `@types/*`, então pacotes Node precisam declarar `"types": ["node"]` ou os imports `node:*` quebram; publicar pacote escopado exige a **org/escopo existir antes** (404 "Scope not found") e token que faça **bypass de 2FA** (token "Publish" comum cai em 403); debugar auth colando tokens vivos no chat vaza segredos — usar um único automation token em env e rotacionar (o PRD guardava o token em plaintext). |
 | 015 | Publicou no crates.io a implementação de referência **opcional** `stateful-spec-flow` (`packages/flow-rs/`) v0.1.0, dirigida por um PRD externo promovido da intake como O-002: bump do `Cargo.toml` para edition 2024 / MSRV 1.96, refino de `keywords`/`categories` para descoberta, 62 testes + dry-run limpos, então publish. | Seguir as propriedades vinculantes do PRD verbatim (edition 2024, MSRV 1.96) em vez dos 2021/1.74 anteriores; refinar keywords p/ termos de maior tráfego (cli/state-machine/workflow/agents) mantendo a keyword de marca e os dois slugs de categoria válidos; commitar o prep num branch e publicar de uma árvore limpa (sem `--allow-dirty`), token só via env. | Publish no crates.io é permanente (yank ≠ delete) — gatear atrás de confirmação explícita; segredo em PRD de intake (token em plaintext) é risco real — usar via env, nunca commitar, e sinalizar rotação; o bump p/ edition 2024 neste crate zero-dep foi no-op de código (cargo check/test limpos). |
 | 014 | Self-adoption: o repositório (fonte da metodologia) passou a praticar as estruturas que publica — criou seu próprio `intake/` (Backlog/Discovery/QA) + `backlog.md` (`O-001`), atualizou a árvore do `project-definition.md` (`packages/` + artefatos 007/008/012/013) e documentou `RAW_HISTORY=3` no `memory.md`. | Uma fonte auto-referencial deve praticar o que entrega — sem o inbox, a triagem de intake era um no-op silencioso; self-adoption registrada como `O-001` (promoted → 014), exercitando o pipeline intake→backlog→roadmap. | Um audit "como usuário da própria metodologia" revela lacunas que a mera implementação da metodologia não pega; a *Repository Structure* do `project-definition.md` defasa ao adicionar áreas grandes (ex.: `packages/`) e exige refresh explícito. |
@@ -106,5 +108,4 @@
 | 011 | Formalizou um modo opcional de **fluxo autônomo de dois agentes** (PM/Arquiteto + Eng. Sênior) coordenado por um arquivo de estado dedicado (`.stateful-spec/flow-state.md`): novo protocolo `methodology/multi-agent-flow.md`, operação `start-multi-agent-flow` (+3 ports), templates `flow-state.md`/`review-handoff.md`, e notas aditivas em `roles.md` e nas ops de sessão. Software-only; reusa o ciclo de 5 fases; generaliza o padrão que a iteração 011 do `stand-in` provou à mão. | Loop autônomo por polling sobre arquivo de estado com máquina de estados granular e turn-based (sem colisão); humano aprova o plano 1× e só gateia ações irreversíveis, com teto de `review_round`=3→BLOCKED; umbrella = 1 iteração/1 Engrama, cada marco é uma sessão, layout flat em `history/`. | Padrão de marco (spec→impl+gate→handoff→fix→commit) generaliza limpo num modo aditivo sem tocar nas 5 fases; investigação web (resíduo do prompt de engramas) dispensada explicitamente pelo dev e registrada honestamente (lição da 009); regra de sync respeitada desde o início (ports escritos junto com a fonte). |
 | 010 | Reconciliação de pontas soltas pós-008: indexou o review-handoff 009 (commitado, PR #25) na History Index e registrou a feature Engramas no CHANGELOG `[Unreleased]`. | Indexar 009 como `review-handoff` (mantendo o arquivo) para preservar trilha de auditoria visível; 009 não recebe linha de Engramas por não ter Session Log próprio. | History Index e tabela Engramas divergem de propósito para artefatos não-feature — review-handoffs são indexados mas não compilados em engramas. |
 | 008 | Sistema de compactação de memória com seção Engramas, algoritmo map-reduce sobre Session Log, drill-down por engramas em vez de ler history/ inteiro, e two-tier compaction para prevenir crescimento ilimitado da tabela. | Two-tier compaction com Archive row mantém tabela em N+1 linhas; ports de operações sincronizados via regra de sync obrigatória; pesquisa de alternativas documentada (hierarchical, MemGPT/Letta, RAG, gist tokens, progressive disclosure). | A regra de sync do project-definition obriga portar mudanças para .cursor/.claude/.opencode; a two-tier compaction resolve o problema assintótico real que o modelo flat não resolvia. |
-| 007 | Suporte a múltiplos tipos de projeto (software, skills, studies) com registro central `project-types.md`. Criou templates, operações e presets específicos por tipo, além de detecção nos wizards de inicialização. | Project Type como campo load-bearing com seções condicionais; software mantido como default para backward compatibility | O repositório da metodologia permanece como software/documentation-only — não reclassificado |
-| 0-archived | As primeiras iterações estabeleceram as fundações da metodologia: correção dos prompts de inicialização do Cursor (001), a obrigatoriedade de iteration tracking via arquivos `history/NNN-name.md` (002) e o wizard `update-project` para refresh da metodologia em projetos já configurados (003); em seguida veio o suporte ao Claude Code com comandos nativos em `.claude/commands/` e entry point CLAUDE.md (004); o sistema de session lifecycle (`start-session`/`end-session`) com Session Log para registrar contribuições de várias operações sob a mesma iteração (005); e a generalização do `AGENTS.md` para ser universal (não só Cursor), unificando os imports CLAUDE.md→AGENTS.md e as regras de agentes (006). Conteúdo completo preservado em `history/.archived/memory.md`. | Iteration file como artefato permanente de tracking; `memory.md` atualizado ao iniciar/completar trabalho (002); operation prompts espelhados como comandos nativos em múltiplas ferramentas — Cursor, Claude Code (004); sessões explícitas com Open Session flag em `memory.md`, cada operação registra timestamp + operação + sumário no Session Log (005). | Closed stale session de iteração já mergeada via PR (005). |
+| 0-archived | As primeiras iterações estabeleceram as fundações da metodologia: correção dos prompts de inicialização do Cursor (001), a obrigatoriedade de iteration tracking via arquivos `history/NNN-name.md` (002) e o wizard `update-project` para refresh da metodologia em projetos já configurados (003); em seguida veio o suporte ao Claude Code com comandos nativos em `.claude/commands/` e entry point CLAUDE.md (004); o sistema de session lifecycle (`start-session`/`end-session`) com Session Log para registrar contribuições de várias operações sob a mesma iteração (005); a generalização do `AGENTS.md` para ser universal (não só Cursor), unificando os imports CLAUDE.md→AGENTS.md e as regras de agentes (006); e o suporte a múltiplos tipos de projeto (software/skills/studies) com o registro central `project-types.md`, templates/operações/presets por tipo e detecção nos wizards de inicialização (007). Conteúdo completo preservado em `history/.archived/memory.md`. | Iteration file como artefato permanente de tracking; `memory.md` atualizado ao iniciar/completar trabalho (002); operation prompts espelhados como comandos nativos em múltiplas ferramentas — Cursor, Claude Code (004); sessões explícitas com Open Session flag em `memory.md`, cada operação registra timestamp + operação + sumário no Session Log (005); Project Type como campo load-bearing com seções condicionais e software como default p/ backward compatibility (007). | Closed stale session de iteração já mergeada via PR (005); o repositório da metodologia permanece software/documentation-only — não reclassificado mesmo com suporte multi-type (007). |
