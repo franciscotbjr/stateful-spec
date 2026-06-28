@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** in-progress
+- **Status:** done
 - **Created:** 2026-06-28
-- **Completed:** —
+- **Completed:** 2026-06-28
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -78,6 +78,9 @@ the developer 2026-06-28).
 | 2026-06-28 16:50 | implement | Developer approved the draft as-is. Applied the tightened revision to `presets/rust-library.md` (158 → 243 lines: MSRV/toolchain pinning, Cargo-workspace + proc-macro layouts, Lints subsection, expanded patterns, Feature Flags, `assert_send_sync` convention, split Publishing/CI-CD). Added a CHANGELOG `[Unreleased] › Changed` entry; README preset row unchanged (still accurate). All four acceptance criteria now met. |
 | 2026-06-28 16:55 | implement | Per developer: set the preset's example values to current Rust — edition example `2024`, MSRV `[e.g., 1.96]`, `rust-toolchain.toml` channel `[e.g., 1.96.0]` (kept as `[e.g., …]` placeholders, not hard-coded requirements). |
 | 2026-06-28 17:00 | implement | Per developer: looked up latest stable crate versions on crates.io and refreshed the dependency examples — tokio 1.52.3, serde 1.0.228, serde_json 1.0.150, thiserror 2.0.18, tracing 0.1.44, async-trait 0.1.89, reqwest 0.13.4. Re-added the `reqwest` row (HTTP client, if needed) the developer named, which the tightening pass had dropped. |
+| 2026-06-28 17:10 | write-commit-message | Committed to new branch `feature/018-apply-preset-rust` (commit `c2a1fcb`, 3 files: preset + CHANGELOG + this iteration) — single-line message ≤300 chars per convention, Co-Authored-By trailer. PR description drafted in Markdown on request; the branch was then pushed and **merged to `main` as PR #34** (squash `dc38287`). |
+| 2026-06-28 17:15 | save-session | Saved progress: all acceptance criteria met; recorded the version-refresh + commit decisions; compiled the 018 Engrama in `memory.md`. Cycle kept **open** (status `in-progress`). Delivery done — merged to `main` via PR #34; formal `end-session` still pending. |
+| 2026-06-28 17:25 | end-session | Session closed. 018 delivered (preset `rust-library` revised + example values refreshed to current Rust/crates + `reqwest` re-added; CHANGELOG; O-006/O-007 filed) and merged to `main` via PR #34 (`dc38287`). All 4 acceptance criteria met → status `done`. Close triage: no `ready` intake items. Failure sweep: no `[INCIDENT]` entries. Archived 015 central (RAW_HISTORY=3). |
 
 > **Timestamp format:** `YYYY-MM-DD HH:MM` (local time). Example: `2026-05-03 14:30 | start-session | Session opened for feature work.`
 >
@@ -94,6 +97,8 @@ the developer 2026-06-28).
 | Tighten the synthesis draft per the adversarial verifier before proposing (drop binary-only `[profile.release]`, demote RPC two-error-plane note, drop sibling-binary test recipe, genericize `exclude=`, dedupe `env!`, trim multi-workspace asides + Constraints dup) | Verifier flagged bloat + 3 residual stand-in leaks; the preset must stay terse and generic per preset philosophy | 2026-06-28 |
 | App/ui preset slug = `rust-gpui-app` (framework-specific), over the verifier's framework-neutral lean (`rust-ui-app`/`rust-desktop-app`) | Developer preference — most evidence-true to the GPUI source; GPUI-only mechanics still called out, egui noted as a variant | 2026-06-28 |
 | File both new-preset proposals now as O-006 (`rust-gpui-app`) + O-007 (`rust-design-system`), status `new` | Developer approved; records the opportunities without scope-creeping 018 | 2026-06-28 |
+| Refresh the preset's example values to current Rust (edition 2024, rust-version 1.96) and current crates.io versions; re-add the `reqwest` row | Developer request; examples should reflect the current state while staying illustrative `[e.g., …]` placeholders, not pins | 2026-06-28 |
+| Commit on a new branch `feature/018-apply-preset-rust`, no push/PR | Branch strategy (main + feature via PR); push/PR are outward-facing actions that need explicit instruction | 2026-06-28 |
 
 ## Blockers & Notes
 
