@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** review
+- **Status:** done
 - **Created:** 2026-06-24
-- **Completed:** — (implementation complete; awaiting developer review)
+- **Completed:** 2026-06-28
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -73,6 +73,7 @@ self-review after each wave and a final holistic review.
 | 2026-06-24 | wave-4 self-review | Grep clean: zero leakage in multi-agent-flow.md and all flow files; repo-wide unambiguous flow-leak terms hit ONLY `.stateful-spec/` self-application history (legit precedent refs), zero in product. Parity: design-gate additions=4 (source+3 ports). Wave-2 forward-ref (roles.md 3-agent mode) now RESOLVED. Scenario: two-agent path unchanged; three-agent path coherent; mode disambiguated by the "additions" framing. No rework. |
 | 2026-06-24 | final-review | Holistic end-to-end review: repo-wide leakage sweep clean — all 11 broad-pattern hits are pre-existing legit content (Rust preset, multi-stack example placeholders, init detection signals) or `.stateful-spec/` self-app history; **zero in any back-ported file**. All new template targets exist; methodology cross-refs resolve; the 4 supporting structures interlock; 5-phase identity preserved. CHANGELOG `[Unreleased]` updated. Status → review; **NOT committed**. The 012 Engrama compaction and this repo's own self-adoption (scaffolding `intake/`, the history-archiving migration of 001–009) are **deferred to the true `end-session` close after developer review**, to avoid an unreviewed structural migration. |
 | 2026-06-28 | review-changes | Independent developer-requested review (via resume-session) — **verified, not trusted**, the wave self-reviews. Stand-in leakage CLEAN across methodology/prompts/templates/ports (hits only in self-app history + balanced multi-stack examples); all relative links in new/edited methodology docs resolve; source↔port parity SATISFIED for the 5 session/review ops × 3 ports (kickoff/close triage, both-dirs next-NNN, idempotent archiving, `[INCIDENT]` capture+sweep, Engrama fold-preservation present in every port). No rework — stays parked in review, uncommitted. Side cleanup: removed stray root `package.json`/`package-lock.json` (`headroom-ai`; unrelated to 012/013). |
+| 2026-06-28 | end-session | Session closed (full close, developer-approved). Status → **done**, Completed 2026-06-28. Finalized alongside 013 (the Open Session): both committed earlier as `b4bdd10`; Engrama compiled into `memory.md` (the N=10 bound folded 001+002 into the `0-archived` row, preserved verbatim to `history/.archived/memory.md`); history-archiving migration ran (`git mv` 001–010 centrals into `history/.archived/`, History Index `File` cells repointed); moved to Recent Completions. No `[INCIDENT]` entries to sweep. |
 
 ## Decisions Made
 
