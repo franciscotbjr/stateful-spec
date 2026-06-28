@@ -48,7 +48,9 @@ _(none)_
 
 ## History Index
 
-> Complete list of iterations. Newest first.
+> Complete list of iterations. Newest first. The `File` cell may point into `history/.archived/`
+> for older iterations — archived rows stay resolvable but are never bulk-read (see
+> `methodology/history-archiving.md`).
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
@@ -63,7 +65,9 @@ _(none)_
 >
 > **Two-tier compaction:** The table holds at most `N` active rows (default 10)
 > plus one Archive row. N is the number after this comment. When the active row
-> count exceeds N, the oldest row merges into the Archive row at the bottom.
+> count exceeds N, the oldest row merges into the Archive row at the bottom —
+> first appending that row's full content verbatim to `history/.archived/memory.md`
+> so the fold loses no detail (see `methodology/history-archiving.md`).
 > Adjust N to match your context budget — smaller N = less context, more loss.
 
 <!-- N = 10 -->

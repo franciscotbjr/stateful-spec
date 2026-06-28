@@ -23,13 +23,13 @@ These commands live in `.claude/commands/` and mirror the source prompts in `pro
 
 ## What this repository is
 
-This is the **source repository for the Stateful Spec methodology** — a documentation-only project. There is no application code, build system, package manager, linter, test runner, or CI. Every file is Markdown. "Quality gates" are manual review.
+This is the **source repository for the Stateful Spec methodology** — **primarily** a documentation-only project: the methodology, prompts, and templates are all Markdown, with no build system, linter, test runner, or CI. The one exception is [`packages/`](packages/) — optional, separately-published reference implementations of the multi-agent flow tool (a Rust crate `stateful-spec-flow` and a Node/TypeScript package `@stateful-spec/flow`) that are **not required** to use the methodology. "Quality gates" for the core are manual review.
 
 Because this repo IS the methodology, it consumes itself: the project's own `.stateful-spec/` folder uses the methodology files at the repo root rather than copying them.
 
 ## Common commands
 
-There are no build/lint/test commands. The only tooling is `git`. When the user says something like "run tests" or "build", clarify — there is nothing to run.
+There are no build/lint/test commands for the methodology core (Markdown only); the only tooling there is `git`. The `packages/` reference implementations DO have builds and tests — `cargo test` in `packages/flow-rs/`, `npm test` in `packages/flow-ts/` — but run those only when working inside `packages/`. Elsewhere, if the user says "run tests" or "build", clarify — there is nothing to run.
 
 ## High-level architecture
 
@@ -73,6 +73,6 @@ Some prompts (notably `prompts/operations/resume-session.md`) instruct the AI to
 
 ## Constraints to honor
 
-- Do not introduce application code, build tooling, dependencies, or CI — this repo is documentation-only by design.
+- Keep the methodology core documentation-only — do not introduce application code, build tooling, dependencies, or CI **outside** `packages/`. The `packages/` directory is the sanctioned exception (optional, separately-published reference implementations; not required to use the methodology). An agent must ask the user's permission before using a published flow tool.
 - Do not duplicate methodology content into `.stateful-spec/methodology/`.
 - When modifying existing files, prefer minimal targeted diffs over rewrites.

@@ -1,0 +1,18 @@
+# An illegal verb is refused (exit 1) and leaves the state untouched (no seq bump).
+[initial]
+process_status = RUNNING
+iteration = 013-conf
+total_milestones = 3
+current_milestone = 1
+turn = engineer
+step = APPROVED
+review_round = 0
+max_review_rounds = 3
+spec_review_round = 0
+max_spec_review_rounds = 3
+seq = 0
+
+[step]
+run = spec-ready
+exit = 1
+expect = step=APPROVED turn=engineer seq=0

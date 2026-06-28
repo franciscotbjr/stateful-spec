@@ -19,6 +19,11 @@ Follow the 5-phase iteration cycle: **Analyze → Plan → Specify → Implement
 - Phase guides: `.stateful-spec/methodology/phases/`
 - Roles and boundaries: `.stateful-spec/methodology/roles.md`
 - Decision framework: `.stateful-spec/methodology/decision-framework.md`
+- Supporting structures (all types): intake + backlog (`.stateful-spec/methodology/backlog.md`), history archiving (`.stateful-spec/methodology/history-archiving.md`), post-delivery QA (`.stateful-spec/methodology/qa-phase.md`)
+
+<!-- Optional published tooling: if your project ships separately-published reference implementations
+     (for example a flow CLI under a `packages/` directory), document them here and require that an
+     agent ask the user's permission before using one. They must never be required to use the methodology. -->
 
 ## Operation Prompts
 
@@ -77,6 +82,9 @@ Source prompts live in `prompts/operations/`. The tool-specific files (`.cursor/
 4. When modifying existing content, minimize the diff — prefer targeted changes over rewrites
 5. Make small, logical commits that leave the repository in a working state
 6. Track iterations in `.stateful-spec/history/` and keep `.stateful-spec/memory.md` current
+7. **Engramas maintenance** — After any lifecycle operation that modifies a history file (`start-session`, `save-session`, `end-session`), update the **Engramas** section in `.stateful-spec/memory.md` using the map-reduce compaction algorithm: (a) group Session Log entries in batches of 5 and summarize each batch into 1-2 lines; (b) combine the Description, batch summaries, Decisions Made, and Blockers & Notes into three engram fields — `Summary` (1-2 sentences), `Key Decisions` (up to 3 bullets), `Learnings` (up to 3 bullets). **Two-tier compaction:** the Engramas table is bounded — recent N iterations (default 10) have individual rows; older iterations fold into a single `0-archived` Archive row. When the active row count exceeds N, merge the oldest active row into the Archive row — first **appending that row's full content verbatim to `history/.archived/memory.md`** so the fold loses no detail. Keep the Engramas table in sync with the History Index.
+8. **Intake & backlog** — Keep raw inbound work in `.stateful-spec/intake/{Backlog,Discovery,QA}/` behind a READY gate, and triaged opportunities in `.stateful-spec/backlog.md` (`O-NNN`, sequential / stable / never reused). Triage `ready` items at session kickoff and close. A defect against the current spec reopens the milestone — it is not a backlog opportunity. See `.stateful-spec/methodology/backlog.md`.
+9. **History archiving** — Keep `.stateful-spec/history/` bounded: older iterations move to `history/.archived/` (resolvable from the History Index, never bulk-read); computing the next `NNN` scans **both** `history/` and `history/.archived/`. See `.stateful-spec/methodology/history-archiving.md`.
 
 ### Iteration tracking
 
@@ -94,3 +102,5 @@ If the session **starts with a direct task** (e.g. "implement this plan") instea
 Use `start-session` at the beginning of an implementation cycle to create an iteration file and mark it as the **Open Session** in `memory.md`. While a session is open, every operation prompt (spec writing, code review, documentation, debugging, etc.) registers its contributions to the Session Log of the open iteration file. Use `end-session` to summarize all work, close the iteration, and clear the Open Session flag.
 
 If an agent instance detects an Open Session in `memory.md`, it should maintain that session — appending entries and not creating competing iterations. If asked to start a new session while one is open, the agent must ask for approval to close the existing one first.
+
+The session boundaries also run the **intake triage** (kickoff and close) and the idempotent **history-archiving** operation. When a delivered artifact later fails human / real-world testing, the **post-delivery QA** loop (`.stateful-spec/methodology/qa-phase.md`) registers, routes, and turns each defect into a lesson; process failures *during* a multi-agent flow are logged as `[INCIDENT]` entries in the Session Log and swept into Engrama learnings at close.

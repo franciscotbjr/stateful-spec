@@ -111,3 +111,8 @@ The iteration is complete. Next steps:
 - **More milestones remaining?** — Return to [Phase 3: Specify](03-specify.md) for the next milestone
 - **New work unit?** — Return to [Phase 1: Analyze](01-analyze.md)
 - **Session ending?** — Use `prompts/operations/end-session.md` to summarize and close the session
+- **Defects surface after delivery?** — Green gates and a clean review do not prove real-world
+  behavior. If human / real-world testing of the **delivered** artifact reveals defects, enter the
+  [Post-Delivery QA](../qa-phase.md) loop (register → route by type → categorize E/P/H → root
+  cause → fix + gate + commit per item → lesson back to a skill). A defect found *before* delivery
+  is not QA — it reopens the milestone.

@@ -57,6 +57,8 @@ If the changes look good, say so — don't invent issues.
 
 **Session tracking:** If an Open Session was detected, append a timestamped entry to the **Session Log** in the referenced iteration file summarizing the review findings (or confirming a clean review).
 
+**Incident capture:** If any **process/methodology** failure surfaced during this milestone (not a code finding — e.g. a recovered handoff, a stall, a wrong-branch commit), also log an `[INCIDENT/P]` entry in the Session Log so the close-time failure sweep can turn it into a lesson (see `methodology/qa-phase.md`).
+
 ## Expected Output
 
 A structured review with findings categorized by severity, or a confirmation that the changes look clean.

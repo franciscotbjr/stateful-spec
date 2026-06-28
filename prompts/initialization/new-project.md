@@ -309,7 +309,9 @@ Create the `.stateful-spec/` directory structure at the project root. The operat
 
 4. **`.stateful-spec/history/`** — Create empty directory for iteration tracking
 
-5. **`AGENTS.md`** — Create at project root using [`templates/project/agents-md.md`](../../templates/project/agents-md.md) as the canonical template. This file is the universal entry point for all AI agents regardless of the native agent chosen. The template includes the operation table, agent invocation notes for all supported agents, and working conventions.
+5. **`.stateful-spec/intake/` + `.stateful-spec/backlog.md`** — Copy the `templates/intake/` structure (the `Backlog/`, `Discovery/`, `QA/` folders with their READMEs) and create `.stateful-spec/backlog.md` from `templates/backlog.md` (empty `O-NNN` table), so the intake inbox and triaged backlog exist from day one. See `.stateful-spec/methodology/backlog.md`.
+
+6. **`AGENTS.md`** — Create at project root using [`templates/project/agents-md.md`](../../templates/project/agents-md.md) as the canonical template. This file is the universal entry point for all AI agents regardless of the native agent chosen. The template includes the operation table, agent invocation notes for all supported agents, and working conventions.
    - **Note on ordering:** Create `AGENTS.md` from the template first, then **after** placing native commands in the next section, update the operation table and agent invocation notes in `AGENTS.md` to match the chosen agent's specific syntax (Cursor: `@name` under `.cursor/rules/`, Claude Code / OpenCode: `/name`, Windsurf: workflows, Codex: `AGENTS.md`-based, Antigravity: rules/workflows).
 
 **If the developer accepted native commands (STEP 8.5):**

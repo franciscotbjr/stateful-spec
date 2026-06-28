@@ -13,14 +13,15 @@
 
 > What is currently in progress? Reference the iteration file.
 
-_(none)_
+- **013 — flow-packages** (feature, review): agnostic reference implementations of the multi-agent flow tooling contract under `packages/` — Rust crate `stateful-spec-flow` + Node/TS `@stateful-spec/flow` (both tested; Rust ≡ TS parity via shared fixtures). Optional / non-binding; agent must ask permission before use. Implementation complete, **awaiting developer review**; **not committed**. Layers on 012. See `history/013-flow-packages.md`.
+- **012 — reverse-update-from-stand-in** (feature, review): back-port of methodology evolutions from the `stand-in` downstream repo — implementation complete across 4 waves (3 new methodology docs; overview/roles/05-verify integration; session ops + 3 ports each; two-mode multi-agent-flow; governance/memory + companion templates). **Awaiting developer review** before close; **not committed**. See `history/012-reverse-update-from-stand-in.md`.
 
 ## Open Session
 
 > When a session is active, this section points to the current iteration file.
 > Managed by `start-session` and `end-session` — do not edit manually.
 
-_(none)_
+- **Open Session:** `history/013-flow-packages.md` (opened 2026-06-26) — implementation complete; held open for developer review. Iteration 012 is likewise parked in **review** (awaiting developer review). Final Engrama compaction for both runs at their true `end-session` close.
 
 ## Recent Completions
 
@@ -59,6 +60,8 @@ _(none)_
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
+| 013 | flow-packages | feature | review | `history/013-flow-packages.md` |
+| 012 | reverse-update-from-stand-in | feature | review | `history/012-reverse-update-from-stand-in.md` |
 | 011 | multi-agent-flow | feature | done | `history/011-multi-agent-flow.md` |
 | 010 | reconcile-loose-ends | chore | done | `history/010-reconcile-loose-ends.md` |
 | 009 | review-handoff-engramas | review-handoff | done | `history/009-review-handoff-engramas.md` |

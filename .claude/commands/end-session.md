@@ -12,6 +12,7 @@ You are helping the developer end a work session. Your job is to review everythi
 
 **Your role:**
 - Confirm the developer wants to end the session
+- Triage the intake inbox (close triage)
 - Analyze the open iteration file and any Session Log entries
 - Summarize the work
 - Close the iteration and clear the Open Session flag
@@ -57,6 +58,16 @@ Show the developer a summary:
 
 If the developer says **no**, stop here. The session remains open.
 
+### STEP 3.5 — Triage the Intake Inbox (close triage)
+
+Triage at iteration close, mirroring the kickoff triage (`start-session` STEP 1.5):
+
+1. Scan `.stateful-spec/intake/{Backlog,Discovery,QA}/` for item files (ignore each `README.md`).
+2. Triage only `status: ready` items; route promote→`O-NNN` / discard per `methodology/backlog.md`.
+3. Mark each routed item `status: triaged` and add a `destination:` line.
+
+If there are no `ready` items, note it and continue.
+
 ### STEP 4 — Summarize and Close
 
 1. **Update the iteration file:**
@@ -64,17 +75,30 @@ If the developer says **no**, stop here. The session remains open.
    - Mark **Status** as `done` (or `review` if not all criteria met)
    - Fill **Completed** date with today's date
 
+1.5. **Failure sweep (before the Engrama).** Enumerate the `[INCIDENT]` entries in the iteration's
+   Session Log (in-flow process failures; see `methodology/qa-phase.md`). Ensure each becomes a
+   `Learning` in the Engrama and route it: durable behavioural → memory; recurring/opportunity →
+   `O-NNN` in `backlog.md`; one-off → Engrama only. An incident must not vanish because no one
+   recorded its lesson.
+
 2. **Finalize Engramas:**
    - Run the Engramas map-reduce compaction on the iteration file:
      - **Map:** Group Session Log entries in batches of 5, summarize each batch into 1-2 lines.
      - **Reduce:** Combine Description + batch summaries + Decisions Made + Blockers & Notes into `Summary` (1-2 sentences), `Key Decisions` (up to 3 bullets, `—` if none), `Learnings` (up to 3 bullets, `—` if none).
    - Update the corresponding row in the **Engramas** table in `memory.md`.
-   - **Two-tier compaction:** Check whether the active engram count (rows with a numeric `#`, excluding the Archive row) exceeds the tier threshold N (default 10, configured in the comment above the Engramas table). If it does, merge the oldest active row into the **Archive** row (numbered `0-archived`, the last row in the table): synthesize a 2-3 sentence summary covering all archived iterations for `Summary`, and fold relevant key decisions and learnings into `Key Decisions` and `Learnings`. This keeps the Engramas table bounded at N+1 rows regardless of project age.
+   - **Two-tier compaction:** Check whether the active engram count (rows with a numeric `#`, excluding the Archive row) exceeds the tier threshold N (default 10, configured in the comment above the Engramas table). If it does, merge the oldest active row into the **Archive** row (numbered `0-archived`, the last row in the table). **Before collapsing it, append that row's full content verbatim to `history/.archived/memory.md`** so the fold loses no detail (see `methodology/history-archiving.md`). Then synthesize a 2-3 sentence summary covering all archived iterations for `Summary`, and fold relevant key decisions and learnings into `Key Decisions` and `Learnings`. This keeps the Engramas table bounded at N+1 rows regardless of project age.
 
 3. **Update `memory.md`:**
    - **Open Session** — Set back to `_(none)_`
    - **Active Work** — Move the completed item to **Recent Completions**
    - **History Index** — Update the iteration's status to `done`
+
+4. **Archive old history:**
+   - Run the idempotent archive operation in `methodology/history-archiving.md`: with this
+     iteration now closed, `git mv` everything outside the last `RAW_HISTORY` (=3) closed centrals
+     (old centrals + all auxiliaries, including this iteration's own milestone specs/handoffs if it
+     was an umbrella) into `history/.archived/`, repointing each moved iteration's `File` cell in
+     the History Index. A no-op when nothing needs moving.
 
 ### STEP 5 — Confirm Close
 

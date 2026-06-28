@@ -1,0 +1,19 @@
+# Engineer hands a mis-scoped milestone back to the PM: zeros spec_review_round,
+# leaves the delivery review_round alone.
+[initial]
+process_status = RUNNING
+iteration = 013-conf
+total_milestones = 3
+current_milestone = 2
+turn = engineer
+step = SPEC_READY
+review_round = 0
+max_review_rounds = 3
+spec_review_round = 2
+max_spec_review_rounds = 3
+seq = 0
+
+[step]
+run = hand-back wrong-profile
+exit = 0
+expect = step=SPEC_PENDING turn=pm spec_review_round=0 review_round=0 updated_by=engineer seq=1

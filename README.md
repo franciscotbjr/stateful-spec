@@ -102,6 +102,19 @@ Once set up, these prompts are available in your project as native agent command
 > `start-multi-agent-flow pm` / `start-multi-agent-flow engineer`. See
 > [`methodology/multi-agent-flow.md`](methodology/multi-agent-flow.md).
 
+## Optional Reference Implementations
+
+The multi-agent flow's coordination is defined as a documentation-only **contract** (see
+[`methodology/multi-agent-flow.md`](methodology/multi-agent-flow.md)). That contract also has optional,
+separately-published reference implementations whose source lives in [`packages/`](packages/):
+
+- **`stateful-spec-flow`** (Rust → crates.io) and **`@stateful-spec/flow`** (Node/TypeScript → npm) —
+  a small CLI that validates the flow's state transitions, blocking-polls, and gates.
+
+**They are not required.** The methodology works fully without them — any tool, or a human relaying
+turns, satisfies the contract. An AI agent that wants to use one must **ask the user's permission
+first** (per [`methodology/roles.md`](methodology/roles.md)).
+
 ## Available Presets
 
 Pre-filled Project Definitions — the AI will suggest one if it matches your project:

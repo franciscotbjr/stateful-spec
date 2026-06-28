@@ -46,6 +46,7 @@ The AI assistant should **NOT**:
 - Make architectural decisions without human approval
 - Skip methodology phases (e.g., jump from Analyze to Implement)
 - Introduce dependencies, patterns, or tools not in the Project Definition without discussion
+- Use an **optional published reference implementation** (e.g. a flow tool in `packages/`) without first telling the user and getting permission — it is never required
 - Commit, deploy, or make irreversible changes without explicit instruction
 - Remove or weaken tests without explicit direction
 - Assume requirements — ask when unclear
@@ -93,6 +94,25 @@ The full protocol (roles, state machine, signal file, termination) is in
 [`multi-agent-flow.md`](multi-agent-flow.md); start it with the `start-multi-agent-flow`
 operation. The boundaries above (no irreversible changes without instruction, no competing
 sessions) continue to apply to each agent.
+
+### Rigorous variant — three agents (optional)
+
+For higher-stakes milestones, the flow can add a third agent — a **read-only Architect reviewer**
+that reviews each milestone **spec** (a *design gate*) before any implementation begins, looping
+observations with the PM until the design is approved. Because it reads only — never building or
+editing — it cannot introduce changes, the strongest form of the boundary above. An engineer that
+finds a milestone mis-scoped can **hand it back** for re-scoping rather than build the wrong thing;
+the PM still owns the post-implementation delivery review. Both modes share the same signal file and
+human gates: choose the lighter two-agent mode for ordinary work and the three-agent mode when a
+design-level gate is worth the overhead. See [`multi-agent-flow.md`](multi-agent-flow.md).
+
+### Post-delivery QA
+
+When defects surface after a delivery, the [Post-Delivery QA](qa-phase.md) loop reuses these roles:
+it **routes by type** — visual/layout/interaction polish to a **single agent** (applied directly),
+substantial/logic/cross-cutting fixes to the **multi-agent flow** (spec → review → implement) —
+under the E/P/H discipline (register → categorize → root cause → fix + gate + commit per item →
+lesson back to a skill).
 
 ## Communication Guidelines
 
