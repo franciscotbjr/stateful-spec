@@ -13,7 +13,7 @@
 
 > What is currently in progress? Reference the iteration file.
 
-- _(none)_ — no iteration in progress. Last delivery: 014 self-adoption (closed 2026-06-28). The intake inbox + `backlog.md` are now live; `O-001` promoted → 014.
+- _(none)_ — no iteration in progress. Last delivery: 015 publish-flow-rs-crates-io (closed 2026-06-28) — `stateful-spec-flow` v0.1.0 live on crates.io.
 
 ## Open Session
 
@@ -28,11 +28,11 @@
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 015 | publish-flow-rs-crates-io | chore | 2026-06-28 |
 | 014 | self-adoption | chore | 2026-06-28 |
 | 013 | flow-packages | feature | 2026-06-28 |
 | 012 | reverse-update-from-stand-in | feature | 2026-06-28 |
 | 011 | multi-agent-flow | feature | 2026-06-03 |
-| 010 | reconcile-loose-ends | chore | 2026-06-03 |
 
 ## Key Decisions
 
@@ -64,9 +64,10 @@
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
+| 015 | publish-flow-rs-crates-io | chore | done | `history/015-publish-flow-rs-crates-io.md` |
 | 014 | self-adoption | chore | done | `history/014-self-adoption.md` |
 | 013 | flow-packages | feature | done | `history/013-flow-packages.md` |
-| 012 | reverse-update-from-stand-in | feature | done | `history/012-reverse-update-from-stand-in.md` |
+| 012 | reverse-update-from-stand-in | feature | done | `history/.archived/012-reverse-update-from-stand-in.md` |
 | 011 | multi-agent-flow | feature | done | `history/.archived/011-multi-agent-flow.md` |
 | 010 | reconcile-loose-ends | chore | done | `history/.archived/010-reconcile-loose-ends.md` |
 | 009 | review-handoff-engramas | review-handoff | done | `history/.archived/009-review-handoff-engramas.md` |
@@ -94,6 +95,7 @@
 
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|------------|
+| 015 | Publicou no crates.io a implementação de referência **opcional** `stateful-spec-flow` (`packages/flow-rs/`) v0.1.0, dirigida por um PRD externo promovido da intake como O-002: bump do `Cargo.toml` para edition 2024 / MSRV 1.96, refino de `keywords`/`categories` para descoberta, 62 testes + dry-run limpos, então publish. | Seguir as propriedades vinculantes do PRD verbatim (edition 2024, MSRV 1.96) em vez dos 2021/1.74 anteriores; refinar keywords p/ termos de maior tráfego (cli/state-machine/workflow/agents) mantendo a keyword de marca e os dois slugs de categoria válidos; commitar o prep num branch e publicar de uma árvore limpa (sem `--allow-dirty`), token só via env. | Publish no crates.io é permanente (yank ≠ delete) — gatear atrás de confirmação explícita; segredo em PRD de intake (token em plaintext) é risco real — usar via env, nunca commitar, e sinalizar rotação; o bump p/ edition 2024 neste crate zero-dep foi no-op de código (cargo check/test limpos). |
 | 014 | Self-adoption: o repositório (fonte da metodologia) passou a praticar as estruturas que publica — criou seu próprio `intake/` (Backlog/Discovery/QA) + `backlog.md` (`O-001`), atualizou a árvore do `project-definition.md` (`packages/` + artefatos 007/008/012/013) e documentou `RAW_HISTORY=3` no `memory.md`. | Uma fonte auto-referencial deve praticar o que entrega — sem o inbox, a triagem de intake era um no-op silencioso; self-adoption registrada como `O-001` (promoted → 014), exercitando o pipeline intake→backlog→roadmap. | Um audit "como usuário da própria metodologia" revela lacunas que a mera implementação da metodologia não pega; a *Repository Structure* do `project-definition.md` defasa ao adicionar áreas grandes (ex.: `packages/`) e exige refresh explícito. |
 | 013 | Implementação de referência **opcional** do contrato de fluxo multi-agente em `packages/`: crate Rust `stateful-spec-flow` + gêmeo Node/TS `@stateful-spec/flow` (ambos zero-dep), com paridade Rust≡TS via fixtures compartilhadas; a metodologia segue usável **sem** os packages, com a regra "pedir permissão antes de usar" e uma emenda à restrição documentation-only para isolar `packages/`. | Core + spawn **configurável** (sem bundles hardcoded) — o package sabe COMO spawnar, o projeto fornece O QUE via `flow.conf`; packages opcionais/não-vinculantes (agente deve saber + pedir permissão); emendar documentation-only p/ carve-out de `packages/`; fontes+testes, publish manual (sem CI). | Paridade Rust≡TS é garantível por fixtures compartilhadas rodadas pelas duas suítes (cargo 54+7+1; node 4+7+5), verificado do zero; a curadoria removeu spawn bundles/cargo-fmt/opencode/PT sem perder o contrato (13 verbos+exit codes); revisão que re-roda os gates (não confia no self-review) confirma contagens exatas. |
 | 012 | Back-port curado e **agnóstico** das evoluções de metodologia do downstream `stand-in`: 3 novos docs universais (`history-archiving`, `backlog`/intake, `qa-phase`), `multi-agent-flow.md` reescrito como doc único de **dois modos** (2 e 3 agentes) + contrato de tooling abstrato, e fiação das estruturas de apoio nas operações de sessão (+3 ports cada) e templates — documentation-only preservado, 5 fases intactas. | Multi-agent flow = doc único de dois modos (sem v1/v2), descartando a bagagem histórica do stand-in; estruturas de apoio (archiving/intake-backlog/QA) universais a todos os tipos, multi-agent-flow segue software-only; nenhum código portado — protocolos como contratos abstratos. | Curadoria agnóstica zera o leakage de stand-in (grep + revisão independente); a regra de sync source↔3 ports escala — cada adição verificada nos 3 ports; a migração estrutural do próprio repo (self-adoption) deve ser deferida ao fechamento revisado, não embarcada na sessão de implementação. |
@@ -103,5 +105,4 @@
 | 007 | Suporte a múltiplos tipos de projeto (software, skills, studies) com registro central `project-types.md`. Criou templates, operações e presets específicos por tipo, além de detecção nos wizards de inicialização. | Project Type como campo load-bearing com seções condicionais; software mantido como default para backward compatibility | O repositório da metodologia permanece como software/documentation-only — não reclassificado |
 | 006 | Correção do AGENTS.md para ser universal (não apenas Cursor). Generalizou imports de CLAUDE.md para AGENTS.md e unificou as regras de agentes. | — | — |
 | 005 | Sistema de session lifecycle com start-session e end-session. Iteration tracking com Session Log para registrar contribuições de diferentes operações sob a mesma iteração. | Sessões explícitas com Open Session flag em memory.md; operações registram timestamp + operação + sumário no Session Log | Closed stale session de iteração já mergeada via PR |
-| 004 | Suporte ao Claude Code com comandos nativos em `.claude/commands/` e entry point CLAUDE.md. Operações disponíveis como `/resume-session`, `/save-session`, etc. | Operation prompts espelhados como comandos nativos em múltiplas ferramentas (Cursor, Claude Code) | — |
-| 0-archived | As primeiras iterações estabeleceram as fundações da metodologia: correção dos prompts de inicialização do Cursor (001), a obrigatoriedade de iteration tracking via arquivos `history/NNN-name.md` (002) e o wizard `update-project` para refresh da metodologia em projetos já configurados (003). Conteúdo completo preservado em `history/.archived/memory.md`. | Iteration file como artefato permanente de tracking; `memory.md` atualizado ao iniciar/completar trabalho (002). | — |
+| 0-archived | As primeiras iterações estabeleceram as fundações da metodologia: correção dos prompts de inicialização do Cursor (001), a obrigatoriedade de iteration tracking via arquivos `history/NNN-name.md` (002) e o wizard `update-project` para refresh da metodologia em projetos já configurados (003); em seguida veio o suporte ao Claude Code com comandos nativos em `.claude/commands/` e entry point CLAUDE.md (004). Conteúdo completo preservado em `history/.archived/memory.md`. | Iteration file como artefato permanente de tracking; `memory.md` atualizado ao iniciar/completar trabalho (002); operation prompts espelhados como comandos nativos em múltiplas ferramentas — Cursor, Claude Code (004). | — |

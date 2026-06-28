@@ -25,3 +25,4 @@ packages/flow-rs/Cargo.lock
 packages/flow-ts/dist
 packages/flow-ts/node_modules
 packages/flow-ts/package-lock.json
+.claude/settings.json
