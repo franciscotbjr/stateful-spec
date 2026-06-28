@@ -28,3 +28,9 @@
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|-----------|
 | 004 | Suporte ao Claude Code com comandos nativos em `.claude/commands/` e entry point CLAUDE.md. Operações disponíveis como `/resume-session`, `/save-session`, etc. | Operation prompts espelhados como comandos nativos em múltiplas ferramentas (Cursor, Claude Code) | — |
+
+## 005 — folded 2026-06-28
+
+| # | Summary | Key Decisions | Learnings |
+|---|---------|---------------|-----------|
+| 005 | Sistema de session lifecycle com start-session e end-session. Iteration tracking com Session Log para registrar contribuições de diferentes operações sob a mesma iteração. | Sessões explícitas com Open Session flag em memory.md; operações registram timestamp + operação + sumário no Session Log | Closed stale session de iteração já mergeada via PR |

@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/franciscotbjr/stateful-spec.git",
+    "url": "git+https://github.com/franciscotbjr/stateful-spec.git",
     "directory": "packages/flow-ts"
   },
   "type": "module",
@@ -16,14 +16,14 @@
     "dist/src"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   },
   "scripts": {
     "build": "tsc",
     "test": "tsc && node --test dist/test/cli.test.js dist/test/conformance.test.js"
   },
   "devDependencies": {
-    "typescript": "^5.4.0",
-    "@types/node": "^20.0.0"
+    "typescript": "6.0.3",
+    "@types/node": "26.0.1"
   }
 }
