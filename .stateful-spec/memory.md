@@ -13,7 +13,7 @@
 
 > What is currently in progress? Reference the iteration file.
 
-- _(none)_ — iteration 020 (O-007 `rust-design-system`) committed on `feature/020-rust-design-system-preset` (`3173517`); close-session on `chore/020-end-session`. Not yet pushed / no PR. Backlog has no `new` opportunities open (O-001…O-007 all promoted).
+- _(none)_ — iteration 020 (O-007 `rust-design-system`) merged to `main` via PR #39 (`d5971a3`); close-session on `chore/020-end-session` (`0e61ce0`), pending PR. Backlog has no `new` opportunities open (O-001…O-007 all promoted).
 
 ## Open Session
 
