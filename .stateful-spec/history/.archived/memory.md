@@ -58,3 +58,9 @@
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|-----------|
 | 010 | Reconciliação de pontas soltas pós-008: indexou o review-handoff 009 (commitado, PR #25) na History Index e registrou a feature Engramas no CHANGELOG `[Unreleased]`. | Indexar 009 como `review-handoff` (mantendo o arquivo) para preservar trilha de auditoria visível; 009 não recebe linha de Engramas por não ter Session Log próprio. | History Index e tabela Engramas divergem de propósito para artefatos não-feature — review-handoffs são indexados mas não compilados em engramas. |
+
+## 011 — folded 2026-06-28
+
+| # | Summary | Key Decisions | Learnings |
+|---|---------|---------------|-----------|
+| 011 | Formalizou um modo opcional de **fluxo autônomo de dois agentes** (PM/Arquiteto + Eng. Sênior) coordenado por um arquivo de estado dedicado (`.stateful-spec/flow-state.md`): novo protocolo `methodology/multi-agent-flow.md`, operação `start-multi-agent-flow` (+3 ports), templates `flow-state.md`/`review-handoff.md`, e notas aditivas em `roles.md` e nas ops de sessão. Software-only; reusa o ciclo de 5 fases; generaliza o padrão que a iteração 011 do `stand-in` provou à mão. | Loop autônomo por polling sobre arquivo de estado com máquina de estados granular e turn-based (sem colisão); humano aprova o plano 1× e só gateia ações irreversíveis, com teto de `review_round`=3→BLOCKED; umbrella = 1 iteração/1 Engrama, cada marco é uma sessão, layout flat em `history/`. | Padrão de marco (spec→impl+gate→handoff→fix→commit) generaliza limpo num modo aditivo sem tocar nas 5 fases; investigação web (resíduo do prompt de engramas) dispensada explicitamente pelo dev e registrada honestamente (lição da 009); regra de sync respeitada desde o início (ports escritos junto com a fonte). |

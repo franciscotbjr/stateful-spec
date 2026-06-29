@@ -47,6 +47,14 @@ folds into the `0-archived` synthesis row, which destroys that row's compiled Su
 - This is a `memory.md`-tier operation (independent of the `history/` folder `git mv`). It runs at
   the same triggers — `start-session` / `end-session` / `save-session`, wherever the two-tier
   compaction runs.
+- **Timing skew (why the cold store can look "stale"):** this append fires at threshold `N`
+  (engram fold), while the central-file `git mv` fires at `RAW_HISTORY` (see *Two bounded tiers*).
+  Because the two are independent, an iteration's **central file** can sit in `history/.archived/`
+  for up to `N − RAW_HISTORY` iterations **before** — or without yet — its **engram row** is folded
+  into `history/.archived/memory.md`. Both cadences write into the same `history/.archived/`
+  directory but on different schedules, so a recently-archived central file whose engram row is not
+  yet in the cold store is **expected**, not a missed append. The cold store always holds exactly
+  the rows that have already folded out of the active Engramas window.
 
 ## Central vs auxiliary files
 
