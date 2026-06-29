@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** bugfix
-- **Status:** in-progress
+- **Status:** done
 - **Created:** 2026-06-28
-- **Completed:** —
+- **Completed:** 2026-06-28
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -80,6 +80,7 @@ Backlog: **O-008**. Source: `intake/Backlog/prd.md` ("Falhas nas operações da 
 | 2026-06-28 | analyze (workflow) | Diagnosed via 9-agent workflow (5 readers → synth → 3 adversarial verifiers, ~460k tok; 1 verifier reconstructed git history). Verified finding: cold store is **not** broken — the verbatim-append fires per-iteration (git-confirmed 004→i015 … 011→i021/this session); the "staleness" is a cadence **misperception** (engram-fold N=10 vs file-archiving RAW_HISTORY=3, ≤7-iteration skew, documented as "independent knobs"). Real defects are doc-drift: (1) root `AGENTS.md` rule 7 dropped the cold-store-append clause + missing rules 8/9; (2) `memory.md` Engramas note dropped the same clause; (3) `resume-session` direct-task entry silent on engram-row insert/fold. No backfill owed under the current (correct) design. |
 | 2026-06-28 | decision (dev) | Developer chose **keep N=10** (engram-fold cadence) over re-wiring the cold store to mirror file-archiving (RAW_HISTORY). → no backfill; fix = doc-drift repair + resume-session gap + cadence-clarity. |
 | 2026-06-28 | implement | Restored the cold-store-append clause to root `AGENTS.md` rule 7 and added the missing rules 8 (Intake & backlog) + 9 (History archiving), path-adjusted to repo-root `methodology/`. Added cadence-independence sentence to rule 9 (root **and** `templates/project/agents-md.md`). Restored the append clause in `.stateful-spec/memory.md`'s Engramas note. Added a "Timing skew" bullet to `methodology/history-archiving.md` *Preserving folded Engramas*. Wired `resume-session` direct-task entry to insert the Engramas row + run the fold/append (source + 3 ports, verified identical). CHANGELOG `Fixed` entry added. |
+| 2026-06-28 | end-session | Session closed; all criteria met (Status → done). Fix committed on `fix/021-fix-archived-memory` (`e3f7978`). Close triage: no `ready` intake items. Engrama compiled; O-008 marked `promoted` (→ 021); iteration 018 central archived (RAW_HISTORY=3). No `[INCIDENT]` entries. |
 
 > **Timestamp format:** `YYYY-MM-DD HH:MM` (local time). Example: `2026-05-03 14:30 | start-session | Session opened for feature work.`
 >
