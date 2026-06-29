@@ -15,7 +15,7 @@
 - **Project Name:** [e.g., my-awesome-app]
 - **Description:** [One-sentence description of what the project does]
 - **Project Type:** software | skills | studies   <!-- determines which sections below apply; `software` is the default -->
-- **Category (software only, optional):** [e.g., library | web app | CLI | API service | mobile app | data pipeline]
+- **Category (software only, optional):** [e.g., library | web app | CLI | API service | mobile app | data pipeline | design system]
 - **Repository URL:** [e.g., https://github.com/user/repo]
 - **License:** [e.g., MIT, Apache-2.0, proprietary]
 
