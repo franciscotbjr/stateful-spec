@@ -1,14 +1,19 @@
 ---
 status: triaged
-title: new - 03 - preset rust
+title: Falhas nas operações da metodologia
 origin: idea
-destination: O-005 (backlog.md) — promoted to iteration 018
+destination: O-008 (backlog) — methodology archiving fails to update .archived/memory.md
 ---
 
-# Aplicar
+# Problema
 
-D:\franciscotbjr\Documents\Explorações\Diário de Experiências com Agentes de IA\stateful-spec\fluxo\backlog\new - 03 - preset rust\product requirements document.md
+Acabo de perceber que o `memory` da pasta `.archived` não está sendo atualizado à medida em que os arquivos de iterações são movidos para a pasta.
 
+## Ação
+
+- Revisar os arquivos os comandos da metodologia como `start-session`, `end-session` e outros para identificar as falhas que estão causando a falha de atualização do `.archived\memory.md`
+
+- Após correção, atualizar o próprio `.archived\memory.md`
 
 ## Persona
 

@@ -33,6 +33,7 @@ If the developer **starts the chat with a concrete task** (e.g. "implement the a
    - Next `NNN` = max over **both** `history/*.md` and `history/.archived/*.md` (never reuse an archived number; see `methodology/history-archiving.md`)
    - New file: `.stateful-spec/history/NNN-[short-name].md` using `templates/implementation/iteration.md`
    - Update **Active Work** and **History Index** in `.stateful-spec/memory.md`
+   - Insert the new iteration's **Engramas** row (newest-first; `Summary` = `_In progress_`, Key Decisions & Learnings = `—`) and apply the two-tier compaction — same as `start-session` STEP 5 item 4, including the verbatim append to `history/.archived/memory.md` if a row folds
    - Run the idempotent archive operation (`methodology/history-archiving.md`), same as `start-session` STEP 5.5
 4. Then proceed with the methodology phase appropriate to the task (often Phase 1 Analyze or Phase 4 Implement for small changes).
 
