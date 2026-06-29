@@ -13,7 +13,7 @@
 
 > What is currently in progress? Reference the iteration file.
 
-- _(none)_ — iteration 019 (O-006 `rust-gpui-app`) closed 2026-06-28; committed on branch `feature/019-rust-gpui-app-preset` (`82283ce`, `57c075e`), **not yet pushed / no PR**. Backlog: **O-007** (`rust-design-system`) remains `new`.
+- _(none)_ — iteration 019 (O-006 `rust-gpui-app`) merged to `main` via PR #36 (`6bee6a0`) + close-session PR #37 (`89b6225`). Backlog: **O-007** (`rust-design-system`) remains `new`.
 
 ## Open Session
 
