@@ -13,15 +13,14 @@
 
 > What is currently in progress? Reference the iteration file.
 
-- [ ] O-007 — author the toolkit-agnostic `rust-design-system` preset → `history/020-rust-design-system-preset.md`
-- _Prior:_ iteration 019 (O-006 `rust-gpui-app`) merged to `main` via PR #36 (`6bee6a0`) + close-session PR #37 (`89b6225`).
+- _(none)_ — iteration 020 (O-007 `rust-design-system`) merged to `main` via PR #39 (`d5971a3`); close-session on `chore/020-end-session` (`0e61ce0`), pending PR. Backlog has no `new` opportunities open (O-001…O-007 all promoted).
 
 ## Open Session
 
 > When a session is active, this section points to the current iteration file.
 > Managed by `start-session` and `end-session` — do not edit manually.
 
-- Currently open: 020 `rust-design-system` preset (O-007) → `history/020-rust-design-system-preset.md`
+- _(none)_
 
 ## Recent Completions
 
@@ -29,11 +28,11 @@
 
 | # | Name | Type | Completed |
 |---|------|------|-----------|
+| 020 | rust-design-system-preset | feature | 2026-06-28 |
 | 019 | rust-gpui-app-preset | feature | 2026-06-28 |
 | 018 | apply-preset-rust | feature | 2026-06-28 |
 | 017 | validate-published-references | chore | 2026-06-28 |
 | 016 | publish-flow-ts-npm | chore | 2026-06-28 |
-| 015 | publish-flow-rs-crates-io | chore | 2026-06-28 |
 
 ## Key Decisions
 
@@ -65,10 +64,10 @@
 
 | # | Name | Type | Status | File |
 |---|------|------|--------|------|
-| 020 | rust-design-system-preset | feature | in-progress | `history/020-rust-design-system-preset.md` |
+| 020 | rust-design-system-preset | feature | done | `history/020-rust-design-system-preset.md` |
 | 019 | rust-gpui-app-preset | feature | done | `history/019-rust-gpui-app-preset.md` |
 | 018 | apply-preset-rust | feature | done | `history/018-apply-preset-rust.md` |
-| 017 | validate-published-references | chore | done | `history/017-validate-published-references.md` |
+| 017 | validate-published-references | chore | done | `history/.archived/017-validate-published-references.md` |
 | 016 | publish-flow-ts-npm | chore | done | `history/.archived/016-publish-flow-ts-npm.md` |
 | 015 | publish-flow-rs-crates-io | chore | done | `history/.archived/015-publish-flow-rs-crates-io.md` |
 | 014 | self-adoption | chore | done | `history/.archived/014-self-adoption.md` |
@@ -101,7 +100,7 @@
 
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|------------|
-| 020 | _In progress_ | — | — |
+| 020 | Adicionou `presets/rust-design-system.md` (O-007) — Project Definition terso e **toolkit-agnóstico** para um crate Rust de design system nativo, **distinto** de `rust-library` (do qual herda a higiene genérica de crate, restando só os *deltas* de DS) e de `rust-gpui-app` (a app que o consome): **token canon único** OKLCH (ramp→aliases→estados semânticos, primary compartilhado dark/light + override em runtime), enums `Density`/`ColorMode` dirigindo ~5 variáveis, tipografia de duas fontes embutidas, ícones-como-shape em catálogo fechado, contratos builder `Widget`/`DsStatefulWidget<State>`+`DsWidget` (um arquivo por componente), motion centralizado, único `apply_theme`+`tokens()` via contexto, **boundary anti-facade** por clippy `disallowed-methods` com **um** escape hatch `raw::`, contraste WCAG + gates de a11y com a matemática embarcada, testes render-without-panic + geometria diferencial, empacotamento `publish=false` path-dep (+switch publicável), `rust-toolchain.toml` na raiz e galeria opcional; +linha no índice de presets +CHANGELOG +exemplo de Category 'design system' no template. Autorado via workflow multi-agente de 5 fases (study→2 drafts→judge→5 lentes adversariais→revise; 13 agentes, ~517k tok); commitado em `feature/020-rust-design-system-preset` (`3173517`), fechado em `chore/020-end-session`. | Herdar a higiene genérica de crate de `rust-library` e restar só os deltas de design system — mantém o preset terso e nitidamente distinto dos dois irmãos (sem duplicar logic-crate nem composição de app). · Autorar via workflow multi-agente adversarial (não single-pass): 22 findings, os 3 *majors* (entradas de `apply_theme`; consistência do escape hatch `raw::` vs a lint; testes de render headless) corrigidos no passe de revise. · Adicionar 'design system' como exemplo de Category em `templates/project/project-definition.md` (não só no preset) — O-007 pede "onde o registro documenta Categories"; os irmãos não têm campo Category. | `Get-Content -Raw` no PowerShell 5.1 assume Windows-1252, não UTF-8 — ler o JSON UTF-8 do workflow assim corrompeu em-dashes/box-drawing/setas em mojibake; correto é `[System.IO.File]::ReadAllText($p,[Text.Encoding]::UTF8)` e escrever com `UTF8Encoding($false)` (sem BOM). · Dual-draft + judge-merge + revisão multi-lente pega lacunas de HOW que o draft único perde (entradas reais do `apply_theme`, interação escape-hatch/lint) — todos os majors vieram das lentes usage/boundary. · Agentes de draft do workflow podem escrever arquivos direto (o draft:complete gravou o preset on-disk), então alguns reviewers leram o on-disk em vez do texto passado — sem efeito aqui pois o reviser usou o merged draft + findings. |
 | 019 | Adicionou `presets/rust-gpui-app.md` (O-006) — Project Definition terso para um app Rust desktop/UI sobre framework de UI acelerada por GPU (GPUI retained-mode ou egui/eframe immediate-mode), distinto de `rust-library`: arquitetura **render-from-state** (engine async GUI-agnóstico + canais `UiCommand`/`EngineEvent` + reducer puro headless-testável), fronteira async-fora-do-executor-UI via clippy `disallowed-methods`, verificação em **3 gates** (técnico/visual/funcional) com testes headless de reducer/geometria + smoke, theming-via-design-system, settings serde-enum + i18n `Lang` obrigatório, snapshots `Arc<[T]>` + virtualização de listas, `Cargo.lock` commitado com git-deps pré-1.0 pinadas por `rev`, `[profile.release]` afinado e CI de binários por-OS human-gated. Genérico com callouts **GPUI-only**; +linha no índice de presets +CHANGELOG. Entregue em 2 commits no branch `feature/019-rust-gpui-app-preset` (`82283ce`, `57c075e`), **não publicado/sem PR**. | Autorar a partir do spec O-006 (síntese já verificada adversarialmente na 018) + paridade com `rust-library`, sem re-rodar a análise multi-agente do `stand-in` — evita custo (~1.4M tok) e o risco de reintroduzir vazamentos já removidos na 018. · Manter o preset framework-neutral com a mecânica específica isolada em callouts **GPUI-only**, reduzir o `--capture` a um único constraint ("fixtures gated, never ship mocks"), e escrever direto em `presets/` (não no scratchpad session-scoped, lição da 018). · Pegar O-006 (`rust-gpui-app`) nesta sessão e deixar O-007 (`rust-design-system`) `new` no backlog — um preset por sessão. | `egui`/`eframe` é **immediate-mode**, não retained — o atalho "retained-mode/GPU" do O-006 classificava errado; o correto é "UI acelerada por GPU" com render-from-state como disciplina do app sobre qualquer modo de UI. · Um clippy `disallowed-methods` global sobre `tokio::spawn` não contradiz "async roda na engine": a engine spawna via `Handle::spawn` explícito (não afetado pela lint), e a lint pega só a forma livre/ambiente — exatamente o erro de spawnar da thread de UI. · `rtk` não está no PATH do tool Bash deste ambiente — fallback p/ `git` puro (a instrução RTK é passthrough, logo sem efeito colateral). |
 | 018 | Aplicou O-005 revisando o preset `presets/rust-library.md` com os aprendizados destilados do projeto real `stand-in` (workflow multi-agente: 338 learnings → síntese → verificação adversarial): MSRV + `rust-toolchain.toml`, bloco de workspace + layout proc-macro, subseção de lints, patterns expandidos (mod-facade, prelude-como-API, `#[non_exhaustive]`, `tracing` sem subscriber, serde, segredos), feature flags, convenção `assert_send_sync`, e Publishing/CI dividido — mantendo o preset terso. Atualizou os valores de exemplo p/ o Rust atual (edição 2024, rust-version 1.96) e as versões correntes do crates.io (tokio 1.52.3 / serde 1.0.228 / serde_json 1.0.150 / thiserror 2.0.18 / tracing 0.1.44 / async-trait 0.1.89 / reqwest 0.13.4), +entrada no CHANGELOG. Entregue em `main` via **PR #34** (`dc38287`) e fechada. | Revisar o preset `rust-library` existente, não criar novo; a metade "propor outros presets" do PRD vira backlog (O-006 `rust-gpui-app`, O-007 `rust-design-system`), não construída em 018. · Aparar a síntese conforme o verificador adversarial antes de propor (remover 3 vazamentos residuais stand-in/MCP; preset genérico e terso). · Versões nos exemplos são placeholders ilustrativos do Rust atual, não pins (incl. re-adição do `reqwest` a pedido). | O scratchpad é session-scoped — o draft pendente sobreviveu só na pasta da sessão anterior e foi recuperado por caminho explícito no resume; não deixar artefato pendente só no scratchpad. · Extração multi-agente + verificação adversarial revela bloat e vazamentos da fonte que a síntese direta não pega. · Versões de exemplo num preset são um snapshot datado (consultadas no crates.io), mantidas como `[e.g., …]`. |
 | 017 | Validou as duas implementações de referência **opcionais** publicadas nas iterações 015–016 (O-004): confirmou `stateful-spec-flow` v0.1.0 vivo e resolvível no crates.io e `@stateful-spec/flow` v0.1.0 vivo no npm, e auditou toda referência in-repo (manifests, READMEs, AGENTS, project-definition, multi-agent-flow, 4 ports de start-multi-agent-flow) contra a verdade publicada — **zero drift, zero edição corretiva**. | Tratar O-004 como **chore** (validação), não feature — nenhum comportamento novo é adicionado, só confirmação de artefatos publicados e reconciliação de referências. | crates.io rejeita requests sem `User-Agent` (política de data-access) — usar o índice esparso `index.crates.io/st/at/stateful-spec-flow` ou enviar UA; API de leitura do npm é `registry.npmjs.org/@stateful-spec%2Fflow`; a metadata publicada bate exatamente com os `Cargo.toml`/`package.json` commitados (incl. MSRV 1.96 e node `>=24`), confirmando consistência total sem correção. |
