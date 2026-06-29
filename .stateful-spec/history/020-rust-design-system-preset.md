@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** in-progress
+- **Status:** done
 - **Created:** 2026-06-28
-- **Completed:** —
+- **Completed:** 2026-06-28
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -61,6 +61,8 @@ The preset captures a design-system crate's defining concerns: a single token ca
 | 2026-06-28 | start-session | Session opened for O-007 — author the `rust-design-system` preset. Iteration 020 created and marked as the open session. |
 | 2026-06-28 | author-preset (workflow) | Authored `presets/rust-design-system.md` via a 5-phase ultracode workflow (Study → dual-Draft → Judge-merge → 5-lens adversarial Review → Revise; 13 agents, ~517k tok). Wrote the final file (UTF-8, no BOM), added the `presets/README.md` index row, the CHANGELOG `[Unreleased]` entry, and "design system" as a Category example in `templates/project/project-definition.md`. Holistic adversarial read passed. Not committed / no PR. |
 | 2026-06-28 | review-changes (polish) | Applied two reviewer notes: aligned the UI-framework placeholder order to `[e.g., egui \| GPUI]` (matching the CHANGELOG, acceptance criteria, and O-007 wording); changed the `presets/README.md` Stack column to "Rust + design tokens + GPUI/egui" to lead with the DS substance over the interchangeable toolkit. Cosmetic; no separate commit. |
+| 2026-06-28 | write-commit-message / commit | Created branch `feature/020-rust-design-system-preset` and committed all session changes as `3173517` (7 files, +332/−5). Single-line message ≤300 chars per convention. No PR opened. |
+| 2026-06-28 | end-session | Session closed. O-007 delivered (`presets/rust-design-system.md` + presets index, CHANGELOG, and template Category example); all acceptance criteria met. Iteration → done; Engrama 020 compiled; iteration 017 central `git mv`'d to `.archived/`; O-007 promoted in `backlog.md`. Close committed on `chore/020-end-session`. |
 
 > **Timestamp format:** `YYYY-MM-DD HH:MM` (local time). Example: `2026-05-03 14:30 | start-session | Session opened for feature work.`
 >
@@ -86,6 +88,6 @@ The preset captures a design-system crate's defining concerns: a single token ca
 ## References
 
 - **Specification:** Backlog O-007 (`.stateful-spec/backlog.md`); lineage in `history/018-apply-preset-rust.md` and `history/019-rust-gpui-app-preset.md`.
-- **PR/MR:** [Link when available]
-- **Commits:** [Key commit hashes or range]
+- **PR/MR:** _(none yet)_
+- **Commits:** `3173517` on branch `feature/020-rust-design-system-preset`
 - **Related Issues:** O-007
