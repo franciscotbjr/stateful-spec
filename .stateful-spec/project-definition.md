@@ -164,3 +164,4 @@ Not applicable — documentation-only project.
 - When modifying source prompts in `prompts/operations/`, the AI must also update the corresponding `.cursor/rules/<name>.mdc`, `.claude/commands/<name>.md`, and `.opencode/commands/<name>.md` files
 - When modifying methodology source files in `methodology/`, no sync is needed — `.stateful-spec/methodology/` references the source directly
 - Non-trivial work must use an iteration file under `.stateful-spec/history/` (see `AGENTS.md` Iteration tracking and `prompts/operations/resume-session.md`); update `memory.md` when starting or completing work
+- Agents on this repository are bound by the persona in `.stateful-spec/persona.md` (rationale/sources: `.stateful-spec/persona-reference.md`, consult on demand). The **Persona** section in root `AGENTS.md` is a deliberate self-only divergence from `templates/project/agents-md.md` — template→copy refreshes must preserve it

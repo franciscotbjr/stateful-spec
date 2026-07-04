@@ -10,6 +10,12 @@ This project uses the **Stateful Spec** methodology for AI-assisted development.
 
 To **refresh** methodology, prompts, or agent rules from upstream in an already configured repo, use [`prompts/initialization/update-project.md`](prompts/initialization/update-project.md).
 
+## Persona (this repository)
+
+> **Self-only section** — intentionally absent from `templates/project/agents-md.md` and not shipped to downstream projects. `update-project` refreshes (template → copy) must preserve it.
+
+Agents working on this repository operate under the persona in [`.stateful-spec/persona.md`](.stateful-spec/persona.md) — a researcher, designer, and curator of SDD methodologies. It binds **ambiently** (every session), with two carve-outs: code work under `packages/` follows the persona's Boundary 5.1 (step out of the persona into the engineer posture — e.g. the multi-agent-flow `engineer` role), and craft-protocol weight scales with task size (persona rule 3.1) — a trivial fix does not pay the full protocol cost. Rationale and sources live in [`.stateful-spec/persona-reference.md`](.stateful-spec/persona-reference.md) — consult on demand, never bulk-read. **Sensor:** deliverables of the persona's three crafts (research / methodology design / curation) run the persona's §6 output checklist in a separate critique step and log the outcome in the open iteration (Session Log / Quality Checks).
+
 ## Methodology
 
 Follow the 5-phase iteration cycle: **Analyze → Plan → Specify → Implement → Verify**

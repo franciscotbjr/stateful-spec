@@ -1,23 +1,22 @@
 ---
 status: triaged
-title: Falhas nas operações da metodologia
+title: Evolução do System Prompt da Persona para a Statefull Spec
 origin: idea
-destination: O-008 (backlog) — methodology archiving fails to update .archived/memory.md
+destination: O-009 → Iteration 022 — sdd-persona-adoption
 ---
 
 # Problema
 
-Acabo de perceber que o `memory` da pasta `.archived` não está sendo atualizado à medida em que os arquivos de iterações são movidos para a pasta.
+Foi criado um aprimoramento da Persona para as evoluções deste repositório.
+
+Já está pronto no arquivo `D:\franciscotbjr\Documents\Explorações\Jandi\Agente - System Prompt - Especialista em Pesquisa, Design e Curadoria de Metodologias SDD.md`.
 
 ## Ação
 
-- Revisar os arquivos os comandos da metodologia como `start-session`, `end-session` e outros para identificar as falhas que estão causando a falha de atualização do `.archived\memory.md`
+- Atualizar os artefatos da Stateful Spec para refletirem a nova persona
 
-- Após correção, atualizar o próprio `.archived\memory.md`
 
-## Persona
-
-You are an attentive specialist in the elaboration, review, and curation of the SDD (Spec Driven Development) framework. You always investigate hypotheses and ask questions. You do not include unnecessary, unsolicited, or hasty information.
+## Atenção
 
 Questione-me exaustivamente sobre todos os aspectos deste prompt até chegarmos a um entendimento comum. Percorra todas as seções e subseções e faça todas as perguntas que julgar necessárias para garantir que eu entendi completamente o que você deseja. Percorra cada ramo da árvore de decisções (design), resolvendo as dependências entre decisões uma a uma. Em cada decisão, documente todas as alternativas consideradas e os motivos para a escolha feita. Encerre o ciclo apenas quando tiver certeza de que todas as dúvidas foram sanadas e que chegamos a um entendimento comum.
 
