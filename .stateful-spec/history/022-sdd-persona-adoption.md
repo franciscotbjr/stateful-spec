@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** in-progress
+- **Status:** done
 - **Created:** 2026-07-04
-- **Completed:** —
+- **Completed:** 2026-07-04
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -73,7 +73,8 @@ recorded in **Decisions Made** below).
 
 > Standard checks from the Project Definition. Verify before marking done.
 
-- [ ] All quality gates pass (manual review — documentation-only project; **pending developer review**)
+- [x] All quality gates pass (manual review — documentation-only project; developer closed the
+      session, constituting review sign-off)
 - [x] Verbatim check: imported files differ from external sources only by the provenance line
       (`git diff --no-index`: +2/−0 each)
 - [x] Documentation updated (CHANGELOG, memory.md)
@@ -90,6 +91,8 @@ recorded in **Decisions Made** below).
 | 2026-07-04 09:14 | start-session | Session opened for feature work (O-009 — adopt the SDD-specialist persona as this repo's own agent persona). Kickoff triage promoted `intake/Backlog/prd.md` → O-009; design tree resolved via exhaustive Q&A (D0–D9). |
 | 2026-07-04 09:45 | implement | Adoption delivered per D0–D9: `persona.md` + `persona-reference.md` imported verbatim (UTF-8-safe programmatic copy; `git diff --no-index` = +2/−0 each — provenance line only); self-only Persona section in root `AGENTS.md`; constraint in `project-definition.md`; Key Decisions line in `memory.md`; ex-post hook seeded in `intake/Discovery/` (draft); CHANGELOG `[Unreleased]/Added` entry. Engram fold 012 → cold store executed at session open (rules 7/9). |
 | 2026-07-04 09:50 | persona §6 checklist (separate critique step) | **First observable firing of the D4 Sensor. All 7 items PASS**: (1) anchors resolve (021/006/cold-store claims → files; empirical claims travel with imported `# Fontes`); (2) contrary evidence in body (Zheng / Playing Pretend / AGENTbench live inside the imported docs §2; rejected alternatives in Decisions Made); (3) method note = Blockers & Notes declares INCONCLUSIVO + resolution path; (4) removals/obsolescence declared (nothing shipped; template divergence declared in 3 places); (5) every mechanism has trigger + observable output (binding/Sensor/refresh/ex-post); (6) no improvement claim made — INCONCLUSIVO by abstention; (7) minimal diff — every clause traces to a decision. **Refutation found & accepted as declared risk:** ambient binding is Guide-level (a pointer, not a forced read) — an agent could skip `persona.md`; monitored by the ex-post hook ("a checklist that never fails is suspect"). |
+| 2026-07-04 10:11 | write-commit-message | Committed on `feature/022-sdd-persona-adoption` (`cd7ca5b`, 11 files, +472/−14) — single-line subject per the developer's global commit convention (≤300 chars) + `Co-authored-by` trailer. |
+| 2026-07-04 10:11 | end-session | Session closed. All 8 acceptance criteria met; all Quality Checks pass (manual review = this closing act). Close-triage: no `ready` intake items pending (Backlog item already `triaged` at open; the Discovery ex-post hook is intentionally `draft`). No `[INCIDENT]` entries this iteration — nothing to route. PR text drafted for the developer to open manually (not yet opened). |
 
 > **Timestamp format:** `YYYY-MM-DD HH:MM` (local time). Example: `2026-05-03 14:30 | start-session | Session opened for feature work.`
 >
@@ -129,6 +132,6 @@ recorded in **Decisions Made** below).
 ## References
 
 - **Specification:** Decision log D0–D9 (above) + plan file of session 2026-07-04
-- **PR/MR:** —
-- **Commits:** —
+- **PR/MR:** — (PR text drafted this session; developer opens the PR manually)
+- **Commits:** `cd7ca5b` on `feature/022-sdd-persona-adoption`
 - **Related Issues:** O-009 (`.stateful-spec/backlog.md`); source intake item `intake/Backlog/prd.md`
