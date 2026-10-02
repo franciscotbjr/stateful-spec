@@ -122,6 +122,8 @@ Pre-filled Project Definitions — the AI will suggest one if it matches your pr
 | Preset | Type | Stack / Materials |
 |--------|------|-------------------|
 | [`rust-library.md`](presets/rust-library.md) | software | Rust + Cargo + clippy/fmt |
+| [`rust-gpui-app.md`](presets/rust-gpui-app.md) | software | Rust + GPUI/egui + cargo |
+| [`rust-design-system.md`](presets/rust-design-system.md) | software | Rust + design tokens + GPUI/egui |
 | [`node-express-api.md`](presets/node-express-api.md) | software | Node.js + Express + Jest + ESLint |
 | [`python-fastapi.md`](presets/python-fastapi.md) | software | Python + FastAPI + pytest + ruff |
 | [`react-webapp.md`](presets/react-webapp.md) | software | React + TypeScript + Vite + Vitest |
