@@ -75,5 +75,10 @@
 
 | # | Summary | Key Decisions | Learnings |
 |---|---------|---------------|-----------|
-| 013 | flow-packages | feature | done | `history/.archived/013-flow-packages.md` |
 | 013 | Implementação de referência **opcional** do contrato de fluxo multi-agente em `packages/`: crate Rust `stateful-spec-flow` + gêmeo Node/TS `@stateful-spec/flow` (ambos zero-dep), com paridade Rust≡TS via fixtures compartilhadas; a metodologia segue usável **sem** os packages, com a regra "pedir permissão antes de usar" e uma emenda à restrição documentation-only para isolar `packages/`. | Core + spawn **configurável** (sem bundles hardcoded) — o package sabe COMO spawnar, o projeto fornece O QUE via `flow.conf`; packages opcionais/não-vinculantes (agente deve saber + pedir permissão); emendar documentation-only p/ carve-out de `packages/`; fontes+testes, publish manual (sem CI). | Paridade Rust≡TS é garantível por fixtures compartilhadas rodadas pelas duas suítes (cargo 54+7+1; node 4+7+5), verificado do zero; a curadoria removeu spawn bundles/cargo-fmt/opencode/PT sem perder o contrato (13 verbos+exit codes); revisão que re-roda os gates (não confia no self-review) confirma contagens exatas. |
+
+## 014 — folded 2026-10-02
+
+| # | Summary | Key Decisions | Learnings |
+|---|---------|---------------|-----------|
+| 014 | Self-adoption: o repositório (fonte da metodologia) passou a praticar as estruturas que publica — criou seu próprio `intake/` (Backlog/Discovery/QA) + `backlog.md` (`O-001`), atualizou a árvore do `project-definition.md` (`packages/` + artefatos 007/008/012/013) e documentou `RAW_HISTORY=3` no `memory.md`. | Uma fonte auto-referencial deve praticar o que entrega — sem o inbox, a triagem de intake era um no-op silencioso; self-adoption registrada como `O-001` (promoted → 014), exercitando o pipeline intake→backlog→roadmap. | Um audit "como usuário da própria metodologia" revela lacunas que a mera implementação da metodologia não pega; a *Repository Structure* do `project-definition.md` defasa ao adicionar áreas grandes (ex.: `packages/`) e exige refresh explícito. |
