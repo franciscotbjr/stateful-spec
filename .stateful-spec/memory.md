@@ -6,14 +6,14 @@
 
 - **Project:** Stateful Spec
 - **Description:** A specification-driven development methodology for AI-assisted software projects
-- **Last Updated:** 2026-07-04
+- **Last Updated:** 2026-10-02
 - **Current Status:** Active development
 
 ## Active Work
 
 > What is currently in progress? Reference the iteration file.
 
-- _(none)_ — iteration 022 (O-009 persona adoption) complete: committed on `feature/022-sdd-persona-adoption` (`cd7ca5b`), **PR text drafted, not yet opened** (developer opens manually). Backlog: O-009 `promoted` (→ 022); no `new` opportunities open (O-001…O-009 all promoted).
+- _(none)_ — iteration 022 (O-009 persona adoption) delivered: merged to `main` via **PR #43** (`6c0fdda`). Backlog: no `new` opportunities open (O-001…O-009 all promoted).
 
 ## Open Session
 
