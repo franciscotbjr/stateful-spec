@@ -57,7 +57,7 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 - [x] Specify: resolve the three Q6b open items (name/location, canonical source, writers) — S1–S4b
 - [x] Implement: marker template + this repo's marker and release-cut rule (rows 1, 6, 7)
 - [x] Implement: initialization wizards write/read the marker (rows 2–4)
-- [ ] Implement: document the marker and the generic comparison rule in `overview.md`; CHANGELOG (rows 5, 8)
+- [x] Implement: document the marker and the generic comparison rule in `overview.md`; CHANGELOG (rows 5, 8)
 - [ ] Verify: AC1 dry run reasoning on an existing single-repo adopter; persona §6 on the deliverable
 
 ## Quality Checks
@@ -78,6 +78,7 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 | 2026-10-05 | save-session | Specify concluído; nenhum arquivo de produto alterado ainda (só a 025 e o `memory.md`). Engrama 025 recompilado; Active Work e Key Decision do O-010 (R6 → M2) atualizados. Sem `[INCIDENT]` a varrer; sem fold (10 linhas ativas, N = 10). Status segue in-progress; próximo passo: Implement das 8 linhas da Specification. |
 | 2026-10-05 | resume-session + Implement (a) | Triagem sem itens `ready`. Linhas 1, 6 e 7: `templates/project/methodology-version.md` (frontmatter `{{METHODOLOGY_VERSION}}` + uma linha), `.stateful-spec/methodology-version.md` (`2.0.0`), regra **Release Cut** no Deployment do `project-definition.md` e o marcador na árvore (`.stateful-spec/` e comentário de `templates/project/`). Crítica em passo separado: nenhuma outra enumeração de `templates/project/` a atualizar (grep por `architecture-decision`); a linha do template dizia "last refreshed from", falso após um `update-project` de escopo 1 (S3 não grava) — reescrita como "methodology and operation prompts were set up or last refreshed from". |
 | 2026-10-05 | Implement (b) | Commit `bd55295` (tarefa a). Linhas 2–4: `new-project` e `onboard-existing` ganham o item 7 do "Always create" (versão = primeiro `## [X.Y.Z]` do `CHANGELOG.md` da origem; sem `X.Y.Z` válido, não grava e avisa); setup parcial do `onboard-existing` só grava se a mesma execução copia `methodology/` (F2); `update-project`: versão da origem definida no STEP 0 (`:54` restrito, S3b), linha "Methodology version" no inventário do STEP 2, transição no STEP 4, item 5 do STEP 6 (só escopos 2/3, mesmo se menor). Sync: nenhum port de `prompts/initialization/` (conferido). Crítica em passo separado: o STEP 4 mostrava `2.0.0 → 3.0.0` também nos escopos 1/4/5, em que o marcador não muda — acrescentada a frase que diz que o marcador fica inalterado nesses escopos. |
+| 2026-10-05 | Implement (c) | Commit `337808f` (tarefa b). Linhas 5 e 8: `overview.md` — marcador na árvore de "Project Memory Structure", linha em "Key Files" e subseção ***Methodology Version*** (fonte = linha de release do `CHANGELOG.md`; writers; sem marcador = ≤ 2.0.0; comparação numérica `MAJOR.MINOR.PATCH`, sem marcador abaixo de qualquer marcador); sem R6 (S4b). `CHANGELOG.md` `[Unreleased]` → `Added`: entrada do marcador (O-010 M1). Crítica em passo separado: os três apontadores para *Methodology Version* (dois marcadores + Key Files) resolvem para o título criado; sem defeito novo. |
 
 ## Decisions Made
 

@@ -124,6 +124,7 @@ your-project/
 └── .stateful-spec/
     ├── memory.md              # Current context — AI reads this first
     ├── project-definition.md  # Technology stack, conventions, quality gates
+    ├── methodology-version.md # Methodology release the project is at
     ├── backlog.md             # Triaged opportunities (O-NNN)
     ├── intake/                # Raw inbox: Backlog/, Discovery/, QA/
     ├── operations/            # Operation prompts (only if native agent commands aren't used)
@@ -150,8 +151,18 @@ your-project/
 | `memory.md` | Current project state, active work, constraints, history index, and compiled engrams (iteration summaries for context-efficient resumption). The AI's entry point. |
 | `project-definition.md` | Technology stack, conventions, quality gates. The source of truth for how to build. |
 | `history/NNN-name.md` | One file per iteration. Contains description, acceptance criteria, task checklist, decisions. |
+| `methodology-version.md` | The methodology release the project is at. Written by the initialization wizards — see *Methodology Version* below. |
 
 Use iteration files for **each work unit** (feature, bugfix, refactor, or substantive doc/methodology change), not only for the first task after onboarding — see `prompts/operations/resume-session.md` (direct-task entry) if the session did not start with the initialization wizard.
+
+### Methodology Version
+
+`.stateful-spec/methodology-version.md` records, in its frontmatter field `methodology_version`, the Stateful Spec release that the project's methodology and operation prompts were set up or last refreshed from.
+
+- **Source:** the first `## [X.Y.Z]` heading of the methodology source's `CHANGELOG.md`, skipping `## [Unreleased]`. The marker records that release even when `[Unreleased]` has entries, so the version identifies a **release line**, not exact content — two snapshots taken between the same two releases carry the same number.
+- **Writers:** `new-project` and `onboard-existing` create it; `update-project` rewrites it only when the refresh covers the methodology **and** the operation prompts (its scopes 2 and 3). No wizard writes it without having read a valid `X.Y.Z` from the source. Do not edit it by hand.
+- **No marker:** a project without the file counts as **≤ 2.0.0**, the last release before the marker existed.
+- **Comparison:** versions compare by numeric `MAJOR.MINOR.PATCH` order (`2.10.0` > `2.9.0`); a missing marker sorts below any marker.
 
 ### Session Lifecycle
 
