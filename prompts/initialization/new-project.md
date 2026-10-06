@@ -314,6 +314,8 @@ Create the `.stateful-spec/` directory structure at the project root. The operat
 6. **`AGENTS.md`** — Create at project root using [`templates/project/agents-md.md`](../../templates/project/agents-md.md) as the canonical template. This file is the universal entry point for all AI agents regardless of the native agent chosen. The template includes the operation table, agent invocation notes for all supported agents, and working conventions.
    - **Note on ordering:** Create `AGENTS.md` from the template first, then **after** placing native commands in the next section, update the operation table and agent invocation notes in `AGENTS.md` to match the chosen agent's specific syntax (Cursor: `@name` under `.cursor/rules/`, Claude Code / OpenCode: `/name`, Windsurf: workflows, Codex: `AGENTS.md`-based, Antigravity: rules/workflows).
 
+7. **`.stateful-spec/methodology-version.md`** — Create from [`templates/project/methodology-version.md`](../../templates/project/methodology-version.md), setting `methodology_version` to the source's current release: the first `## [X.Y.Z]` heading of the Stateful Spec source's `CHANGELOG.md`, skipping `## [Unreleased]` — record that release even when `[Unreleased]` has entries. If you could not read a valid `X.Y.Z` there, do **not** create the file, and tell the developer: the project counts as ≤ 2.0.0 until `update-project` (scope 2 or 3) writes it.
+
 **If the developer accepted native commands (STEP 8.5):**
 
 **Emit only the operations the active Project Type uses** (see the per-type operation

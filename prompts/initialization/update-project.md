@@ -51,7 +51,7 @@ You are an AI assistant helping **update** Stateful Spec in a project that is al
   - A **local folder** path (clone on disk)
   - A **fork** URL
 
-Try to read key paths from that source (`methodology/overview.md`, `CHANGELOG.md` if present) to know what version or era you are syncing.
+Try to read key paths from that source (`methodology/overview.md`, `CHANGELOG.md` if present) to know what version you are syncing. The **source version** is the first `## [X.Y.Z]` heading of the source's `CHANGELOG.md`, skipping `## [Unreleased]` — that release, even when `[Unreleased]` has entries.
 
 **If the repository is not accessible:** Continue with the instructions in this file and any methodology text already in the developer’s workspace; say clearly that the update may be incomplete without the upstream tree.
 
@@ -107,6 +107,7 @@ Inspect and summarize:
 | Vendored prompts | Any **`prompts/`** tree inside *this* project (full or partial copy from Stateful Spec) |
 | Git | Dirty working tree? Current branch? (recommend branch for update) |
 | Project Type | The `Project Type` in `.stateful-spec/project-definition.md` — software / skills / studies, or **absent** (legacy install → treated as software). See [`methodology/project-types.md`](../../methodology/project-types.md). |
+| Methodology version | `methodology_version` in `.stateful-spec/methodology-version.md`, or **no marker (≤ 2.0.0)** if the file is absent |
 
 Present a short **summary table** to the developer.
 
@@ -157,7 +158,7 @@ Wait for the choice. If **4**, ask which sections they want to align and show a 
 > 3. **Specific commit / branch** — (developer names it)
 > 4. **Local folder** — path already checked out on disk
 
-Wait for the answer.
+Wait for the answer. Then read the source version (STEP 0) at the chosen version and show the transition from STEP 2's Methodology version row, e.g. `2.0.0 → 3.0.0` or `no marker → 3.0.0`. If no valid `X.Y.Z` can be read, show `→ unknown` and say the marker will not be written. Only scopes 2 and 3 record the target in the marker (STEP 6) — for scopes 1, 4, and 5, say the marker stays unchanged.
 
 ---
 
@@ -209,6 +210,10 @@ Wait for the answer.
    - (b) **Replace the variable sections** (Stack / Materials, Conventions, Verification, Quality Gates, Delivery / Distribution) with the active type's subsections from the template / registry. Preserve any project-specific values the developer wants to keep.
    - (c) **Sync the operation set**: emit the active type's native commands (and remove ops that no longer apply only with explicit confirmation), and update the `AGENTS.md` operation table to match. See the per-type operation lists in [`methodology/project-types.md`](../../methodology/project-types.md).
    - **Never** delete `.stateful-spec/memory.md` or `.stateful-spec/history/`. Act only on explicit confirmation.
+
+5. **Methodology version marker** (scopes 2 and 3 only)
+   - Write `.stateful-spec/methodology-version.md` from source `templates/project/methodology-version.md` with the source version from STEP 4 — even if it is lower than the current marker (it records what was synced).
+   - Do **not** write it in scopes 1, 4, or 5, nor when no valid `X.Y.Z` was read from the source `CHANGELOG.md`; say so in the summary of edits (the current marker, or its absence, stays as is).
 
 Show a **short summary of edits** (files touched) before saving.
 
