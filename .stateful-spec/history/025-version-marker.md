@@ -54,6 +54,7 @@ the current version, and which wizards write it (`new-project`, `onboard-existin
 | Timestamp | Operation | Summary |
 |-----------|-----------|---------|
 | 2026-10-05 20:49 | start-session | Session opened for O-010 M1 (version marker; 024 Plan Q6, Q6b, R6). Kickoff triage: no `ready` intake items (`prd.md` triaged; `review-iteration-lifecycle.md`, `workspace-upstream-contribution.md`, `persona-ex-post-evaluation.md` draft). Engrama 015 folded into `0-archived` (verbatim copy in `history/.archived/memory.md`). Archive step: no-op (`history/` holds 022–024 + 025). |
+| 2026-10-05 21:08 | save-session | Commit `e3fabb3` (fechamento da 024 + abertura da 025, num único commit). Specify do M1 ainda não iniciado; nenhuma tarefa ou critério concluído. Status segue in-progress. |
 
 ## Decisions Made
 
@@ -68,5 +69,5 @@ the current version, and which wizards write it (`new-project`, `onboard-existin
 
 - **Specification:** —
 - **PR/MR:** —
-- **Commits:** —
+- **Commits:** `e3fabb3` (fechamento da 024 + abertura da 025)
 - **Related Issues:** O-010 (`.stateful-spec/backlog.md`); `intake/Backlog/prd.md`
