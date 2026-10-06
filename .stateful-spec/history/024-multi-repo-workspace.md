@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** in-progress
+- **Status:** done
 - **Created:** 2026-10-02
-- **Completed:** —
+- **Completed:** 2026-10-05
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -27,7 +27,7 @@ Plan; implementation runs in one iteration per milestone (M1–M7).
 > Re-scoped 2026-10-04 (Plan decision): 024 covers **Analyze + Plan** for O-010. The PRD's 8
 > criteria moved to the milestone iterations (M1–M7) as mapped below; M7 verifies all 8 end to end.
 
-- [x] Phase 1 analysis written: [`024-multi-repo-workspace-analysis.md`](024-multi-repo-workspace-analysis.md)
+- [x] Phase 1 analysis written: [`024-multi-repo-workspace-analysis.md`](.archived/024-multi-repo-workspace-analysis.md)
 - [x] Every Plan decision recorded with the alternatives not taken (Decisions Made)
 - [x] Milestones M1–M7 approved
 - [x] Persona §6 output checklist run on the Plan deliverable as a separate critique step
@@ -66,11 +66,11 @@ Specify → Implement → Verify and references this file's Decisions Made):
 
 ## Quality Checks
 
-- [ ] Manual review of the diff (no quality-gate commands exist for this repo)
-- [ ] Sync rule honored: every new/changed source prompt mirrored in the 3 tool ports
+- [x] Manual review of the diff (no quality-gate commands exist for this repo) — branch diff confined to `.stateful-spec/`; the Plan was reviewed by the §6 critique and the refutation pass
+- [x] Sync rule honored: every new/changed source prompt mirrored in the 3 tool ports — N/A: no source prompt changed (Analyze + Plan only)
 - [x] Persona §6 output checklist run as a separate critique step (methodology design craft)
-- [ ] Documentation updated (README, CHANGELOG, AGENTS/CLAUDE where applicable)
-- [ ] No debug content or TODOs left behind
+- [x] Documentation updated (README, CHANGELOG, AGENTS/CLAUDE where applicable) — N/A: no shipped artifact changed; those docs change in M6
+- [x] No debug content or TODOs left behind
 
 ## Session Log
 
@@ -85,6 +85,7 @@ Specify → Implement → Verify and references this file's Decisions Made):
 | 2026-10-04 12:20 | plan (Q&A) | Committed Phase 1 (`43edd59`). Plan design Q&A, one question at a time, Q1–Q15 of the analysis plus sub-questions (Q4a/b/c, Q5b, Q6b, Q8a, Q9a/b/c, Q10b, Q11a/b/b-1/b-2/c, Q12a/b): 28 decisions recorded with alternatives in Decisions Made — 11 against the recommendation or custom designs (Q2, Q4a, Q4b, Q4c, Q6, Q6b, Q8, Q9c, Q11b, Q11b-1, Q11b-2), counted by grep. Q6b corrected after a conflict with published CHANGELOG versions (0.2.0 → 3.0.0). New draft intake `workspace-upstream-contribution.md` (Q11c). Refutation pass via a usage scenario: all 8 ACs map to decisions; 6 findings R1–R6 (Blockers & Notes), R4/R5 need a decision. |
 | 2026-10-04 18:26 | plan (close-out) | R4/R5 decided (member instructions: each side governs its domain; complete operation set); R1/R3/R6 proposals approved; R2 resolved as a declared one-time exception (read everything at add-member) after the narrower proposal was rejected — a miscount (8 active `stand-in` rows) caught and corrected to 7 + `0-archived` before recording. Milestones M1–M7 approved; one iteration per milestone; 024 re-scoped to Analyze + Plan (PRD criteria moved to milestones, kept verbatim). Persona §6 critique (separate step): anchors verified (9 sampled `file:line` resolve); fixed 2 partial failures (Q2 contrary evidence F8; Q11a inference-by-analogy label) and 1 failure (no Plan INCONCLUSIVO list — added); declared what became obsolete and 2 risks (Q14 trigger has no owning operation; central file 48,359 bytes). |
 | 2026-10-05 20:35 | save-session | Resumed via `resume-session`: kickoff triage found no `ready` items (`prd.md` triaged → O-010; 3 drafts: `review-iteration-lifecycle`, `workspace-upstream-contribution`, `persona-ex-post-evaluation`). Drift found: the 024 Engrama still described Phase 1 because no save ran after the Plan; recompiled via map-reduce (9 entries, 2 batches). `memory.md`: Active Work, Last Updated, a Key Decision on citing 024's decisions from milestone iterations. No fold (10 active = N). No `[INCIDENT]` entries. Status kept `in-progress` although the 4 re-scoped criteria are met: closing is left to `end-session` (developer chose save, not close). |
+| 2026-10-05 20:41 | end-session | Session closed `done`: 024 re-scoped to Analyze + Plan, 4/4 criteria met (the PRD's 8 criteria are carried by M1–M7, one iteration each from 025). Close triage: no `ready` items (`prd.md` triaged; 3 drafts). No `[INCIDENT]` entries. Engrama 024 finalized via map-reduce (10 entries, 2 batches); no fold (10 active = N). Quality Checks: diff confined to `.stateful-spec/`; sync and docs N/A. Archive op: `git mv` of the 021 central and of `024-multi-repo-workspace-analysis.md` into `history/.archived/` (History Index 021 repointed; the two analysis links in this file repointed by hand; the analysis's back-link to this central resolves only once this central is archived too — appended to the draft `review-iteration-lifecycle.md`). O-010 Destination in `backlog.md` now names M1–M7. |
 
 ## Decisions Made
 
@@ -139,7 +140,7 @@ Specify → Implement → Verify and references this file's Decisions Made):
 
 - The PRD requires one-question-at-a-time exhaustive Q&A before any design is settled. Questions the repository can answer are answered by exploration, not asked.
 - The cold-store ledger `history/.archived/memory.md` had a stray History Index row (`| 013 | flow-packages | feature | done | … |`) inside the `## 013` section, left over from the 023 fold-script incident. Removed at the developer's request (scoped to the `## 013` section; the 013 Engrama row is intact).
-- `history-archiving.md` keeps in `history/` only the open iteration's central file and its **current-milestone** auxiliaries; it does not say what happens to an auxiliary of an open iteration that has no milestones (e.g. `024-multi-repo-workspace-analysis.md`). Read literally, the next archive run would move that file to `.archived/`. Resolved 2026-10-04 (see Decisions Made): kept as a current auxiliary while 024 is open; the gap is appended to the draft `intake/Backlog/review-iteration-lifecycle.md`. When the file moves (at 024's close at the latest), its link in References must be repointed by hand — the archive op only repoints the History Index `File` cell.
+- `history-archiving.md` keeps in `history/` only the open iteration's central file and its **current-milestone** auxiliaries; it does not say what happens to an auxiliary of an open iteration that has no milestones (e.g. `024-multi-repo-workspace-analysis.md`). Read literally, the next archive run would move that file to `.archived/`. Resolved 2026-10-04 (see Decisions Made): kept as a current auxiliary while 024 is open; the gap is appended to the draft `intake/Backlog/review-iteration-lifecycle.md`. When the file moves (at 024's close at the latest), its link in References must be repointed by hand — the archive op only repoints the History Index `File` cell. Done at the close (2026-10-05).
 - **Plan refutation pass (2026-10-04, after Q15)** — usage scenario: create a Workspace, add `stand-in` and `skills`, open a session bound to `stand-in`, run a cross-member change. AC coverage: AC1 (Q1, Q8a), AC2 (Q4b), AC3 (Q8/Q8a), AC4 (Q13), AC5 (Q12), AC6 (Q4/Q5/Q11b-1), AC7 (Q8/Q9), AC8 (Q10/Q10b) — each maps to ≥1 decision. Findings (gaps or contradictions between decisions, to resolve before or in Specify):
   - **R1 — add-member writes into an existing member outside a bound session.** Q6/Q7 make add-member run `update-project`/`onboard-existing` in the member; that member may hold an Open Session in another agent — the same risk Q12a avoided. Needs a rule (e.g. add-member checks the member's Open Session first, as in Q9a, and stops if one is open) — **resolved: Plan R1**.
   - **R2 — add-member harvest vs the cold-store reading rule.** Q11b-1 path (3) transfers "existing Learnings"; the member's folded Engramas live in `history/.archived/memory.md`, which must never be bulk-read (`methodology/history-archiving.md:90-96`). Proposed: limit path (3) to the active Engramas + the `0-archived` row — **rejected; resolved instead by Plan R2** (read everything once, as a declared exception).
@@ -153,8 +154,8 @@ Specify → Implement → Verify and references this file's Decisions Made):
 
 ## References
 
-- **Analysis (Phase 1):** [`024-multi-repo-workspace-analysis.md`](024-multi-repo-workspace-analysis.md)
+- **Analysis (Phase 1):** [`024-multi-repo-workspace-analysis.md`](.archived/024-multi-repo-workspace-analysis.md)
 - **Specification:** — (to be written)
 - **PR/MR:** —
-- **Commits:** `38597d7` (session opened and paused in `review`), `43edd59` (Phase 1 analysis)
+- **Commits:** `38597d7` (session opened and paused in `review`), `43edd59` (Phase 1 analysis), `190a2df` (Plan + save-session)
 - **Related Issues:** O-010; `intake/Backlog/prd.md`; precedent `D:\development\public\stand-in`

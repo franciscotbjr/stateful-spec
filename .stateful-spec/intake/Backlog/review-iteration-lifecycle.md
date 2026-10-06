@@ -18,7 +18,9 @@ não atendidos). A iteração 024 decidiu cada ponto por julgamento (ver *Decisi
   não tem milestone corrente; ao pé da letra, uma reabertura (que roda a operação) arquivaria uma
   auxiliar ainda em uso, como `024-multi-repo-workspace-analysis.md`. A operação também não reaponta
   o link da auxiliar no arquivo central, só a célula `File` do History Index. A 024 tratou a
-  auxiliar como corrente enquanto a iteração estiver aberta (2026-10-04).
+  auxiliar como corrente enquanto a iteração estiver aberta (2026-10-04). No fechamento (2026-10-05),
+  a auxiliar foi para `.archived/` antes da central, e o link dela de volta para a central só
+  resolve quando a central também for arquivada.
 
 **Para moldar antes de promover:** se o caminho de reabertura pertence ao `start-session` ou ao
 `resume-session`; o que fazer com a linha de Engrama na reabertura (manter ou voltar a
