@@ -53,7 +53,7 @@ stateful-spec/
 │   ├── phase-transitions/  # start-analysis through start-verification
 │   └── operations/         # operation prompts (lifecycle + per-type + multi-agent flow)
 ├── templates/              # Fill-in templates
-│   ├── project/            # project-definition, memory, architecture-decision, agents-md
+│   ├── project/            # project-definition, memory, methodology-version, architecture-decision, agents-md
 │   ├── specification/      # feature, endpoint, component, bugfix, refactor, skill, study
 │   ├── implementation/     # implementation-plan, test-plan, iteration, verification-plan,
 │   │                       #   flow-state, review-handoff, arch-verdict
@@ -70,6 +70,7 @@ stateful-spec/
 ├── .stateful-spec/         # Project memory instance (this project's own Stateful Spec)
 │   ├── memory.md           #   state, Engramas, History Index
 │   ├── project-definition.md
+│   ├── methodology-version.md # methodology release this repo is at (see Deployment)
 │   ├── backlog.md          #   triaged opportunities (O-NNN)
 │   ├── intake/             #   raw inbox: Backlog/, Discovery/, QA/
 │   └── history/            #   one file per iteration (+ .archived/ cold store)
@@ -153,6 +154,7 @@ Not applicable — documentation-only project.
 - **Target Environment:** GitHub repository (public)
 - **CI/CD:** None
 - **Branch Strategy:** main + feature branches with PRs
+- **Release Cut:** a human gate. In **one commit**, rename `## [Unreleased]` in `CHANGELOG.md` to `## [X.Y.Z] - YYYY-MM-DD` and write `X.Y.Z` into `.stateful-spec/methodology-version.md`; a git tag `vX.Y.Z` is optional
 
 ## Constraints & Non-Negotiables
 

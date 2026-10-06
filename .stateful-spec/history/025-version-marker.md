@@ -55,7 +55,7 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 ## Implementation Tasks
 
 - [x] Specify: resolve the three Q6b open items (name/location, canonical source, writers) — S1–S4b
-- [ ] Implement: marker template + this repo's marker and release-cut rule (rows 1, 6, 7)
+- [x] Implement: marker template + this repo's marker and release-cut rule (rows 1, 6, 7)
 - [ ] Implement: initialization wizards write/read the marker (rows 2–4)
 - [ ] Implement: document the marker and the generic comparison rule in `overview.md`; CHANGELOG (rows 5, 8)
 - [ ] Verify: AC1 dry run reasoning on an existing single-repo adopter; persona §6 on the deliverable
@@ -76,6 +76,7 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 | 2026-10-05 | resume-session + Specify | Contexto carregado; triagem sem itens `ready`. Specify do M1 concluído em Q&A uma pergunta por vez: 9 decisões (S1, S1b, S2, S2b, S3, S3b, S3c, S4, S4b), todas pela recomendação — marcador `.stateful-spec/methodology-version.md` só com `methodology_version`; fonte canônica = primeiro `## [X.Y.Z]` do `CHANGELOG.md` (linha de release, mesmo com `[Unreleased]`); gravado por `new-project`/`onboard-existing` e por `update-project` só nos escopos 2/3, que também o lê no inventário; documentado no `overview.md`; marcador próprio deste repo (`2.0.0`) + regra de corte no Deployment do `project-definition.md`; R6 movida para o M2. Critérios de aceite revisados e seção Specification (8 arquivos) adicionada. |
 | 2026-10-05 | Specify — crítica §6 | Checklist §6 da persona em passo separado, com refutação por cenário: âncoras arquivo:linha conferidas; contras e alternativas no corpo de cada decisão; avaliação declarada ex ante artificial (INCONCLUSIVO até o M7); o que ficou obsoleto está listado em Blockers & Notes. Dois achados corrigidos na Specification (F1 fonte ilegível em `new-project`/`onboard-existing`; F2 setup parcial do `onboard-existing` gravando versão sobre cópia antiga da metodologia). |
 | 2026-10-05 | save-session | Specify concluído; nenhum arquivo de produto alterado ainda (só a 025 e o `memory.md`). Engrama 025 recompilado; Active Work e Key Decision do O-010 (R6 → M2) atualizados. Sem `[INCIDENT]` a varrer; sem fold (10 linhas ativas, N = 10). Status segue in-progress; próximo passo: Implement das 8 linhas da Specification. |
+| 2026-10-05 | resume-session + Implement (a) | Triagem sem itens `ready`. Linhas 1, 6 e 7: `templates/project/methodology-version.md` (frontmatter `{{METHODOLOGY_VERSION}}` + uma linha), `.stateful-spec/methodology-version.md` (`2.0.0`), regra **Release Cut** no Deployment do `project-definition.md` e o marcador na árvore (`.stateful-spec/` e comentário de `templates/project/`). Crítica em passo separado: nenhuma outra enumeração de `templates/project/` a atualizar (grep por `architecture-decision`); a linha do template dizia "last refreshed from", falso após um `update-project` de escopo 1 (S3 não grava) — reescrita como "methodology and operation prompts were set up or last refreshed from". |
 
 ## Decisions Made
 
@@ -98,6 +99,7 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
   - **F1 — unreadable source in `new-project`/`onboard-existing`.** S3 covered only `update-project`; the README's copy-paste entry (`README.md:8`) can run a wizard without the source tree, or a fork's heading may not be `X.Y.Z`. Fix: no marker, say so; the project counts as ≤ 2.0.0 (conservative).
   - **F2 — `onboard-existing` partial setup.** Its "create only what's missing" path (`onboard-existing.md:165`) would write a current-version marker beside an older, pre-existing `methodology/` copy — a false claim. Fix: write it only when the same run copies `methodology/`; otherwise point to `update-project`.
 - **Evaluation (persona §3.2):** the design is assessed **ex ante, artificial** (Q&A + refutation by reasoning). Whether the marker serves the Workspace is first measured in M7's end-to-end scenario — until then INCONCLUSIVO.
+- **Implement (a) notes:** both marker bodies point to a subsection titled ***Methodology Version*** in `overview.md` — task (c) must use exactly that title. This repo's marker body differs from the template on purpose: here the writer is the Release Cut rule (S3c), not the wizards, so the template's "written by the initialization wizards — do not edit by hand" would be false (self-only divergence, like the Persona section in `AGENTS.md`).
 - **Made obsolete by Specify:** the AC draft (replaced by the revised criteria); R6 in M1 (moved to M2, S4b); `update-project`'s file-reading inference (`update-project.md:54`) narrowed to the source version (S3b).
 
 ## References
