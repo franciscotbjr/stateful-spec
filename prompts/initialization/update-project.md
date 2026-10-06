@@ -158,7 +158,7 @@ Wait for the choice. If **4**, ask which sections they want to align and show a 
 > 3. **Specific commit / branch** — (developer names it)
 > 4. **Local folder** — path already checked out on disk
 
-Wait for the answer. Then read the source version (STEP 0) at the chosen version and show the transition from STEP 2's Methodology version row, e.g. `2.0.0 → 3.0.0` or `no marker → 3.0.0`. If no valid `X.Y.Z` can be read, show `→ unknown` and say the marker will not be written. Only scopes 2 and 3 record the target in the marker (STEP 6) — for scopes 1, 4, and 5, say the marker stays unchanged.
+Wait for the answer. Then read the source version (STEP 0) from the chosen tag, branch, commit, or folder and show the transition from STEP 2's Methodology version row, e.g. `2.0.0 → 3.0.0` or `no marker → 3.0.0`. If no valid `X.Y.Z` can be read, show `→ unknown` and say the marker will not be written. Only scopes 2 and 3 record the target in the marker (STEP 6) — for scopes 1, 4, and 5, say the marker stays unchanged.
 
 ---
 

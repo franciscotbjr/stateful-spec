@@ -27,13 +27,13 @@ the current version, and which wizards write it (`new-project`, `onboard-existin
 
 > Revised at Specify (2026-10-05) from the 024 Plan Q6/Q6b/R6 draft; each criterion cites the Decisions Made rows it verifies.
 
-- [ ] `templates/project/methodology-version.md` exists: YAML frontmatter with only `methodology_version`, plus a one-line body pointing to the rule in `overview.md` (S1, S1b)
-- [ ] The current version is the first `## [X.Y.Z]` heading of the source `CHANGELOG.md`, skipping `## [Unreleased]`, and the marker records that release line even when `[Unreleased]` has entries (S2, S2b)
-- [ ] `new-project` and `onboard-existing` write the marker; `update-project` writes it only in scopes 2/3, and reads it in STEP 2 (inventory) and STEP 4 (transition). No wizard writes it without having read a valid `X.Y.Z` from the source `CHANGELOG.md`, and each says when it does not write; `onboard-existing`'s partial-setup path writes it only when the same run copies `methodology/` (S3, S3b, Specify refutation)
-- [ ] `methodology/overview.md` documents the marker, the no-marker case (≤ 2.0.0) and the generic comparison rule; R6 is left to M2 (S4, S4b)
-- [ ] This repo has `.stateful-spec/methodology-version.md` with `2.0.0`, and the release-cut rule in the Deployment section of `.stateful-spec/project-definition.md` (S3c)
-- [ ] AC1 — no regression: an already-configured single-repo project works exactly as before; the marker is additive
-- [ ] Sync rule honored for any changed source prompt (none planned — only `prompts/initialization/`, which has no ports); `CHANGELOG.md` `[Unreleased]` updated (cutting/tagging 3.0.0 stays a human gate after M7)
+- [x] `templates/project/methodology-version.md` exists: YAML frontmatter with only `methodology_version`, plus a one-line body pointing to the rule in `overview.md` (S1, S1b) — verified: `templates/project/methodology-version.md:1-5`
+- [ ] The current version is the first `## [X.Y.Z]` heading of the source `CHANGELOG.md`, skipping `## [Unreleased]`, and the marker records that release line even when `[Unreleased]` has entries (S2, S2b) — verified: `new-project.md:317`, `onboard-existing.md:164`, `update-project.md:54`, `overview.md:162`
+- [x] `new-project` and `onboard-existing` write the marker; `update-project` writes it only in scopes 2/3, and reads it in STEP 2 (inventory) and STEP 4 (transition). No wizard writes it without having read a valid `X.Y.Z` from the source `CHANGELOG.md`, and each says when it does not write; `onboard-existing`'s partial-setup path writes it only when the same run copies `methodology/` (S3, S3b, Specify refutation) — verified: `new-project.md:317`, `onboard-existing.md:164,166`, `update-project.md:110,161,214-216`
+- [x] `methodology/overview.md` documents the marker, the no-marker case (≤ 2.0.0) and the generic comparison rule; R6 is left to M2 (S4, S4b) — verified: `overview.md:127,154,158-165`; no `R6`/`Workspace` in `overview.md` (grep)
+- [x] This repo has `.stateful-spec/methodology-version.md` with `2.0.0`, and the release-cut rule in the Deployment section of `.stateful-spec/project-definition.md` (S3c) — verified: marker `:2` = first release heading `CHANGELOG.md:64`; rule at `project-definition.md:157`
+- [x] AC1 — no regression: an already-configured single-repo project works exactly as before; the marker is additive — verified ex ante, artificial (see Blockers & Notes, *Verify*)
+- [x] Sync rule honored for any changed source prompt (none planned — only `prompts/initialization/`, which has no ports); `CHANGELOG.md` `[Unreleased]` updated (cutting/tagging 3.0.0 stays a human gate after M7) — verified: no initialization port under `.claude/commands/`, `.cursor/rules/`, `.opencode/commands/` (ls); `CHANGELOG.md:11`
 
 ## Specification
 
@@ -58,14 +58,14 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 - [x] Implement: marker template + this repo's marker and release-cut rule (rows 1, 6, 7)
 - [x] Implement: initialization wizards write/read the marker (rows 2–4)
 - [x] Implement: document the marker and the generic comparison rule in `overview.md`; CHANGELOG (rows 5, 8)
-- [ ] Verify: AC1 dry run reasoning on an existing single-repo adopter; persona §6 on the deliverable
+- [x] Verify: AC1 dry run reasoning on an existing single-repo adopter; persona §6 on the deliverable
 
 ## Quality Checks
 
-- [ ] Manual review of the diff (no quality-gate commands exist for this repo)
-- [ ] Sync rule honored: every new/changed source prompt mirrored in the 3 tool ports
-- [ ] Documentation updated (if applicable)
-- [ ] No debug code or TODOs left behind
+- [x] Manual review of the diff (no quality-gate commands exist for this repo)
+- [x] Sync rule honored: every new/changed source prompt mirrored in the 3 tool ports (no ports exist for `prompts/initialization/`)
+- [x] Documentation updated (if applicable)
+- [x] No debug code or TODOs left behind
 
 ## Session Log
 
@@ -79,6 +79,7 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 | 2026-10-05 | resume-session + Implement (a) | Triagem sem itens `ready`. Linhas 1, 6 e 7: `templates/project/methodology-version.md` (frontmatter `{{METHODOLOGY_VERSION}}` + uma linha), `.stateful-spec/methodology-version.md` (`2.0.0`), regra **Release Cut** no Deployment do `project-definition.md` e o marcador na árvore (`.stateful-spec/` e comentário de `templates/project/`). Crítica em passo separado: nenhuma outra enumeração de `templates/project/` a atualizar (grep por `architecture-decision`); a linha do template dizia "last refreshed from", falso após um `update-project` de escopo 1 (S3 não grava) — reescrita como "methodology and operation prompts were set up or last refreshed from". |
 | 2026-10-05 | Implement (b) | Commit `bd55295` (tarefa a). Linhas 2–4: `new-project` e `onboard-existing` ganham o item 7 do "Always create" (versão = primeiro `## [X.Y.Z]` do `CHANGELOG.md` da origem; sem `X.Y.Z` válido, não grava e avisa); setup parcial do `onboard-existing` só grava se a mesma execução copia `methodology/` (F2); `update-project`: versão da origem definida no STEP 0 (`:54` restrito, S3b), linha "Methodology version" no inventário do STEP 2, transição no STEP 4, item 5 do STEP 6 (só escopos 2/3, mesmo se menor). Sync: nenhum port de `prompts/initialization/` (conferido). Crítica em passo separado: o STEP 4 mostrava `2.0.0 → 3.0.0` também nos escopos 1/4/5, em que o marcador não muda — acrescentada a frase que diz que o marcador fica inalterado nesses escopos. |
 | 2026-10-05 | Implement (c) | Commit `337808f` (tarefa b). Linhas 5 e 8: `overview.md` — marcador na árvore de "Project Memory Structure", linha em "Key Files" e subseção ***Methodology Version*** (fonte = linha de release do `CHANGELOG.md`; writers; sem marcador = ≤ 2.0.0; comparação numérica `MAJOR.MINOR.PATCH`, sem marcador abaixo de qualquer marcador); sem R6 (S4b). `CHANGELOG.md` `[Unreleased]` → `Added`: entrada do marcador (O-010 M1). Crítica em passo separado: os três apontadores para *Methodology Version* (dois marcadores + Key Files) resolvem para o título criado; sem defeito novo. |
+| 2026-10-05 | Verify | Commit `05f2e1f` (tarefa c). Revisão do diff `74c393e..HEAD`: 8 arquivos de produto, +36/−4 linhas, nenhum TODO/FIXME; 7/7 critérios de aceite e 4/4 Quality Checks marcados, com âncora. AC1 por raciocínio (nenhum prompt de operação lê o marcador — grep). Um achado corrigido: `update-project.md:161` usava "version" em dois sentidos ("source version … at the chosen version") → "from the chosen tag, branch, commit, or folder". Crítica §6 em passo separado: 7/7 PASS, com 2 riscos declarados (âncoras das S-rows valem em `74c393e`; Guides sem Sensor determinístico) — ver Blockers & Notes, *Verify*. |
 
 ## Decisions Made
 
@@ -105,6 +106,9 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 - **Implement (b) — declared residuals (not fixed, outside the decided rows):**
   - F2's rule ("write only if this run copies `methodology/`") is narrower than S3's principle (the marker covers methodology **and** operation prompts): a partial setup that copies a missing `methodology/` but keeps old operation prompts would record the current version over old prompts. Rare case; accepted as risk unless the developer widens the rule.
   - `onboard-existing` STEP 1 (`:52-55`) skips to STEP 5 when `.stateful-spec/` exists, so the partial-setup path in STEP 4.5 may be unreachable as written — pre-existing ambiguity, not introduced by M1.
+- **Verify (2026-10-05):**
+  - **AC1 — ex ante, artificial (reasoning + grep), not measured on a real adopter.** No `prompts/operations/*` file reads the marker (grep `methodology-version|methodology_version`: readers are only the 3 wizards, `overview.md`, the template and this repo's files), so `resume-session`/`start-session`/`save-session`/`end-session` behave as before. Scenarios for a project adopted at 2.0.0 without a marker: (1) day-to-day operations — unchanged; (2) `update-project` scope 1 from `main` before the 3.0.0 cut — inventory "no marker (≤ 2.0.0)", transition `no marker → 2.0.0` with "marker stays unchanged", refreshed `overview.md` gains a subsection nothing acts on; (3) scopes 2/3 — one new file, `2.0.0` (S2b: still the release line); (4) `onboard-existing` on it — STEP 1 skips to STEP 5, no marker written. `new-project` adds one file. Result: PASS.
+  - **Persona §6 (separate step):** (1) anchors — PASS with declaration: the file:line anchors in Decisions Made S1–S4b were measured at `74c393e` and several shifted with M1 (e.g. `CHANGELOG.md:63` → `:64`, `onboard-existing.md:165` → `:166`); the criteria anchors above resolve at Verify. (2) contrary evidence — PASS: alternatives in every S-row; residuals of Implement (b) declared above. (3) method note / INCONCLUSIVO — PASS: *Evaluation* note above; usefulness to the Workspace INCONCLUSIVO until M7. (4) removed/obsolete — PASS: `update-project.md:54` "version or era" inference replaced by the source-version definition (S3b); sweep of `templates/project/agents-md.md`, `templates/project/memory.md`, root `README.md` found no enumeration made false. (5) trigger + observable output — PASS with declared risk: triggers are the wizard runs and, here, the Release Cut; the observable output is the file plus `update-project`'s STEP 2 row and STEP 4 transition; "never write without reading", "do not edit by hand" and the Release Cut rule are **Guides without a deterministic Sensor** (no CI by design) — the only Sensor is the human reading the STEP 4 transition, and for this repo a manual check (marker `2.0.0` = `CHANGELOG.md:64`, run here). (6) evaluation cell — PASS: the CHANGELOG's "Additive — behaves as before" is AC1's ex ante artificial result. (7) minimal diff — PASS: +36/−4 product lines, one change per Specification row, no file outside the list.
 - **Made obsolete by Specify:** the AC draft (replaced by the revised criteria); R6 in M1 (moved to M2, S4b); `update-project`'s file-reading inference (`update-project.md:54`) narrowed to the source version (S3b).
 
 ## References
