@@ -5,9 +5,9 @@
 ## Metadata
 
 - **Type:** feature
-- **Status:** review
+- **Status:** done
 - **Created:** 2026-10-05
-- **Completed:** —
+- **Completed:** 2026-10-06
 - **Author:** Francisco Tarcizo Bomfim Júnior
 
 ## Description
@@ -81,6 +81,7 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 | 2026-10-05 | Implement (c) | Commit `337808f` (tarefa b). Linhas 5 e 8: `overview.md` — marcador na árvore de "Project Memory Structure", linha em "Key Files" e subseção ***Methodology Version*** (fonte = linha de release do `CHANGELOG.md`; writers; sem marcador = ≤ 2.0.0; comparação numérica `MAJOR.MINOR.PATCH`, sem marcador abaixo de qualquer marcador); sem R6 (S4b). `CHANGELOG.md` `[Unreleased]` → `Added`: entrada do marcador (O-010 M1). Crítica em passo separado: os três apontadores para *Methodology Version* (dois marcadores + Key Files) resolvem para o título criado; sem defeito novo. |
 | 2026-10-05 | Verify | Commit `05f2e1f` (tarefa c). Revisão do diff `74c393e..HEAD`: 8 arquivos de produto, +36/−4 linhas, nenhum TODO/FIXME; 7/7 critérios de aceite e 4/4 Quality Checks marcados, com âncora. AC1 por raciocínio (nenhum prompt de operação lê o marcador — grep). Um achado corrigido: `update-project.md:161` usava "version" em dois sentidos ("source version … at the chosen version") → "from the chosen tag, branch, commit, or folder". Crítica §6 em passo separado: 7/7 PASS, com 2 riscos declarados (âncoras das S-rows valem em `74c393e`; Guides sem Sensor determinístico) — ver Blockers & Notes, *Verify*. |
 | 2026-10-05 | save-session | Commit `718abf8` (Verify). Implement (a–c) e Verify concluídos na mesma sessão, com o developer ausente e autorização para comitar por fase. Status → `review` (não `done`): critérios verificados pelo agente, aprovação pendente do developer, que pediu um relatório para analisar (`history/025-version-marker-report.md`); o fechamento fica para o `end-session`. Sem `[INCIDENT]` a varrer; Engrama 025 recompilado; sem fold (10 linhas ativas, N = 10). |
+| 2026-10-06 | end-session | Sessão fechada pelo developer (`/end-session`) após a revisão do relatório: status `done`, 7/7 critérios. Resumo da 025: Specify (S1–S4b, refutação F1/F2) → Implement em 3 commits (`bd55295`, `337808f`, `05f2e1f`) → Verify (`718abf8`) → save-session (`b14c6e6`) e relatório (`93ebef2`); +36/−4 linhas de produto em 8 arquivos. Triagem de fechamento: nenhum item `ready` (`prd.md` triado; 3 drafts). Varredura de falhas: nenhum `[INCIDENT]`. Engrama 025 finalizado; sem fold (10 linhas ativas, N = 10). Arquivamento (`RAW_HISTORY` = 3): central 022 e o relatório da 025 (auxiliar) → `history/.archived/`; `history/` fica com 023–025. |
 
 ## Decisions Made
 
@@ -117,5 +118,5 @@ Not changed (subtraction test): `prompts/operations/*` and their ports (no opera
 - **Specification:** section **Specification** above + Decisions Made S1–S4b
 - **PR/MR:** —
 - **Commits:** `e3fabb3` (fechamento da 024 + abertura da 025); `74c393e` (Specify); `bd55295`, `337808f`, `05f2e1f` (Implement a, b, c); `718abf8` (Verify)
-- **Report:** `history/025-version-marker-report.md` (M1 summary for the developer's review)
+- **Report:** `history/.archived/025-version-marker-report.md` (M1 summary for the developer's review)
 - **Related Issues:** O-010 (`.stateful-spec/backlog.md`); `intake/Backlog/prd.md`
